@@ -46,6 +46,7 @@ module.exports = {
                     "src/core/**/*",
                     "src/utils/**/*",
                     "src/providers/**/*",
+                    "src/fonts/**/*",
                 ],
             },
             {
