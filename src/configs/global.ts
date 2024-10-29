@@ -1,4 +1,5 @@
-/* eslint-disable import/no-unused-modules */
+/* eslint-disable boundaries/no-unknown-files */
+
 export const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export const MEIDA_URL = process.env.NEXT_PUBLIC_MEDIA_URL;
 export const FORK_SPOON_ID = process.env.NEXT_PUBLIC_FORK_SPOON_ID;

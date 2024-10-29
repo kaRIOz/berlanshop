@@ -13,8 +13,8 @@
 		"make-pretty": "prettier --write \"**/*.{js,jsx,ts,tsx}\"",
 		"storybook": "storybook dev -p 6006",
 		"build-storybook": "storybook build",
-		"test": "jest",
-		"prepare": "husky"
+        "test": "jest"
+
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^3.9.0",
@@ -73,5 +73,5 @@
 		"tailwindcss-animated": "^1.1.2",
 		"ts-jest": "^29.2.5",
 		"typescript": "^5"
-	}
+}
 }
