@@ -5,7 +5,14 @@ import Image from "next/image";
 export default function Home() {
     return (
         <main>
-            <Swiper slidesPerView={5} spaceBetween={-100} loop={true} centeredSlides={true} grabCursor={true}>
+            <Swiper
+                slidesPerView={5}
+                spaceBetween={-100}
+                loop={true}
+                centeredSlides={true}
+                direction="horizontal"
+                grabCursor={true}
+            >
                 <SwiperSlide>
                     <Image
                         width={300}
