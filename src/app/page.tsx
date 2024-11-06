@@ -10,9 +10,8 @@ import "swiper/css/pagination";
 
 import Header from "@/components/header/header";
 
-import { TbTruckDelivery } from "react-icons/tb";
+import { TbTruckDelivery, TbCreditCardPay } from "react-icons/tb";
 import { SiAdguard } from "react-icons/si";
-import { TbCreditCardPay } from "react-icons/tb";
 import { GiBackup } from "react-icons/gi";
 
 export default function Home() {
