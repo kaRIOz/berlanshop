@@ -5,6 +5,7 @@ import "./globals.css";
 
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/ui/app-sidebar";
+import Header from "@/components/header/header";
 const geistSans = localFont({
     src: "./fonts/GeistVF.woff",
     variable: "--font-geist-sans",
@@ -28,7 +29,8 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" dir="rtl" suppressHydrationWarning>
-            <body className={`${geistSans.variable} ${geistMono.variable}  antialiased flex h-screen`}>
+            <body className={`${geistSans.variable} ${geistMono.variable}  antialiased  h-screen`}>
+                <Header />
                 <SidebarProvider>
                     <div className="grid grid-cols-[auto,1fr] w-full">
                         <AppSidebar />

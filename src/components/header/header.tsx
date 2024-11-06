@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 export default function Header() {
     return (
-        <header className="bg-slate-200 m-auto shadow-sm">
+        <header className="bg-slate-200 bg-red m-auto shadow-sm">
             <div className="w-8/12 m-auto py-4 flex justify-between items-center">
                 <div className="flex space-x-4 space-x-reverse">
                     <FaInstagram className="text-lg" />
@@ -14,7 +14,8 @@ export default function Header() {
                     <Image
                         src="https://img.freepik.com/free-vector/human-organization-logo-style-gradient-design-vector_474888-2130.jpg?semt=ais_hybrid"
                         alt="logo"
-                        fill
+                        width={100}
+                        height={80}
                         className="w-8 h-8 object-cover"
                     />
                 </div>
