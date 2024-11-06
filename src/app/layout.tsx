@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/ui/app-sidebar";
 const geistSans = localFont({
     src: "./fonts/GeistVF.woff",
     variable: "--font-geist-sans",
@@ -25,8 +27,18 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" suppressHydrationWarning>
-            <body className={`${geistSans.variable} ${geistMono.variable}  antialiased`}>{children}</body>
+        <html lang="en" dir="rtl" suppressHydrationWarning>
+            <body className={`${geistSans.variable} ${geistMono.variable}  antialiased flex h-screen`}>
+                <SidebarProvider>
+                    <div className="grid grid-cols-[auto,1fr] w-full">
+                        <AppSidebar />
+                        <main className="flex flex-col h-screen overflow-auto">
+                            <SidebarTrigger className="absolute top-4" />
+                            {children}
+                        </main>
+                    </div>
+                </SidebarProvider>
+            </body>
         </html>
     );
 }

@@ -8,9 +8,17 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 
+import Header from "@/components/header/header";
+
+import { TbTruckDelivery } from "react-icons/tb";
+import { SiAdguard } from "react-icons/si";
+import { TbCreditCardPay } from "react-icons/tb";
+import { GiBackup } from "react-icons/gi";
+
 export default function Home() {
     return (
-        <main className="bg-red-200 flex w-11/12 m-auto h-screen justify-center items-center">
+        <section>
+            <Header />
             <Swiper
                 modules={[EffectCoverflow]}
                 effect={"coverflow"}
@@ -31,8 +39,8 @@ export default function Home() {
                     <SwiperSlide key={i}>
                         {({ isActive, isNext, isPrev }) => (
                             <Image
-                                className={`${isActive ? "opacity-100" : isNext || isPrev ? "opacity-70" : "opacity-30"} overflow-hidden  transition-all duration-500 ease-in-out`}
-                                width={250}
+                                className={`${isActive ? "opacity-100" : isNext || isPrev ? "opacity-70" : "opacity-30"} overflow-hidden  transition-all duration-500 ease-in-out border-solid border-4 border-white mt-8`}
+                                width={300}
                                 height={400}
                                 src="/test.png"
                                 alt=""
@@ -41,6 +49,24 @@ export default function Home() {
                     </SwiperSlide>
                 ))}
             </Swiper>
-        </main>
+            <div className="w-8/12 mt-12 m-auto flex justify-between items-center">
+                <div className="flex justify-center items-center space-x-3 space-x-reverse ">
+                    <TbTruckDelivery className="text-2xl" />
+                    <p className="font-semibold">ارسال سریع</p>
+                </div>
+                <div className="flex justify-center items-center space-x-3 space-x-reverse">
+                    <SiAdguard className="text-2xl" />
+                    <p className="font-semibold">اصالت کالا</p>
+                </div>
+                <div className="flex justify-center items-center space-x-3 space-x-reverse">
+                    <TbCreditCardPay className="text-2xl" />
+                    <p className="font-semibold">پرداخت امن</p>
+                </div>
+                <div className="flex justify-center items-center space-x-3 space-x-reverse">
+                    <GiBackup className="text-2xl" />
+                    <p className="font-semibold">پشتیبانی</p>
+                </div>
+            </div>
+        </section>
     );
 }
