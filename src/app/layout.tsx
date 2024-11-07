@@ -3,9 +3,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/ui/app-sidebar";
-import Header from "@/components/header/header";
+import Navbar from "@/components/navbar/header";
 const geistSans = localFont({
     src: "./fonts/GeistVF.woff",
     variable: "--font-geist-sans",
@@ -29,17 +27,12 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" dir="rtl" suppressHydrationWarning>
-            <body className={`${geistSans.variable} ${geistMono.variable}  antialiased  h-screen`}>
-                <Header />
-                <SidebarProvider>
-                    <div className="grid grid-cols-[auto,1fr] w-full">
-                        <AppSidebar />
-                        <main className="flex flex-col h-screen overflow-auto">
-                            <SidebarTrigger className="absolute top-4" />
-                            {children}
-                        </main>
-                    </div>
-                </SidebarProvider>
+            <body className={`${geistSans.variable} ${geistMono.variable}  antialiased`}>
+                <Navbar />
+
+                <div>
+                    <main>{children}</main>
+                </div>
             </body>
         </html>
     );

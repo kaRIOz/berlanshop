@@ -36,8 +36,8 @@ export default function Home() {
                         {({ isActive, isNext, isPrev }) => (
                             <Image
                                 className={`${isActive ? "opacity-100" : isNext || isPrev ? "opacity-70" : "opacity-30"} overflow-hidden  transition-all duration-500 ease-in-out border-solid border-4 border-white mt-8`}
-                                width={300}
-                                height={400}
+                                width={250}
+                                height={350}
                                 src="/test.png"
                                 alt=""
                             />
