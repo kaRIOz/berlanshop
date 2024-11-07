@@ -32,7 +32,7 @@ const product = [
 const ShopPage = async () => {
     return (
         <section className="flex flex-col items-center w-3/4 mx-auto">
-            <Link href={"/"}>ShopPage</Link>
+            <Link href={"/"}>فروشگاه</Link>
             <br />
             <hr />
             <article className="flex  justify-center md:justify-between items-center flex-wrap gap-4">

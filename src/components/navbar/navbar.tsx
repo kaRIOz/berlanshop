@@ -21,7 +21,7 @@ const items: { title: string; url: string }[] = [
     },
     {
         title: "درباره ما",
-        url: "#",
+        url: "/about-us",
     },
     {
         title: "پروفایل",
