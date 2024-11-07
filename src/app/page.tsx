@@ -30,12 +30,13 @@ export default function Home() {
                 centeredSlides={true}
                 direction="horizontal"
                 grabCursor={true}
+                className="w-3/4"
             >
                 {Array.from({ length: 5 }, (_, i) => (
                     <SwiperSlide key={i}>
                         {({ isActive, isNext, isPrev }) => (
                             <Image
-                                className={`${isActive ? "opacity-100" : isNext || isPrev ? "opacity-70" : "opacity-30"} overflow-hidden  transition-all duration-500 ease-in-out border-solid border-4 border-white mt-8`}
+                                className={`${isActive ? "opacity-100" : isNext || isPrev ? "opacity-70" : "opacity-30"} overflow-hidden  transition-all duration-500 ease-in-out border-solid border-2 border-white mt-8`}
                                 width={250}
                                 height={350}
                                 src="/test.png"
@@ -45,7 +46,7 @@ export default function Home() {
                     </SwiperSlide>
                 ))}
             </Swiper>
-            <div className="w-8/12 mt-12 m-auto flex justify-between items-center">
+            <div className="w-2/3 mt-12 m-auto flex justify-between items-center">
                 <div className="flex justify-center items-center space-x-3 space-x-reverse ">
                     <TbTruckDelivery className="text-2xl" />
                     <p className="font-semibold">ارسال سریع</p>
