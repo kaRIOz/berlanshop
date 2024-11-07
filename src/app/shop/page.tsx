@@ -31,16 +31,23 @@ const product = [
 
 const ShopPage = async () => {
     return (
-        <section className="flex flex-col items-center w-screen h-screen">
-            <Link href={"/"}>ShopPage </Link>
+        <section className="flex flex-col items-center w-3/4 mx-auto">
+            <Link href={"/"}>ShopPage</Link>
             <br />
             <hr />
-            <article className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
+            <article className="flex  justify-center md:justify-between items-center flex-wrap gap-4">
                 {product.concat([...product, ...product, ...product]).map((product, index) => (
-                    <div key={index}>
-                        <h2>{product.name}</h2>
-                        <p>قیمت {product.price}</p>
-                        {/* <img src={product.image} alt={product.name} /> */}
+                    <div key={index} className="w-64 border border-2 hover:shadow-md transition-all ease-in-out ">
+                        <img
+                            src="https://plus.unsplash.com/premium_photo-1663013729768-8fcfe4cda447?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGRyZXNzfGVufDB8fDB8fHww"
+                            alt={product.name}
+                            className="w-full h-80 object-cover"
+                        />
+                        <h2 className="font-semibold p-2">{product.name}</h2>
+                        <div className="flex justify-between items-center p-2">
+                            <p>قیمت </p>
+                            <p>{product.price}</p>
+                        </div>
                     </div>
                 ))}
             </article>
