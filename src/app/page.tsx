@@ -20,8 +20,8 @@ export default function Home() {
                 effect={"coverflow"}
                 coverflowEffect={{
                     rotate: 0,
-                    stretch: 200,
-                    depth: 200,
+                    stretch: 100,
+                    depth: 300,
                     modifier: 0.5,
                     slideShadows: false,
                 }}
@@ -46,7 +46,7 @@ export default function Home() {
                     </SwiperSlide>
                 ))}
             </Swiper>
-            <div className="w-2/3 mt-12 m-auto flex justify-between items-center">
+            <div className="w-2/3 my-12 m-auto flex justify-between items-center">
                 <div className="flex justify-center items-center space-x-3 space-x-reverse ">
                     <TbTruckDelivery className="text-2xl" />
                     <p className="font-semibold">ارسال سریع</p>
