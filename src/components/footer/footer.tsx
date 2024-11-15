@@ -1,28 +1,49 @@
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
+
+import zarinpal from "../../../public/zarinpal.png";
+import { IoLogoInstagram } from "react-icons/io";
+import { PiTelegramLogo } from "react-icons/pi";
 
 const Footer = () => {
     return (
-        <footer className="w-full  bg-slate-100 mt-36">
-            <div className="w-2/3 mx-auto grid grid-cols-1 md:grid-cols-2 content-center">
-                <div>
-                    <h2 className="font-semibold text-2xl py-8">راه های ارتباطی</h2>
-                    <ul className="pb-20 flex flex-col space-y-6">
-                        <li>اینستاگرام</li>
-                        <li>تلگرام</li>
-                        <li>شماره تلفن:09121234567</li>
-                        <li> ادرس : میدان امام خمینی ،خیابان فردوسی ،کوچه برلن ، پلاک 7</li>
-                    </ul>
-                </div>
-                <div>
-                    <h2 className="font-semibold text-2xl py-8">نمادهای اطمینان</h2>
-                    <Image
-                        src="https://parspng.com/wp-content/uploads/2023/01/zarin-palpng.parspng.com_.png"
-                        width={100}
-                        height={100}
-                        alt="zarinpal-logo"
-                    />
-                </div>
+        <footer className="w-full mx-auto px-16 py-16 grid grid-cols-2 gap-y-4 md:gap-y-0   content-center  md:grid md:grid-cols-4 md:place-content-start  bg-[#f5f5f3]">
+            <div>
+                <h3 className="mb-8 font-medium">خرید از برلن شاپ</h3>
+                <ul className="flex flex-col space-y-3 relative">
+                    <li className="footer-li">خرید شال</li>
+                    <li className="footer-li">خرید روسری</li>
+                    <li className="footer-li">خرید مقنعه</li>
+                    <li className="footer-li">خرید توربان</li>
+                </ul>
+            </div>
+            <div>
+                <h3 className="mb-8 font-medium">خدمات مشتریان</h3>
+                <ul className="flex flex-col space-y-3 relative">
+                    <li className="footer-li">پرسش های متدوال</li>
+                    <li className="footer-li">راهنمای خرید</li>
+                    <li className="footer-li">شرایط بازگشت</li>
+                    <li className="footer-li">قوانین و مقررات</li>
+                </ul>
+            </div>
+            <div>
+                <h3 className="mb-8 font-medium">ارتباط با ما</h3>
+                <ul className="flex flex-col space-y-3 relative">
+                    <li className="footer-li">تلفن : 7786423</li>
+                    <li className="footer-li">ایمیل :berlanshop@gmail.com</li>
+                    <li className="footer-li">
+                        <IoLogoInstagram className="text-2xl" />
+                    </li>
+                    <li className="footer-li">
+                        <PiTelegramLogo className="text-2xl" />
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h3 className="mb-8 font-medium">نمادهای اطمینان</h3>
+                <ul className="flex flex-col space-y-3 relative">
+                    <Image src={zarinpal} alt="zarinpal" width={100} />
+                </ul>
             </div>
         </footer>
     );

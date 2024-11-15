@@ -104,3 +104,8 @@
         --sidebar-ring: 217.2 91.2% 59.8%;
     }
 }
+@layer components {
+  .footer-li {
+    @apply text-sm font-light tracking-wider cursor-pointer hover:text-red-600 hover:font-normal w-fit	
+  }
+}

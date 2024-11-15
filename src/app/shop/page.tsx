@@ -2,33 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-// type Product = {
-//     id: string;
-//     name: string;
-//     price: number;
-//     image: string;
-// };
-
-const product = [
-    {
-        id: "1",
-        name: "پروتکل اینترنتی مالی",
-        price: 1000,
-        image: "#",
-    },
-    {
-        id: "2",
-        name: "پروتکل اینترنتی مالی",
-        price: 1000,
-        image: "#",
-    },
-    {
-        id: "3",
-        name: "پروتکل اینترنتی مالی",
-        price: 1000,
-        image: "#",
-    },
-];
+import { product } from "$/constance";
 
 const ShopPage = async () => {
     return (
@@ -36,20 +10,27 @@ const ShopPage = async () => {
             <Link href={"/"}>فروشگاه</Link>
             <br />
             <hr />
-            <article className="flex  justify-center md:justify-between items-center flex-wrap gap-4">
+            <article className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 ">
                 {product.concat([...product, ...product, ...product]).map((product, index) => (
-                    <div key={index} className="w-64 border-2 hover:shadow-md transition-all ease-in-out ">
+                    <div key={index} className="w-64  hover:shadow-md transition-all ease-in-out ">
                         <Image
-                            width={250}
-                            height={300}
+                            width={200}
+                            height={200}
                             src="https://plus.unsplash.com/premium_photo-1663013729768-8fcfe4cda447?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGRyZXNzfGVufDB8fDB8fHww"
                             alt={product.name}
                             className="w-full h-80 object-cover"
                         />
-                        <h2 className="font-semibold p-2">{product.name}</h2>
-                        <div className="flex justify-between items-center p-2">
-                            <p>قیمت </p>
-                            <p>{product.price}</p>
+                        <div className="flex flex-col p-2">
+                            <h2 className="font-medium">{product.name}</h2>
+                            <p className="text-[11px] font-light text-gray-400">
+                                ورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ
+                            </p>
+                            <div className="flex justify-between items-center mt-2">
+                                <button className="text-[10px] bg-blue-500 p-2 rounded text-white">
+                                    اضافه کردن به سبد خرید
+                                </button>
+                                <p className="">{product.price}</p>
+                            </div>
                         </div>
                     </div>
                 ))}
