@@ -1,14 +1,17 @@
 "use client";
 import { Swiper, SwiperSlide } from "swiper/react";
 import React from "react";
+import Image from "next/image";
+import { EffectCoverflow } from "swiper/modules";
 
-import Banner from "@/components/banner/Banner";
-import Header from "@/components/header/Header";
-import Sales from "@/components/sales/Sales";
-import Newest from "@/components/newest/Newest";
-import SearchVsCategory from "@/components/search-category/SearchVsCategory";
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+
+import { TbTruckDelivery, TbCreditCardPay } from "react-icons/tb";
+import { SiAdguard } from "react-icons/si";
+import { GiBackup } from "react-icons/gi";
 import Footer from "@/components/footer/footer";
-import SignIn from "@/components/sign-in/SignIn";
 
 export default function Home() {
     return (
@@ -64,7 +67,6 @@ export default function Home() {
             </div>
 
             <Footer />
-            <SignIn />
         </section>
     );
 }
