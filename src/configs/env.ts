@@ -2,6 +2,13 @@ import { config } from "dotenv";
 import { expand } from "dotenv-expand";
 import { z, ZodError } from "zod";
 
+const stringBoolean = z.coerce
+    .string()
+    .transform(val => {
+        return val === "true";
+    })
+    .default("false");
+
 const envSchema = z.object({
     DB_HOST: z.string().min(1),
     DB_USER: z.string().min(1),
@@ -11,15 +18,27 @@ const envSchema = z.object({
     DATABASE_URL: z.string().min(1),
     AUTH_SECRET: z.string().min(1),
     AUTH_TRUST_HOST: z.string().min(1),
+    DB_MIGRATING: stringBoolean,
+    DB_SEEDING: stringBoolean,
 });
 
 expand(config());
 
+export type EnvSchema = z.infer<typeof envSchema>;
+
 try {
     envSchema.parse(process.env);
-} catch (e) {
-    if (e instanceof ZodError) {
-        console.error("Environment validation error:", e.errors);
+} catch (error) {
+    if (error instanceof ZodError) {
+        let message = "Missing required values in .env:\n";
+        error.issues.forEach(issue => {
+            message += issue.path[0] + "\n";
+        });
+        const e = new Error(message);
+        e.stack = "";
+        throw e;
+    } else {
+        console.error(error);
     }
 }
 
