@@ -1,10 +1,7 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
-
-import imgSales1 from "../../../public/imgSales1.jpg";
-import imgSales2 from "../../../public/imgSales2.jpg";
-import imgSales3 from "../../../public/imgsales3.jpg";
 
 import "./sales.css";
 

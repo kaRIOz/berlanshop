@@ -5,9 +5,9 @@ import React from "react";
 import Banner from "@/components/banner/Banner";
 import Header from "@/components/header/Header";
 import Sales from "@/components/sales/Sales";
-import Footer from "@/components/footer/Footer";
 import Newest from "@/components/newest/Newest";
 import SearchVsCategory from "@/components/search-category/SearchVsCategory";
+import Footer from "@/components/footer/footer";
 
 export default function Home() {
     return (
