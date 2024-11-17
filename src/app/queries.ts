@@ -3,10 +3,17 @@ import { eq } from "drizzle-orm";
 import { db } from "@/drizzle";
 import { user } from "@/drizzle/schema";
 import { executeQuery } from "@/drizzle/utils/executeQuery";
+import { unstable_cache } from "next/cache";
 
 export async function getCategories() {
     return executeQuery({
-        queryFn: async () => await db.query.category.findMany(),
+        queryFn: unstable_cache(
+            async () => {
+                return await db.query.category.findMany();
+            },
+            ["getCategories"],
+            { revalidate: 10 },
+        ),
         serverErrorMessage: "getCategories",
         isProtected: false,
     });
