@@ -15,15 +15,11 @@ export const product = pgTable("product", {
     categoryId: integer("category_id")
         .notNull()
         .references(() => category.id),
-    inventoryId: integer("inventory_id")
-        .notNull()
-        .references(() => category.id),
-    discountId: integer("discount_id")
-        .notNull()
-        .references(() => category.id),
+    inventoryId: integer("inventory_id").references(() => category.id),
+    discountId: integer("discount_id").references(() => category.id),
     createdAt: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),
-    updatedAt: timestamp("updated_at", { mode: "string" }).notNull(),
-    deletedAt: timestamp("deleted_at", { mode: "string" }).notNull(),
+    updatedAt: timestamp("updated_at", { mode: "string" }),
+    deletedAt: timestamp("deleted_at", { mode: "string" }),
 });
 
 export const productRelations = relations(product, ({ one }) => ({
@@ -52,12 +48,9 @@ export const productSchema = z
         SKU: z.string().min(1),
         thumbnail: z.string().min(1),
         images: z.string().min(1),
-        categoryId: z.string().min(1),
-        inventoryId: z.string().min(1),
-        discountId: z.string().min(1),
+        categoryId: z.number().min(1),
     })
     .pick({
-        id: true,
         name: true,
         price: true,
         description: true,
@@ -65,8 +58,6 @@ export const productSchema = z
         thumbnail: true,
         images: true,
         categoryId: true,
-        inventoryId: true,
-        discountId: true,
     });
 
 export type ProductSchema = z.infer<typeof productSchema>;

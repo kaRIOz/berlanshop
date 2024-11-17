@@ -4,25 +4,46 @@ import { CategorySchema } from "@/drizzle/schema/product/category";
 
 const mock: CategorySchema[] = [
     {
-        name: "Node.js",
+        id: 1,
+        nameFa: "شال",
+        nameEn: "shaal",
+        parentId: null,
+        thumbnail: "/test.png",
     },
     {
-        name: "React",
+        id: 2,
+        nameFa: "روسری",
+        nameEn: "roosari",
+        parentId: null,
+        thumbnail: "/test.png",
     },
     {
-        name: "Python",
+        id: 3,
+        nameFa: "مقنعه",
+        nameEn: "maghnae",
+        parentId: null,
+        thumbnail: "/test.png",
     },
     {
-        name: "Javascript",
+        id: 4,
+        nameFa: "توربان",
+        nameEn: "toorban",
+        parentId: null,
+        thumbnail: "/test.png",
     },
     {
-        name: "Algorithms",
+        id: 5,
+        nameFa: "شال مجلسی ",
+        nameEn: "majlesi",
+        parentId: 1,
+        thumbnail: "/test.png",
     },
     {
-        name: "Devops",
-    },
-    {
-        name: "APIs",
+        id: 6,
+        nameFa: "شال مجلسی توری",
+        nameEn: "toori",
+        parentId: 5,
+        thumbnail: "/test.png",
     },
 ];
 

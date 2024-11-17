@@ -1,4 +1,4 @@
-import { auth } from "@/auth";
+// import { auth } from "@/auth";
 
 type Options<T> = {
     queryFn: {
@@ -15,8 +15,8 @@ export async function executeQuery<T>({
 }: Options<T>) {
     try {
         if (isProtected) {
-            const session = await auth();
-            if (!session) throw new Error("Not authorized");
+            // const session = await auth();
+            // if (!session) throw new Error("Not authorized");
         }
         return await queryFn();
     } catch (error) {

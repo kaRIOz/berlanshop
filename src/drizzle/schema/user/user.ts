@@ -11,7 +11,7 @@ export const user = pgTable("user", {
     password: varchar("password", { length: 255 }).notNull(),
     email: varchar("email", { length: 255 }).notNull().unique(),
     phoneNumber: varchar("phoneNumber", { length: 255 }).notNull().unique(),
-    code: varchar("code", { length: 255 }).notNull(),
+    code: varchar("code", { length: 255 }),
     codeExpiration: timestamp("code_expiration").notNull().defaultNow(),
     createdAt: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),
     updatedAt: timestamp("updated_at", { mode: "string" }).notNull().defaultNow(),
