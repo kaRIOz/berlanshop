@@ -1,6 +1,6 @@
 import { DB } from "@/drizzle";
 import { user } from "@/drizzle/schema";
-import { UserSchema } from "@/drizzle/schema/user";
+import { UserSchema } from "@/drizzle/schema/user/user";
 import { faker } from "@faker-js/faker";
 
 const mock = () => {

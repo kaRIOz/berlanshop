@@ -1,7 +1,7 @@
 "use server";
 
 import { executeAction } from "@/drizzle/utils/executeAction";
-import { signOut as authSignOut } from "@/lib/auth";
+import { signOut as authSignOut } from "@/auth";
 
 export async function signOut() {
     return executeAction({

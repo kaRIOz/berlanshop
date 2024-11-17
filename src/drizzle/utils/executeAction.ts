@@ -1,4 +1,4 @@
-import { auth } from "@/lib/auth";
+import { auth } from "@/auth";
 import { getErrorMessage } from "@/lib/utils";
 import { isRedirectError } from "next/dist/client/components/redirect";
 

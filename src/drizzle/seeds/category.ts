@@ -1,6 +1,6 @@
 import { DB } from "@/drizzle";
 import { category } from "@/drizzle/schema";
-import { CategorySchema } from "@/drizzle/schema/category";
+import { CategorySchema } from "@/drizzle/schema/product/category";
 
 const mock: CategorySchema[] = [
     {
