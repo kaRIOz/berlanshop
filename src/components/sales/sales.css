@@ -1,0 +1,65 @@
+.content {
+  padding: 0 1rem;
+  font-size: 2vw;
+  padding: 1rem;
+  text-align: center;
+}
+
+ul.contactsheet {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+}
+ul.contactsheet:after {
+  content: "";
+  display: block;
+  flex-grow: 10; /* Prevent justify/stretch of last photo. 10 seems best */
+}
+.contactsheet li {
+  height: 40vh;
+  flex-grow: 1;
+  margin: 0 0.5rem 0.5rem 0;
+  list-style: none; /* override common/Normalize */
+}
+.contactsheet img {
+  max-height: 100%;
+  min-width: 100%;
+  object-fit: cover;
+  vertical-align: bottom;
+  border-radius: 0.6rem;
+}
+.contactsheet img:hover {
+    box-shadow: 0 0 0 0.1;
+}
+
+/* Portrait: */
+@media (max-aspect-ratio: 1 / 1) {
+  .contactsheet li {
+    height: 30vh;
+  }
+}
+
+/* Short screens: */
+@media (max-height: 480px) {
+  .contactsheet li {
+    height: 80vh;
+  }
+}
+
+/* Smaller screens in portrait: */
+@media (max-aspect-ratio: 1 / 1) and (max-width: 480px) {
+  ul.contactsheet {
+    flex-direction: row;
+  }
+
+  .contactsheet li {
+    height: auto;
+    width: 100%;
+  }
+
+  .contactsheet img {
+    width: 100%;
+    max-height: 75vh;
+    min-width: 0;
+  }
+}

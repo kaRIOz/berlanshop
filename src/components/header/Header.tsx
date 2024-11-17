@@ -6,7 +6,7 @@ import Image from "next/image";
 
 import Logo from "../../../public/Logo.png";
 
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { navBarList } from "$/constance";
 
 // icons

@@ -1,6 +1,6 @@
 This workspace is a Next.js project for an e-commerce application called "berlanshop". The project is still a work in progress and aims to showcase a production-ready self-hosted e-commerce platform specifically tailored for Iran.
 
-### What does this project do?
+### What does this project do???
 
 -   This project is an e-commerce application built using Next.js, a React framework for server-rendered applications. It aims to provide a platform for hosting an e-commerce website tailored for the Iranian market.
 
@@ -29,6 +29,7 @@ This workspace is a Next.js project for an e-commerce application called "berlan
     -   `tsconfig.json`: TypeScript configuration file.
 
 -   **`src` Directory**:
+
     -   Contains subdirectories for different parts of the application:
         -   `actions`: Possibly contains Redux actions.
         -   `app`: Contains components related to the main application layout.

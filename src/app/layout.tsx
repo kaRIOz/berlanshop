@@ -3,18 +3,16 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
-import Navbar from "@/components/navbar/navbar";
-import Footer from "@/components/footer/footer";
-
-const geistSans = localFont({
-    src: "./fonts/GeistVF.woff",
-    variable: "--font-geist-sans",
-    weight: "100 900",
-});
-const geistMono = localFont({
-    src: "./fonts/GeistMonoVF.woff",
-    variable: "--font-geist-mono",
-    weight: "100 900",
+const vazir = localFont({
+    src: [
+        { path: "./fonts/Vazir-Black.woff", weight: "800", style: "black" },
+        { path: "./fonts/Vazir-Bold.woff", weight: "600", style: "Bold" },
+        { path: "./fonts/Vazir-Regular.woff", weight: "500", style: "Regular" },
+        { path: "./fonts/Vazir-Medium.woff", weight: "400", style: "Medium" },
+        { path: "./fonts/Vazir-Light.woff", weight: "300", style: "Light" },
+        { path: "./fonts/Vazir-Thin.woff", weight: "200", style: "Thin" },
+    ],
+    variable: "--font-vazir",
 });
 
 export const metadata: Metadata = {
@@ -29,13 +27,10 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" dir="rtl" suppressHydrationWarning>
-            <body className={`${geistSans.variable} ${geistMono.variable}  antialiased`}>
-                <Navbar />
-
+            <body className={`${vazir.className} antialiased`}>
                 <div>
                     <main>{children}</main>
                 </div>
-                <Footer />
             </body>
         </html>
     );
