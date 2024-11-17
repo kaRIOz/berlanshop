@@ -19,12 +19,12 @@ export const navBarList: NavbarList[] = [
     {
         id: 4,
         title: "تماس با ما",
-        link: "contact",
+        link: "/contact",
     },
     {
         id: 5,
         title: "علاقه مندی ها",
-        link: "/blog",
+        link: "/favorite",
     },
 ];
 

@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { SelectUserModel } from "@/drizzle/schema/user";
+import { SelectUserModel } from "@/drizzle/schema/user/user";
 
 type Props = {
     data?: Pick<SelectUserModel, "id" | "fullName">;

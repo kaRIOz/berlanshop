@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -14,20 +14,8 @@ import { HiMenuAlt3 } from "react-icons/hi";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 
 const Header = () => {
-    const [showMenu, setShowMenu] = useState(true);
     const [sidenav, setSidenav] = useState(false);
 
-    useEffect(() => {
-        let ResponsiveMenu = () => {
-            if (window.innerWidth < 667) {
-                setShowMenu(false);
-            } else {
-                setShowMenu(true);
-            }
-        };
-        ResponsiveMenu();
-        window.addEventListener("resize", ResponsiveMenu);
-    }, []);
     return (
         <header className="w-full h-20 bg-white sticky top-0 z-50 shadow-sm ">
             <nav className="h-full px-4 max-w-container mx-auto relative">
