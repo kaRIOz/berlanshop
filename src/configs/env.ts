@@ -18,6 +18,7 @@ const envSchema = z.object({
     DATABASE_URL: z.string().min(1),
     AUTH_SECRET: z.string().min(1),
     AUTH_TRUST_HOST: z.string().min(1),
+    NEXT_PUBLIC_SERVER_URL: z.string().min(1),
     DB_MIGRATING: stringBoolean,
     DB_SEEDING: stringBoolean,
 });
