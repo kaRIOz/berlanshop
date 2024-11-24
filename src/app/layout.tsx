@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" dir="rtl" suppressHydrationWarning>
-            <body className={`${vazir.className} antialiased`}>
+            <body className={`${vazir.className} antialiased bg-gray-50`}>
                 <div>
                     <main>{children}</main>
                 </div>
