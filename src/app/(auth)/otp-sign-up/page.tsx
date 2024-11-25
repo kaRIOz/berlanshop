@@ -2,18 +2,21 @@
 
 import React from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
-//import use-form
 import { useForm } from "react-hook-form";
-//import zod
+
 import { z } from "zod";
-// imoprt logo
-import Logo from "../../../../public/Logo.png";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const otpSignUp = () => {
+    const router = useRouter();
+
     const otpSignUpSchema = z.object({
-        username: z.string().regex(/((0?9)|(\+?989))\d{9}/g, { message: "شماره تلفن صحیح نمی باشد" }),
+        username: z
+            .string()
+            .max(11, { message: "شماره تلفن صحیح نمی باشد" })
+            .regex(/((0?9)|(\+?989))\d{9}/g, { message: "شماره تلفن صحیح نمی باشد" }),
     });
 
     type otpForm = z.infer<typeof otpSignUpSchema>;
@@ -24,13 +27,14 @@ const otpSignUp = () => {
         formState: { errors },
     } = useForm<otpForm>({ resolver: zodResolver(otpSignUpSchema) });
 
-    const onSubmit = () => {
-        console.log("hi");
+    const onSubmit = (data: otpForm) => {
+        router.push(`/otp-checkout?phoneNumber=${data.username}`);
     };
+
     return (
         <div className="h-screen flex justify-center items-center  mx-auto">
             <div className="bg-white border-[1px] w-full flex flex-col items-center max-w-[400px] px-6 py-4 rounded-md">
-                <Image src={Logo} alt="Logo" width={150} />
+                <Image src={"/Logo.png"} alt="Logo" width={150} height={100} />
                 <h2 className="ml-auto mt-4">ورود | ثبت نام</h2>
                 <p className="ml-auto mt-10 text-[13px] text-gray-600 font-light">
                     لطفا شماره موبایل خود را وارد کنید. کد تایید به این شماره پیامک خواهد شد
@@ -39,9 +43,10 @@ const otpSignUp = () => {
                 <form onSubmit={handleSubmit(onSubmit)} className="ml-auto mt-4 w-full">
                     <input
                         type="text"
-                        className={`w-full px-4 py-3 text-sm outline-none border ${errors?.username ? " border-red-500 " : "border-blue-500"} rounded-lg`}
+                        className={`w-full px-4 py-3 text-sm outline-none border ${errors.username ? " border-red-500 " : "border-blue-500"} rounded-lg`}
                         autoComplete="off"
                         {...register("username")}
+                        autoFocus
                     />
                     {errors.username && <span className="text-[11px] text-red-500">{errors.username.message}</span>}
                     <button

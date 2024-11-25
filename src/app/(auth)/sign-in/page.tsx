@@ -43,7 +43,7 @@ const SignIn = () => {
                                     type="text"
                                     name="username"
                                     id="email"
-                                    className="bg-gray-50 border border-gray-300 rounded-lg  focus:border-blue-500 block w-full p-2.5  outline-none placeholder:text-sm"
+                                    className="bg-gray-50 border border-gray-300 rounded-lg  focus:border-red-500 block w-full p-2.5  outline-none placeholder:text-sm"
                                     placeholder="ایمیل خود را وارد کنید"
                                     autoComplete="email"
                                 />

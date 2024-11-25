@@ -58,7 +58,7 @@ const SignUp = () => {
     return (
         <section className="">
             <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-                <div className="w-full bg-white  rounded-lg shadow  md:mt-0 sm:max-w-md xl:p-0">
+                <div className="w-full bg-white  rounded-md border md:mt-0 sm:max-w-md xl:p-0">
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                         <h1 className="text-xl font-bold leading-tight tracking-tight md:text-2xl ">ثبت نام</h1>
                         <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit(onSubmit)}>
@@ -69,7 +69,7 @@ const SignUp = () => {
                                     type="text"
                                     name="username"
                                     id="email"
-                                    className="bg-gray-50 border border-gray-300 rounded-lg  focus:border-blue-500 block w-full p-2.5  outline-none placeholder:text-sm"
+                                    className="bg-gray-50 border border-gray-300 rounded-lg focus:border-blue-500 block w-full p-2.5  outline-none placeholder:text-sm"
                                     placeholder="ایمیل خود را وارد کنید"
                                     autoComplete="email"
                                 />
@@ -112,7 +112,7 @@ const SignUp = () => {
                             </div>
                             <button
                                 type="submit"
-                                className="w-full text-white bg-blue-500  hover:bg-blue-600 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                className="w-full text-white bg-red-500  active:scale-95 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                                 disabled={isPending}
                             >
                                 {!isPending ? (

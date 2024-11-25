@@ -41,9 +41,14 @@ const Header = () => {
                         </motion.ul>
                     </div>
 
-                    <Link href="/">
-                        <Image src={Logo} alt="Logo" width={100} />
-                    </Link>
+                    <div className="flex justify-between items-center space-x-5 space-x-reverse">
+                        <Link href="/">
+                            <Image src={Logo} alt="Logo" width={100} />
+                        </Link>
+                        <button className="border-[1px] px-4 py-2 rounded-lg hover:bg-gray-100 text-[13px]">
+                            <Link href={"/otp-sign-up"}>ورود | ثبت نام</Link>
+                        </button>
+                    </div>
 
                     <HiMenuAlt3
                         onClick={() => setSidenav(!sidenav)}
