@@ -2,7 +2,6 @@
 import React from "react";
 import Image from "next/image";
 
-import zarinpal from "../../../public/zarinpal.png";
 import { IoLogoInstagram } from "react-icons/io";
 import { PiTelegramLogo } from "react-icons/pi";
 
@@ -43,7 +42,7 @@ const Footer = () => {
             <div>
                 <h3 className="mb-8 font-medium">نمادهای اطمینان</h3>
                 <ul className="flex flex-col space-y-3 relative">
-                    <Image src={zarinpal} alt="zarinpal" width={100} />
+                    <Image src={"/zarinpal.png"} alt="zarinpal" width={100} height={50} />
                 </ul>
             </div>
         </footer>

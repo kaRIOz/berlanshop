@@ -3,8 +3,8 @@ import Link from "next/link";
 import React from "react";
 
 import { product } from "$/constance";
-import Header from "@/components/header/Header";
-import SearchVsCategory from "@/components/search-category/SearchVsCategory";
+import Header from "@/components/homepage/header/Header";
+import SearchVsCategory from "@/components/homepage/search-category/SearchVsCategory";
 
 const ShopPage = async () => {
     return (

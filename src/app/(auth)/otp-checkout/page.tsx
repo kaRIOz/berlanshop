@@ -35,12 +35,14 @@ const otpCheckout = () => {
             <div className="bg-white border-[1px] w-full flex flex-col items-center max-w-[400px] px-6 py-4 rounded-md">
                 <Image src={Logo} alt="Logo" width={150} />
                 <h2 className="ml-auto mt-4">کد تایید را وارد کنید</h2>
-                <p className="ml-auto mt-6 text-[13px] text-gray-600 font-light">کد تایید برای شماره "" پیامک شد</p>
+                <p className="ml-auto mt-6 text-[13px] text-gray-600 font-light">
+                    کد تایید برای شماره {params.get("phoneNumber")} پیامک شد
+                </p>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="ml-auto mt-4 w-full">
                     <input
                         type="text"
-                        className={`w-full px-4 py-3 text-sm outline-none border border-blue-500 rounded-lg text-center`}
+                        className={`w-full px-4 py-3 text-sm outline-none border border-blue-500 rounded-lg text-center tracking-[8px]`}
                         autoComplete="off"
                         {...register("payamak")}
                         autoFocus

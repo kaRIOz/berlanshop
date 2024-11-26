@@ -24,8 +24,8 @@ const SearchVsCategory = () => {
                     className="flex justify-between items-center gap-x-2 relative"
                     onClick={() => setShowCategory(!showCategory)}
                 >
-                    <BiCategoryAlt className="w-5 h-5" />
-                    <p className="text-[14px] font-normal">دسته بندی کالاها</p>
+                    <BiCategoryAlt className="text-[14px] md:text-xl" />
+                    <p className="text-[10px] md:text-[14px] font-normal">دسته بندی کالاها</p>
 
                     {showCategory && (
                         <motion.ul
