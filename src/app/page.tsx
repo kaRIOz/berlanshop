@@ -4,7 +4,6 @@ import Sales from "@/components/sales/Sales";
 import Newest from "@/components/newest/Newest";
 import SearchVsCategory from "@/components/search-category/SearchVsCategory";
 import Footer from "@/components/footer/footer";
-import { getCategories } from "./queries";
 
 export default async function Home() {
     // const categoriesData = getCategories();

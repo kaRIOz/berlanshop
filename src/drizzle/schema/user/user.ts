@@ -6,13 +6,14 @@ import { address, shoppingSession } from "@/drizzle/schema";
 
 export const user = pgTable("user", {
     id: serial("id").notNull().primaryKey(),
-    fullName: varchar("fullName", { length: 255 }).notNull(),
-    age: integer("age").notNull(),
-    password: varchar("password", { length: 255 }).notNull(),
-    email: varchar("email", { length: 255 }).notNull().unique(),
-    phoneNumber: varchar("phoneNumber", { length: 255 }).notNull().unique(),
-    code: varchar("code", { length: 255 }),
-    codeExpiration: timestamp("code_expiration").notNull().defaultNow(),
+    phoneNumber: varchar("phoneNumber", { length: 12 }).notNull().unique(),
+    email: varchar("email", { length: 128 }).unique(),
+    firstName: varchar("first_name", { length: 255 }),
+    lastName: varchar("last_name", { length: 255 }),
+    age: integer("age"),
+    password: varchar("password", { length: 12 }),
+    verificationCode: varchar("verification_code", { length: 32 }),
+    codeExpiresAt: timestamp("code_expires_at", { mode: "string" }).defaultNow(),
     createdAt: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),
     updatedAt: timestamp("updated_at", { mode: "string" }).notNull().defaultNow(),
 });
@@ -23,21 +24,21 @@ export const userRelations = relations(user, ({ many, one }) => ({
 }));
 
 const baseSchema = createInsertSchema(user, {
-    fullName: schema => schema.fullName.min(1),
-    password: schema => schema.password.min(1),
-    age: z.coerce.number().min(18).max(99),
+    firstName: schema => schema.firstName,
+    lastName: schema => schema.lastName,
+    phoneNumber: schema =>
+        schema.phoneNumber
+            .max(11, { message: "شماره تلفن صحیح نمی باشد" })
+            .regex(/((0?9)|(\+?989))\d{9}/g, { message: "شماره تلفن صحیح نمی باشد" }),
+    verificationCode: schema => schema.verificationCode.min(6).max(6).nullish(),
+    password: schema => schema.password,
     email: schema => schema.email.email(),
-    phoneNumber: schema => schema.phoneNumber.regex(/^09[0-9]{9}$/),
-    code: schema => schema.code.min(6).max(6),
-}).pick({ fullName: true, password: true, age: true, email: true, phoneNumber: true, code: true });
+    age: z.coerce.number().min(18).max(99).nullish(),
+});
 
 export const userSchema = z.union([
     z.object({
-        mode: z.literal("signUp"),
-        email: baseSchema.shape.email,
-        password: baseSchema.shape.password,
-        fullName: baseSchema.shape.fullName,
-        age: baseSchema.shape.age,
+        mode: z.literal("checkPhoneNumber"),
         phoneNumber: baseSchema.shape.phoneNumber,
     }),
     z.object({
@@ -48,13 +49,7 @@ export const userSchema = z.union([
     z.object({
         mode: z.literal("singInByPhoneNumber"),
         phoneNumber: baseSchema.shape.phoneNumber,
-        code: baseSchema.shape.code,
-    }),
-    z.object({
-        mode: z.literal("update"),
-        fullName: baseSchema.shape.fullName,
-        age: baseSchema.shape.age,
-        id: z.number().min(1),
+        verificationCode: baseSchema.shape.verificationCode,
     }),
 ]);
 

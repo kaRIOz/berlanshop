@@ -1,4 +1,53 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
+
+export type ColorObject = {
+    [key: string]: string;
+};
+
+export const tailwindColors: ColorObject = {
+    current: "currentColor",
+    transparent: "transparent",
+    white: "#F9F9F9",
+    primary: "#0D3261",
+    "primary-content": "#FFFFFF",
+    "main-bg": "var(--Main-BG-Pattern, linear-gradient(0deg, #98C1E5 0%, #AA8FBF 100%))",
+    // "primary-focus": generateDarkenColorFrom("#0D3261"),
+    secondary: "#6c5ce7",
+    "secondary-100": "#757685",
+    "secondary-50": "#75768580",
+    "secondary-content": "#FFFFFF",
+    // "secondary-focus": generateDarkenColorFrom("#6c5ce7"),
+    accent: "#1FB2A5",
+    "accent-content": "#FFFFFF",
+    // "accent-focus": generateDarkenColorFrom("#1FB2A5"),
+    neutral: "#808080",
+    // "neutral-content": generateForegroundColorFrom("#FFFFFF"),
+    // "neutral-focus": generateDarkenColorFrom("#2a323c", 0.03),
+    "base-25": "#353d47",
+    "base-50": "#2a323c",
+    "base-75": "#20272e",
+    "base-100": "#1d232a",
+    "base-200": "#191e24",
+    "base-300": "#15191e",
+    "base-content": "#A6ADBB",
+    "white-100": "#F1F1F1",
+    "white-50": "#FFFFFF80",
+    "danger-100": "#9B1515",
+    "gray-dark": "#808080",
+    "gray-50": "rgba(119, 119, 119, 0.50)",
+    "gray-100": "#777",
+    info: "#215EAA",
+    // "info-content": generateForegroundColorFrom("#215EAA"),
+    success: "#159B4B",
+    // "success-content": generateForegroundColorFrom("#159B4B"),
+    warning: "#E4A606",
+    // "warning-content": generateForegroundColorFrom("#E4A606"),
+    error: "#9B1515",
+    // "error-content": generateForegroundColorFrom("#f87272"),
+    "gradient-first": "#98c1e5",
+    "gradient-second": "#aa8fbf",
+};
 
 const config: Config = {
     darkMode: ["class"],
@@ -11,7 +60,9 @@ const config: Config = {
             fontFamily: {
                 vazir: "var(--font-vazir)",
             },
+
             colors: {
+                ...tailwindColors,
                 background: "hsl(var(--background))",
                 foreground: "hsl(var(--foreground))",
                 card: {
@@ -70,6 +121,6 @@ const config: Config = {
             },
         },
     },
-    plugins: [require("tailwindcss-animate")],
+    plugins: [tailwindcssAnimate],
 };
 export default config;

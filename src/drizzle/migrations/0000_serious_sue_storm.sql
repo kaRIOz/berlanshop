@@ -34,6 +34,17 @@ CREATE TABLE IF NOT EXISTS "cart_item" (
 	"updated_at" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "category" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"name" varchar(255) NOT NULL,
+	"thumbnail" varchar(255) NOT NULL,
+	"link" varchar(255) NOT NULL,
+	"parent_id" integer,
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp DEFAULT now() NOT NULL,
+	CONSTRAINT "category_name_unique" UNIQUE("name")
+);
+--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "discount" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"name" varchar(255) NOT NULL,
@@ -120,22 +131,22 @@ CREATE TABLE IF NOT EXISTS "shopping_session" (
 	"updated_at" integer NOT NULL
 );
 --> statement-breakpoint
-ALTER TABLE "comment" DISABLE ROW LEVEL SECURITY;--> statement-breakpoint
-ALTER TABLE "post" DISABLE ROW LEVEL SECURITY;--> statement-breakpoint
-ALTER TABLE "post_to_tag" DISABLE ROW LEVEL SECURITY;--> statement-breakpoint
-ALTER TABLE "tag" DISABLE ROW LEVEL SECURITY;--> statement-breakpoint
-DROP TABLE "comment" CASCADE;--> statement-breakpoint
-DROP TABLE "post" CASCADE;--> statement-breakpoint
-DROP TABLE "post_to_tag" CASCADE;--> statement-breakpoint
-DROP TABLE "tag" CASCADE;--> statement-breakpoint
-ALTER TABLE "category" ADD COLUMN "thumbnail" varchar(255) NOT NULL;--> statement-breakpoint
-ALTER TABLE "category" ADD COLUMN "link" varchar(255) NOT NULL;--> statement-breakpoint
-ALTER TABLE "category" ADD COLUMN "parent_id" integer;--> statement-breakpoint
-ALTER TABLE "category" ADD COLUMN "created_at" timestamp DEFAULT now() NOT NULL;--> statement-breakpoint
-ALTER TABLE "category" ADD COLUMN "updated_at" timestamp DEFAULT now() NOT NULL;--> statement-breakpoint
-ALTER TABLE "user" ADD COLUMN "phoneNumber" varchar(255) NOT NULL;--> statement-breakpoint
-ALTER TABLE "user" ADD COLUMN "code" varchar(255);--> statement-breakpoint
-ALTER TABLE "user" ADD COLUMN "code_expiration" timestamp DEFAULT now() NOT NULL;--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "user" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"phoneNumber" varchar(12) NOT NULL,
+	"email" varchar(128),
+	"first_name" varchar(255),
+	"last_name" varchar(255),
+	"age" integer,
+	"password" varchar(12),
+	"verification_code" varchar(32),
+	"code_expires_at" timestamp DEFAULT now(),
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp DEFAULT now() NOT NULL,
+	CONSTRAINT "user_phoneNumber_unique" UNIQUE("phoneNumber"),
+	CONSTRAINT "user_email_unique" UNIQUE("email")
+);
+--> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "address" ADD CONSTRAINT "address_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
@@ -156,6 +167,12 @@ END $$;
 --> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "cart_item" ADD CONSTRAINT "cart_item_session_id_shopping_session_id_fk" FOREIGN KEY ("session_id") REFERENCES "public"."shopping_session"("id") ON DELETE no action ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "category" ADD CONSTRAINT "category_parent_id_category_id_fk" FOREIGN KEY ("parent_id") REFERENCES "public"."category"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -219,11 +236,3 @@ DO $$ BEGIN
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "category" ADD CONSTRAINT "category_parent_id_category_id_fk" FOREIGN KEY ("parent_id") REFERENCES "public"."category"("id") ON DELETE no action ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-ALTER TABLE "user" ADD CONSTRAINT "user_phoneNumber_unique" UNIQUE("phoneNumber");

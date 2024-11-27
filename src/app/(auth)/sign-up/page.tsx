@@ -4,7 +4,7 @@ import React, { useTransition } from "react";
 import Link from "next/link";
 
 // import use-form
-import { useForm, UseFormHandleSubmit } from "react-hook-form";
+import { useForm } from "react-hook-form";
 //import zod
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -32,7 +32,7 @@ const signUpSchema = z.object({
         .regex(/^(?=.*\d).{1,}$/, {
             message: "حداقل شامل یک رقم باشد",
         })
-        .regex(/^(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>/?]).{1,}$/, {
+        .regex(/^(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{1,}$/, {
             message: "حداقل شامل یک کارکتر باشد",
         }),
 
@@ -52,7 +52,7 @@ const SignUp = () => {
     const onSubmit = async (data: SignUpForm) => {
         await startTransition(async () => {
             await new Promise(resolve => setTimeout(resolve, 4000));
-            console.log("Authentication successful");
+            console.log("Authentication successful", data.username);
         });
     };
     return (

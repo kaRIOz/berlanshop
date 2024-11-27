@@ -1,0 +1,45 @@
+"use server";
+
+import db from "@/drizzle";
+import { executeAction } from "@/drizzle/utils/executeAction";
+import { eq } from "drizzle-orm";
+import { user } from "@/drizzle/schema/user/user";
+import { generateOTP } from "@/drizzle/utils/generateOTP";
+import { redirect } from "next/navigation";
+import { otpSignUpSchema, type OTPForm } from "./types";
+
+type NewUser = typeof user.$inferInsert;
+
+export async function checkPhoneNumber(data: OTPForm) {
+    const validatedData = otpSignUpSchema.safeParse(data);
+
+    const code = generateOTP();
+
+    return executeAction({
+        actionFn: async () => {
+            if (validatedData.success) {
+                const isUserExist = await db.query.user.findFirst({
+                    where: eq(user.phoneNumber, data.phoneNumber),
+                });
+                if (!isUserExist) {
+                    const newUser: NewUser = {
+                        phoneNumber: data.phoneNumber,
+                        verificationCode: code,
+                    };
+                    await db.insert(user).values(newUser);
+                } else {
+                    await db
+                        .update(user)
+                        .set({
+                            verificationCode: code,
+                        })
+                        .where(eq(user.phoneNumber, data.phoneNumber));
+                }
+            }
+        },
+        isProtected: false,
+
+        clientSuccessMessage: `Verification code sent successfully : ${code}`,
+        serverErrorMessage: "phoneNumber Error",
+    });
+}

@@ -1,23 +1,45 @@
-import NextAuth from "next-auth";
+/* eslint-disable no-unused-vars */
+import NextAuth, { type DefaultSession, type User } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-
-// eslint-disable-next-line boundaries/element-types
-import { getUserByEmailAndPassword } from "@/app/sign-in/queries";
+import { signInByPhoneNumber } from "./app/(auth)/otp-verify/actions";
+import { authConfig } from "./auth.config";
+import { DrizzleAdapter } from "@auth/drizzle-adapter";
+import db from "@/drizzle";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+    ...authConfig,
+    trustHost: true,
+    // adapter: DrizzleAdapter(db),
+    pages: {
+        signIn: "/",
+    },
+    session: {
+        maxAge: 172800,
+        updateAge: 86400,
+    },
     providers: [
         Credentials({
             credentials: {
-                email: {},
-                password: {},
+                phoneNumber: { label: "phoneNumber", type: "text" },
+                verificationCode: { label: "verificationCode", type: "text" },
             },
             authorize: async credentials => {
-                const dbUser = await getUserByEmailAndPassword(credentials);
-                if (!dbUser) {
-                    throw new Error("User not found / Wrong credentials");
-                }
+                try {
+                    const dbUser = await signInByPhoneNumber(credentials);
+                    if (!dbUser) {
+                        throw new Error("User not found / Wrong credentials");
+                    }
 
-                return { ...dbUser, id: dbUser.id.toString() };
+                    return {
+                        id: dbUser.id.toString(),
+                        firstName: dbUser.firstName,
+                        lastName: dbUser.lastName,
+                        phoneNumber: dbUser.phoneNumber,
+                    } as User;
+                } catch (e) {
+                    debugger;
+                    throw new Error("Error signing in Auth");
+                }
             },
         }),
     ],
@@ -25,18 +47,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         jwt({ token, user }) {
             if (user) {
                 token.id = user.id;
-                // @ts-expect-error type must declared in the next-auth
-                token.fullName = user.fullName;
+                token.user = { ...user };
             }
             return token;
         },
         session({ session, token }) {
-            // @ts-expect-error type must declared in the next-auth
-            session.user.id = token.id;
-            // @ts-expect-error type must declared in the next-auth
-            session.user.fullName = token.fullName;
+            Object.assign(session.user, token.user ?? {});
             return session;
         },
     },
 });
-``;

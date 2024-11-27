@@ -2,6 +2,8 @@ import React from "react";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { Toaster } from "@/components/ui/toaster";
+import AuthProvider from "@/providers/auth-provider";
 
 const vazir = localFont({
     src: [
@@ -28,9 +30,12 @@ export default function RootLayout({
     return (
         <html lang="en" dir="rtl" suppressHydrationWarning>
             <body className={`${vazir.className} antialiased bg-gray-50`}>
-                <div>
-                    <main>{children}</main>
-                </div>
+                <AuthProvider>
+                    <Toaster />
+                    <div>
+                        <main>{children}</main>
+                    </div>
+                </AuthProvider>
             </body>
         </html>
     );

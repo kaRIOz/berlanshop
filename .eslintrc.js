@@ -67,10 +67,12 @@ module.exports = {
         "react/react-in-jsx-scope": "off",
         "no-extra-boolean-cast": "off",
         "no-unused-vars": "warn",
+        "@typescript-eslint/no-unused-vars": "off",
         "no-duplicate-imports": ["error", { includeExports: true }],
         "no-undef": "warn",
         "no-use-before-define": "error",
-        "no-console": ["warn", { allow: ["warn", "error", "info"] }],
+        "no-debugger": "off",
+        "no-console": ["warn", { allow: ["log", "warn", "error", "info"] }],
         "no-var": "error",
 
         // "boundaries/no-unknown": ["error"],

@@ -1,6 +1,8 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "../tailwind/components.css";
+@import "tailwindcss/utilities";
+
 @layer base {
     :root {
         --background: 0 0% 100%;
@@ -105,7 +107,7 @@
     }
 }
 @layer components {
-  .footer-li {
-    @apply text-sm font-light tracking-wider cursor-pointer hover:text-red-600 hover:font-normal w-fit	
-  }
+    .footer-li {
+        @apply text-sm font-light tracking-wider cursor-pointer hover:text-red-600 hover:font-normal w-fit;
+    }
 }
