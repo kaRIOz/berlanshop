@@ -5,10 +5,6 @@ import Image from "next/image";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import imgBanner1 from "../../../public/imgBanner1.webp";
-import imgBanner2 from "../../../public/imgBanner2.webp";
-import imgBanner3 from "../../../public/imgBanner3.webp";
-
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
 // import swiper styles
@@ -34,31 +30,31 @@ const Banner = () => {
                 className=""
             >
                 <SwiperSlide>
-                    <Image src={imgBanner1} alt="imageBanner1" />
+                    <Image src={"/imgBanner1.webp"} alt="imageBanner1" width={1550} height={100} />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <Image src={imgBanner2} alt="imageBanner2" />
+                    <Image src={"/imgBanner3.webp"} alt="imageBanner2" width={1550} height={100} />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <Image src={imgBanner3} alt="imageBanner3" />
+                    <Image src={"/imgBanner2.webp"} alt="imageBanner3" width={1550} height={100} />
                 </SwiperSlide>
             </Swiper>
-            <div className="w-5/6 mt-4 py-6 pb-8 m-auto flex justify-between items-center border-b-[1px] max-w-container">
+            <div className="w-5/6 mt-4 py-6 pb-8 m-auto grid grid-cols-2 md:grid-cols-4 border-b-[1px] max-w-container">
                 <div className="flex justify-center items-center space-x-3 space-x-reverse ">
-                    <TbTruckDelivery className="text-2xl" />
-                    <p className="font-semibold">ارسال سریع</p>
+                    <TbTruckDelivery className="text-[14px] md:text-2xl" />
+                    <p className="font-semibold text-[12px] md:text-sm">ارسال سریع</p>
                 </div>
                 <div className="flex justify-center items-center space-x-3 space-x-reverse">
-                    <SiAdguard className="text-2xl" />
-                    <p className="font-semibold">اصالت کالا</p>
+                    <SiAdguard className="text-[14px] md:text-2xl" />
+                    <p className="font-semibold text-[12px] md:text-sm">اصالت کالا</p>
                 </div>
                 <div className="flex justify-center items-center space-x-3 space-x-reverse">
-                    <TbCreditCardPay className="text-2xl" />
-                    <p className="font-semibold font-vazir">پرداخت امن</p>
+                    <TbCreditCardPay className="text-[14px] md:text-2xl" />
+                    <p className="font-semibold  text-[12px] md:text-sm">پرداخت امن</p>
                 </div>
                 <div className="flex justify-center items-center space-x-3 space-x-reverse">
-                    <GiBackup className="text-2xl" />
-                    <p className="font-semibold">پشتیبانی</p>
+                    <GiBackup className="text-[14px] md:text-2xl" />
+                    <p className="font-semibold  text-[12px] md:text-sm">پشتیبانی</p>
                 </div>
             </div>
         </>

@@ -110,4 +110,11 @@
     .footer-li {
         @apply text-sm font-light tracking-wider cursor-pointer hover:text-red-600 hover:font-normal w-fit;
     }
+
+    .table td {
+        @apply text-[14px] p-4 text-center;
+    }
+    .tbody td {
+        @apply text-gray-500 text-[12px] border-b rounded-lg;
+    }
 }

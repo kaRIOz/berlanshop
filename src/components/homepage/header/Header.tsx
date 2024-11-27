@@ -3,21 +3,18 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-
-import Logo from "../../../public/Logo.png";
+import { usePathname } from "next/navigation";
 
 import { motion } from "framer-motion";
 import { navBarList } from "$/constance";
 
-// icons
 import { HiMenuAlt3 } from "react-icons/hi";
 import { IoMdCloseCircleOutline } from "react-icons/io";
-import { useSession } from "next-auth/react";
-import { Loading } from "../loading";
 
 const Header = () => {
-    const { data, status } = useSession();
     const [sidenav, setSidenav] = useState(false);
+
+    const pathname = usePathname();
 
     return (
         <header className="w-full h-20 bg-white sticky top-0 z-50 shadow-sm ">
@@ -34,7 +31,7 @@ const Header = () => {
                                 {navBarList.map(({ id, title, link }) => (
                                     <Link
                                         key={id}
-                                        className="hidden md:flex text-sm hover:font-Regular w-22 h-6 justify-center items-center px-4  text-[#767676] hover:text-[#262626]"
+                                        className={`hidden md:flex text-sm hover:font-Regular w-22 h-6 justify-center items-center px-4 ${pathname === link && "text-[#262626]"}  text-[#767676] hover:text-[#262626]`}
                                         href={link}
                                     >
                                         <li>{title}</li>
@@ -46,16 +43,13 @@ const Header = () => {
 
                     <div className="flex justify-between items-center space-x-5 space-x-reverse">
                         <Link href="/">
-                            <Image src={Logo} alt="Logo" width={100} />
+                            <Image src={"/Logo.png"} alt="Logo" width={100} height={50} />
                         </Link>
-
-                        {status === "loading" && <Loading />}
-                        {status === "authenticated" && <p>{data?.user?.phoneNumber}</p>}
-                        {status === "unauthenticated" && (
-                            <button className="border-[1px] px-4 py-2 rounded-lg hover:bg-gray-100 text-[13px]">
-                                <Link href={"/otp"}>ثبت نام | ورود</Link>
-                            </button>
-                        )}
+                        <button className="border-[1px] px-4 py-2 rounded-lg hover:bg-gray-100 text-[13px]">
+                            <Link href={"/otp-sign-up"} className="w-full h-full">
+                                ورود | ثبت نام
+                            </Link>
+                        </button>
                     </div>
 
                     <HiMenuAlt3
@@ -73,7 +67,7 @@ const Header = () => {
                             <div className="bg-black w-1/2 h-screen p-6">
                                 <div>
                                     <div className="flex justify-between items-center shadow-md border-b-[1px] my-2">
-                                        <Image src={Logo} alt="Logo" width={80} />
+                                        <Image src={"/Logo.png"} alt="Logo" width={80} height={50} />
                                         <IoMdCloseCircleOutline
                                             className="text-2xl"
                                             onClick={() => setSidenav(false)}
