@@ -3,15 +3,13 @@ import NextAuth, { type DefaultSession, type User } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { signInByPhoneNumber } from "./app/(auth)/otp-verify/actions";
 import { authConfig } from "./auth.config";
-import { DrizzleAdapter } from "@auth/drizzle-adapter";
-import db from "@/drizzle";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
     ...authConfig,
     trustHost: true,
     // adapter: DrizzleAdapter(db),
     pages: {
-        signIn: "/",
+        signIn: "/otp",
     },
     session: {
         maxAge: 172800,
@@ -37,7 +35,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                         phoneNumber: dbUser.phoneNumber,
                     } as User;
                 } catch (e) {
-                    debugger;
                     throw new Error("Error signing in Auth");
                 }
             },

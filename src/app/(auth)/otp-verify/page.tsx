@@ -14,7 +14,7 @@ import { getSession } from "next-auth/react";
 
 const OTPVerify = () => {
     const phoneNumber = useSearchParams().get("phoneNumber");
-    // const [isPending, startTransition] = useTransition();
+
     const {
         register,
         handleSubmit,
@@ -28,6 +28,7 @@ const OTPVerify = () => {
 
     useEffect(() => {
         if (formState) {
+            debugger;
             console.log("formState", formState);
             const fetchSession = async () => await getSession();
             fetchSession();
@@ -37,6 +38,7 @@ const OTPVerify = () => {
 
     const onSubmit: SubmitHandler<OTPVerifyType> = data => {
         const formData = new FormData();
+
         formData.append("phoneNumber", data.phoneNumber);
         formData.append("verificationCode", data.verificationCode);
         startTransition(async () => await action(formData));

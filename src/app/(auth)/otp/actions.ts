@@ -12,7 +12,6 @@ type NewUser = typeof user.$inferInsert;
 
 export async function checkPhoneNumber(data: OTPForm) {
     const validatedData = otpSignUpSchema.safeParse(data);
-
     const code = generateOTP();
 
     return executeAction({
