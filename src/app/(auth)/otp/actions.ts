@@ -5,19 +5,17 @@ import { executeAction } from "@/drizzle/utils/executeAction";
 import { eq } from "drizzle-orm";
 import { user } from "@/drizzle/schema/user/user";
 import { generateOTP } from "@/drizzle/utils/generateOTP";
-import { redirect } from "next/navigation";
 import { otpSignUpSchema, type OTPForm } from "./types";
 
 type NewUser = typeof user.$inferInsert;
 
-export async function checkPhoneNumber(data: OTPForm) {
-    const validatedData = otpSignUpSchema.safeParse(data);
+export async function checkPhoneNumber(formData: OTPForm) {
+    const { success, data, error } = otpSignUpSchema.safeParse(formData);
 
     const code = generateOTP();
-
     return executeAction({
         actionFn: async () => {
-            if (validatedData.success) {
+            if (success) {
                 const isUserExist = await db.query.user.findFirst({
                     where: eq(user.phoneNumber, data.phoneNumber),
                 });
@@ -38,8 +36,7 @@ export async function checkPhoneNumber(data: OTPForm) {
             }
         },
         isProtected: false,
-
-        clientSuccessMessage: `Verification code sent successfully : ${code}`,
-        serverErrorMessage: "phoneNumber Error",
+        clientSuccessMessage: `${code}`,
+        serverErrorMessage: `phoneNumber Error : ${error}`,
     });
 }

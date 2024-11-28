@@ -10,8 +10,11 @@ import { navBarList } from "$/constance";
 
 import { HiMenuAlt3 } from "react-icons/hi";
 import { IoMdCloseCircleOutline } from "react-icons/io";
+import { useSession } from "next-auth/react";
+import { Loading } from "@/components/loading";
 
 const Header = () => {
+    const { data, status } = useSession();
     const [sidenav, setSidenav] = useState(false);
 
     const pathname = usePathname();
@@ -45,11 +48,15 @@ const Header = () => {
                         <Link href="/">
                             <Image src={"/Logo.png"} alt="Logo" width={100} height={50} />
                         </Link>
-                        <button className="border-[1px] px-4 py-2 rounded-lg hover:bg-gray-100 text-[13px]">
-                            <Link href={"/otp-sign-up"} className="w-full h-full">
-                                ورود | ثبت نام
-                            </Link>
-                        </button>
+                        {status === "authenticated" && <p>{data.user.phoneNumber}</p>}
+                        {status === "unauthenticated" && (
+                            <button className="border-[1px] px-4 py-2 rounded-lg hover:bg-gray-100 text-[13px]">
+                                <Link href={"/otp"} className="w-full h-full">
+                                    ورود | ثبت نام
+                                </Link>
+                            </button>
+                        )}
+                        {status === "loading" && <Loading />}
                     </div>
 
                     <HiMenuAlt3

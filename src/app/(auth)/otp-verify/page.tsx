@@ -11,6 +11,7 @@ import { Loading } from "@/components/loading";
 import { OTPVerifySchema, type OTPVerifyType } from "./types";
 import { signInAction } from "./actions";
 import { getSession } from "next-auth/react";
+import { toast } from "@/components/ui/use-toast";
 
 const OTPVerify = () => {
     const phoneNumber = useSearchParams().get("phoneNumber");
@@ -28,7 +29,10 @@ const OTPVerify = () => {
 
     useEffect(() => {
         if (formState) {
-            console.log("formState", formState);
+            toast({
+                title: formState.message,
+                variant: !!formState.success ? "default" : "destructive",
+            });
             const fetchSession = async () => await getSession();
             fetchSession();
             redirect("/");

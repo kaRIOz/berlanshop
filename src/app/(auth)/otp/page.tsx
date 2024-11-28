@@ -9,9 +9,28 @@ import { otpSignUpSchema, type OTPForm } from "./types";
 import { checkPhoneNumber } from "./actions";
 import { useRouter } from "next/navigation";
 import { toast } from "@/components/ui/use-toast";
+import { ToastAction } from "@/components/ui/toast";
+import { useCopyToClipboard } from "usehooks-ts";
 
 const OTPSign = () => {
     const router = useRouter();
+    const [copiedText, copy] = useCopyToClipboard();
+    const handleCopy = (text: string) => () => {
+        copy(text)
+            .then(() => {
+                toast({
+                    variant: "default",
+                    title: `Copied Successfully!`,
+                });
+            })
+            .catch(error => {
+                toast({
+                    variant: "destructive",
+                    title: `Failed ${error}`,
+                });
+                console.error("Failed to copy!", error);
+            });
+    };
     const [isPending, startTransition] = useTransition();
     const {
         register,
@@ -23,8 +42,14 @@ const OTPSign = () => {
         startTransition(async () => {
             const response = await checkPhoneNumber(data);
             toast({
-                title: response.message,
+                title: "Verification code sent successfully",
                 variant: response.success === true ? "default" : "destructive",
+                description: response.message,
+                action: (
+                    <ToastAction onClick={handleCopy(response.message)} altText="Goto schedule to undo">
+                        Copy
+                    </ToastAction>
+                ),
             });
             router.push("/otp-verify?phoneNumber=" + data.phoneNumber);
         });
@@ -45,7 +70,7 @@ const OTPSign = () => {
                         type="text"
                         name="phoneNumber"
                         className={`w-full px-4 py-3 text-sm outline-none border ${errors.phoneNumber ? " border-red-500 " : "border-blue-500"} rounded-lg`}
-                        autoComplete="off"
+                        autoComplete="mobile tel"
                         autoFocus
                     />
                     {errors.phoneNumber && (

@@ -125,9 +125,7 @@ const SelectBox = <TFieldValues extends FieldValues>({
                                 <div className="relative">
                                     <CommandInput
                                         value={searchTerm}
-                                        onValueChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                                            setSearchTerm(e.target.value)
-                                        }
+                                        onValueChange={(search: string) => setSearchTerm(search)}
                                         placeholder="Search..."
                                         className="h-9"
                                     />
