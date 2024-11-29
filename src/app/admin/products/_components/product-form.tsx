@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import { useActionState, useEffect, useRef, useState, useTransition, type ChangeEvent } from "react";
 import { productFormSchema, type ProductFromType } from "./product-form.types";
 import { Loading } from "@/components/loading";
+import { updateProduct } from "../[id]/edit/actions";
 
 export function ProductForm({ product }: { product?: ProductSchema }) {
     const router = useRouter();
@@ -26,11 +27,21 @@ export function ProductForm({ product }: { product?: ProductSchema }) {
         formState: { errors, isSubmitting },
     } = useForm<ProductFromType>({
         resolver: zodResolver(productFormSchema),
-        defaultValues: { name: "", price: "", description: "", SKU: "", thumbnail: null, categoryId: 1 },
+        defaultValues: {
+            name: product?.name ?? "",
+            price: product?.price ?? "",
+            description: product?.description ?? "",
+            SKU: product?.SKU ?? "",
+            thumbnail: null,
+            categoryId: product?.categoryId ?? 1,
+        },
         mode: "onChange",
     });
     const [pending, startTransition] = useTransition();
-    const [formState, action] = useActionState(addProduct, undefined);
+    const [formState, action] = useActionState(
+        product?.mode === "edit" ? updateProduct.bind(null, product.id) : addProduct,
+        undefined,
+    );
     useEffect(() => {
         if (formState?.success) {
             toast({
@@ -59,7 +70,7 @@ export function ProductForm({ product }: { product?: ProductSchema }) {
 
         if (!product) {
             startTransition(async () => action(formData));
-        } else {
+        } else if (product.mode === "edit") {
             startTransition(async () => action(formData));
         }
     };
@@ -139,6 +150,9 @@ export function ProductForm({ product }: { product?: ProductSchema }) {
                             </button>
                         </div>
                     </div>
+                )}
+                {product && product.thumbnail && (
+                    <Image src={product.thumbnail} alt={`Product image-${product.name}`} height={50} width={50} />
                 )}
                 <input
                     {...register("thumbnail")}

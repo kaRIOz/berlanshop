@@ -1,8 +1,12 @@
+"use client";
 import type { SelectProductModel } from "@/drizzle/schema/product/product";
 import { formatPrice } from "@/utils/string";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useTransition } from "react";
+import { deleteProduct } from "../actions";
+import { Loading } from "@/components/loading";
+import { toast } from "@/components/ui/use-toast";
 
 type Props = {
     products:
@@ -14,6 +18,7 @@ type Props = {
 };
 
 const ProductList = ({ products }: Props) => {
+    const [pending, startTransition] = useTransition();
     return (
         <table className="table w-full mt-3">
             <thead className="bg-gray-100 rounded-lg">
@@ -48,7 +53,20 @@ const ProductList = ({ products }: Props) => {
                             >
                                 ویرایش
                             </Link>
-                            <button className="bg-red-500 px-2 py-1 text-white  rounded-lg ">حذف</button>
+                            <button
+                                onClick={async () => {
+                                    const response = await deleteProduct(product.id);
+                                    if (response) {
+                                        toast({
+                                            title: response.message,
+                                            variant: response.success === true ? "default" : "destructive",
+                                        });
+                                    }
+                                }}
+                                className="bg-red-500 px-2 py-1 text-white  rounded-lg "
+                            >
+                                {pending ? <Loading /> : "حذف"}
+                            </button>
                         </td>
                     </tr>
                 ))}

@@ -9,9 +9,9 @@ export default async function EditProduct({ params: { id } }: { params: { id: st
         <>
             <h1>ویرایش محصول </h1>
             <ProductForm
-                defaultValues={{
+                product={{
                     mode: "edit",
-                    id: product.id,
+                    id: +id,
                     name: product.name,
                     price: product.price,
                     description: product.description,

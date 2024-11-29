@@ -10,7 +10,6 @@ import { revalidatePath } from "next/cache";
 export const addProduct = async (formState: OperationResult | undefined, formData: FormData) => {
     return executeAction({
         actionFn: async () => {
-            debugger;
             const validatedData = Object.fromEntries(formData);
             const { success, data } = productFormSchema.safeParse(validatedData);
             if (success) {
@@ -26,7 +25,7 @@ export const addProduct = async (formState: OperationResult | undefined, formDat
                     thumbnail: imagePath,
                     categoryId: Number(data.categoryId),
                 });
-
+                revalidatePath("/admin/products");
                 revalidatePath("/");
                 revalidatePath("/products");
             }
