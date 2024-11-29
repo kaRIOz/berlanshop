@@ -1,7 +1,7 @@
 "use server";
 
 import db from "@/drizzle";
-import { user, userSchema } from "@/drizzle/schema/user/user";
+import { user } from "@/drizzle/schema/user/user";
 import { executeQuery } from "@/drizzle/utils/executeQuery";
 import { and, eq } from "drizzle-orm";
 import { OTPVerifySchema } from "./types";

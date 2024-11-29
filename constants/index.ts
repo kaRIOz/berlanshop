@@ -1,6 +1,6 @@
 type NavbarList = { id: number; title: string; link: string };
 
-import { MdDashboard, MdSupervisedUserCircle, MdShoppingBag, MdAttachMoney, MdOutlineMessage } from "react-icons/md";
+import { MdDashboard, MdSupervisedUserCircle, MdShoppingBag, MdOutlineMessage } from "react-icons/md";
 import { FaUsers } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 import { IoExitOutline } from "react-icons/io5";
@@ -64,32 +64,32 @@ export const product: Product[] = [
 export const menuItems = [
     {
         title: "پنل ادمین",
-        path: "/admin-dashboard",
+        path: "/admin",
         icon: MdDashboard,
     },
     {
         title: "سفارشات",
-        path: "/admin-dashboard/orders",
+        path: "/admin/orders",
         icon: MdSupervisedUserCircle,
     },
     {
         title: "محصولات",
-        path: "/admin-dashboard/products",
+        path: "/admin/products",
         icon: MdShoppingBag,
     },
     {
         title: "مشتریان",
-        path: "/admin-dashboard/customers",
+        path: "/admin/customers",
         icon: FaUsers,
     },
     {
         title: "پیام ها",
-        path: "/admin-dashboard/messages",
+        path: "/admin/messages",
         icon: MdOutlineMessage,
     },
     {
         title: "تنظیمات",
-        path: "/admin-dashboard/setting",
+        path: "/admin/setting",
         icon: IoMdSettings,
     },
     {

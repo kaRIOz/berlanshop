@@ -6,7 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 import { motion } from "framer-motion";
-import { navBarList } from "$/constance";
+import { navBarList } from "$/constants";
 
 import { HiMenuAlt3 } from "react-icons/hi";
 import { IoMdCloseCircleOutline } from "react-icons/io";

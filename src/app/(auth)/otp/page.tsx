@@ -15,6 +15,7 @@ import { useCopyToClipboard } from "usehooks-ts";
 const OTPSign = () => {
     const router = useRouter();
     const [copiedText, copy] = useCopyToClipboard();
+    console.log(copiedText);
     const handleCopy = (text: string) => () => {
         copy(text)
             .then(() => {

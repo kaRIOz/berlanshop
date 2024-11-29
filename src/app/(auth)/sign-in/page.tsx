@@ -17,11 +17,7 @@ const SignIn = () => {
 
     type signInform = z.infer<typeof signInSchema>;
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm<signInform>({ resolver: zodResolver(signInSchema) });
+    const { register, handleSubmit } = useForm<signInform>({ resolver: zodResolver(signInSchema) });
 
     const onSubmit = () => {
         console.log("user is login");

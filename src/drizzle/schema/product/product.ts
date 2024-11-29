@@ -3,6 +3,7 @@ import { integer, pgTable, serial, timestamp, varchar } from "drizzle-orm/pg-cor
 import { cartItem, category, discount, inventory, orderItems } from "@/drizzle/schema";
 import { relations, type InferSelectModel } from "drizzle-orm";
 import { z } from "zod";
+import { createInsertSchema } from "drizzle-zod";
 
 export const product = pgTable("product", {
     id: serial("id").notNull().primaryKey(),
@@ -11,7 +12,7 @@ export const product = pgTable("product", {
     SKU: varchar("sku", { length: 255 }).notNull(),
     price: varchar("price", { length: 255 }).notNull(),
     thumbnail: varchar("thumbnail", { length: 255 }).notNull(),
-    images: varchar("images", { length: 255 }).notNull(),
+    images: varchar("images", { length: 255 }),
     categoryId: integer("category_id")
         .notNull()
         .references(() => category.id),
@@ -39,26 +40,40 @@ export const productRelations = relations(product, ({ one }) => ({
     orderItems: one(orderItems),
 }));
 
-export const productSchema = z
-    .object({
+const baseSchema = createInsertSchema(product, {
+    id: schema => schema.id.min(1),
+    name: schema => schema.name.min(1),
+    description: schema => schema.description.min(1).max(255),
+    categoryId: schema => schema.categoryId.min(1),
+    SKU: schema => schema.SKU.min(1),
+    price: schema => schema.price.min(1),
+    thumbnail: schema => schema.thumbnail.min(1),
+    images: schema => schema.images.min(1),
+});
+
+export const productSchema = z.union([
+    z.object({
+        mode: z.literal("create"),
+        name: baseSchema.shape.name,
+        price: baseSchema.shape.price,
+        description: baseSchema.shape.description,
+        SKU: baseSchema.shape.SKU,
+        thumbnail: baseSchema.shape.thumbnail,
+        images: baseSchema.shape.images,
+        categoryId: baseSchema.shape.categoryId,
+    }),
+    z.object({
+        mode: z.literal("edit"),
         id: z.number().min(1),
-        name: z.string().min(1),
-        price: z.string().min(1),
-        description: z.string().min(1),
-        SKU: z.string().min(1),
-        thumbnail: z.string().min(1),
-        images: z.string().min(1),
-        categoryId: z.number().min(1),
-    })
-    .pick({
-        name: true,
-        price: true,
-        description: true,
-        SKU: true,
-        thumbnail: true,
-        images: true,
-        categoryId: true,
-    });
+        name: baseSchema.shape.name,
+        price: baseSchema.shape.price,
+        description: baseSchema.shape.description,
+        SKU: baseSchema.shape.SKU,
+        thumbnail: baseSchema.shape.thumbnail,
+        images: baseSchema.shape.images,
+        categoryId: baseSchema.shape.categoryId,
+    }),
+]);
 
 export type ProductSchema = z.infer<typeof productSchema>;
 export type SelectProductModel = InferSelectModel<typeof product>;

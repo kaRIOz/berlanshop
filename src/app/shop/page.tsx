@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-import { product } from "$/constance";
+import { product } from "$/constants";
 import Header from "@/components/homepage/header/Header";
 import SearchVsCategory from "@/components/homepage/search-category/SearchVsCategory";
 
