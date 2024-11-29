@@ -1,22 +1,22 @@
 "use server";
 
 import db from "@/drizzle";
-import { user, userSchema } from "@/drizzle/schema/user/user";
+import { admin } from "@/drizzle/schema/admin/admin";
 import { executeQuery } from "@/drizzle/utils/executeQuery";
 import { and, eq } from "drizzle-orm";
-import { OTPVerifySchema } from "./types";
+import { singInSchema } from "./types";
 import { signIn } from "@/auth";
 import { executeAction } from "@/drizzle/utils/executeAction";
 
 export async function signInAction(formState: { success: boolean; message: string } | undefined, formData: FormData) {
-    const validatedData = OTPVerifySchema.safeParse(Object.fromEntries(formData));
+    const validatedData = singInSchema.safeParse(Object.fromEntries(formData));
     if (validatedData.success) {
-        const { phoneNumber, verificationCode } = validatedData.data;
+        const { username, password } = validatedData.data;
         return executeAction({
             actionFn: async () =>
                 await signIn("credentials", {
-                    phoneNumber: phoneNumber,
-                    verificationCode: verificationCode,
+                    username: username,
+                    password: password,
                     redirect: false,
                 }),
             isProtected: false,
@@ -26,22 +26,22 @@ export async function signInAction(formState: { success: boolean; message: strin
     }
 }
 
-export async function signInByPhoneNumber(data: unknown) {
+export async function signInByEmailAndPassword(data: unknown) {
     return executeQuery({
         queryFn: async () => {
-            const validatedData = OTPVerifySchema.safeParse(data);
+            const validatedData = singInSchema.safeParse(data);
 
             if (validatedData.success) {
-                return await db.query.user.findFirst({
+                return await db.query.admin.findFirst({
                     columns: {
                         id: true,
-                        firstName: true,
-                        lastName: true,
-                        phoneNumber: true,
+                        username: true,
+                        password: true,
                     },
                     where: and(
-                        eq(user.phoneNumber, validatedData.data.phoneNumber),
-                        eq(user.verificationCode, String(validatedData.data.verificationCode)),
+                        // hash
+                        eq(admin.username, validatedData.data.username),
+                        eq(admin.password, String(validatedData.data.password)),
                     ),
                 });
             }

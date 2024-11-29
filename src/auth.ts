@@ -17,9 +17,34 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
     providers: [
         Credentials({
+            name: "/user",
             credentials: {
                 phoneNumber: { label: "phoneNumber", type: "text" },
                 verificationCode: { label: "verificationCode", type: "text" },
+            },
+            authorize: async credentials => {
+                try {
+                    const dbUser = await signInByPhoneNumber(credentials);
+                    if (!dbUser) {
+                        throw new Error("User not found / Wrong credentials");
+                    }
+
+                    return {
+                        id: dbUser.id.toString(),
+                        firstName: dbUser.firstName,
+                        lastName: dbUser.lastName,
+                        phoneNumber: dbUser.phoneNumber,
+                    } as User;
+                } catch (e) {
+                    throw new Error("Error signing in Auth");
+                }
+            },
+        }),
+        Credentials({
+            name: "admin",
+            credentials: {
+                username: { label: "username", type: "text" },
+                password: { label: "password", type: "text" },
             },
             authorize: async credentials => {
                 try {

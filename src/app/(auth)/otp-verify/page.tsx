@@ -38,7 +38,6 @@ const OTPVerify = () => {
 
     const onSubmit: SubmitHandler<OTPVerifyType> = data => {
         const formData = new FormData();
-
         formData.append("phoneNumber", data.phoneNumber);
         formData.append("verificationCode", data.verificationCode);
         startTransition(async () => await action(formData));
@@ -49,7 +48,7 @@ const OTPVerify = () => {
                 <Image src={"/Logo.png"} alt="Logo" width={150} height={100} />
                 <h2 className="ml-auto mt-4">کد تایید را وارد کنید</h2>
                 <p className="ml-auto mt-6 text-[13px] text-gray-600 font-light">
-                    کد تایید برای شماره {phoneNumber} پیامک شد
+                    کد تایید برای شماره {` "${phoneNumber}" `} پیامک شد
                 </p>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="ml-auto mt-4 w-full">
