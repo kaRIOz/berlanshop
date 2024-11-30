@@ -9,7 +9,7 @@ const AdminProducts = async () => {
     const products = await getProducts();
 
     return (
-        <div className="bg-primary-content border p-3 rounded-lg mt-3">
+        <div className=" mt-3">
             <div className="flex items-center justify-between ">
                 <div className="flex items-center gap-2 p-2 rounded-lg bg-slate-200 w-max">
                     <FaSearch />

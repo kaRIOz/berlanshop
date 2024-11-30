@@ -16,6 +16,8 @@ import { productFormSchema, type ProductFromType } from "./product-form.types";
 import { Loading } from "@/components/loading";
 import { updateProduct } from "../[id]/edit/actions";
 
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
 export function ProductForm({ product }: { product?: ProductSchema }) {
     const router = useRouter();
     const hiddenFileInputRef = useRef<HTMLInputElement | null>(null);
@@ -103,6 +105,20 @@ export function ProductForm({ product }: { product?: ProductSchema }) {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+            <div>
+                <Select>
+                    <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="دسته بندی محصول" />
+                    </SelectTrigger>
+                    <SelectContent {...register("categoryId")}>
+                        <SelectGroup>
+                            <SelectItem value="شال">شال</SelectItem>
+                            <SelectItem value="روسری">روسری</SelectItem>
+                            <SelectItem value="مقنعه">مقنعه</SelectItem>
+                        </SelectGroup>
+                    </SelectContent>
+                </Select>
+            </div>
             <div className="space-y-2">
                 <Label htmlFor="name">اسم محصول</Label>
                 <Input {...register("name")} name="name" type="text" />
@@ -126,13 +142,18 @@ export function ProductForm({ product }: { product?: ProductSchema }) {
                     name="description"
                     required
                     defaultValue={product?.description}
+                    className="w-full h-16 resize-none"
                 />
                 {errors.description && <div className="text-destructive">{errors.description.message}</div>}
             </div>
             <div className="upload">
                 {!preview && (
-                    <button type="button" onClick={triggerFileInput}>
-                        Upload Image
+                    <button
+                        type="button"
+                        onClick={triggerFileInput}
+                        className="bg-emerald-500 p-2 rounded-lg text-[12px] text-primary-content active:scale-95"
+                    >
+                        آپلود عکس محصول
                     </button>
                 )}
 

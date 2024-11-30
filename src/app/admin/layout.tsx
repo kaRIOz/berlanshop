@@ -12,7 +12,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
             <div className="grid grid-cols-[auto,1fr] w-full">
                 <AdminSidebar />
 
-                <main className="flex flex-col overflow-auto m-2 ">
+                <main className="flex flex-col overflow-auto m-2 bg-primary-content border  p-3 rounded-lg">
                     <SidebarTrigger />
                     {children}
                 </main>
