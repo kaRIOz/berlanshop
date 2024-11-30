@@ -10,6 +10,9 @@ import { navBarList } from "$/constants";
 
 import { HiMenuAlt3 } from "react-icons/hi";
 import { IoMdCloseCircleOutline } from "react-icons/io";
+import { IoPersonOutline } from "react-icons/io5";
+import { MdArrowDropDown } from "react-icons/md";
+
 import { useSession } from "next-auth/react";
 import { Loading } from "@/components/loading";
 
@@ -57,7 +60,12 @@ const Header = () => {
                             </button>
                         )}
                         {status === "loading" && <Loading />}
-                        {status === "authenticated" && <p>{data.user.phoneNumber}</p>}
+                        {status === "authenticated" && (
+                            <div className="flex items-center cursor-pointer hover:bg-red-100 p-1 rounded-lg">
+                                <IoPersonOutline className="text-2xl" />
+                                <MdArrowDropDown />
+                            </div>
+                        )}
                     </div>
 
                     <HiMenuAlt3

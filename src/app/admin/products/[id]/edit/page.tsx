@@ -7,7 +7,7 @@ export default async function EditProduct({ params: { id } }: { params: { id: st
     if (!product) notFound();
     return (
         <>
-            <h1>ویرایش محصول </h1>
+            <h1 className="mb-4">ویرایش محصول </h1>
             <ProductForm
                 product={{
                     mode: "edit",
