@@ -12,12 +12,10 @@ import { HiMenuAlt3 } from "react-icons/hi";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { useSession } from "next-auth/react";
 import { Loading } from "@/components/loading";
-import { useSession } from "next-auth/react";
-import { Loading } from "@/components/loading";
 
 const Header = () => {
     const { data, status } = useSession();
-    const { data, status } = useSession();
+
     const [sidenav, setSidenav] = useState(false);
 
     const pathname = usePathname();

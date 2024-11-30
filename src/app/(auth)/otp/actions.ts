@@ -9,8 +9,8 @@ import { otpSignUpSchema, type OTPForm } from "./types";
 
 type NewUser = typeof user.$inferInsert;
 
-export async function checkPhoneNumber(data: OTPForm) {
-    const validatedData = otpSignUpSchema.safeParse(data);
+export async function checkPhoneNumber(formData: OTPForm) {
+    const { success, error, data } = otpSignUpSchema.safeParse(formData);
     const code = generateOTP();
     return executeAction({
         actionFn: async () => {

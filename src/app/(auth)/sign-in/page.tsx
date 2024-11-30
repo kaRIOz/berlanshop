@@ -25,10 +25,9 @@ const SignIn = () => {
 
     useEffect(() => {
         if (formState) {
-            debugger;
             const fetchSession = async () => await getSession();
             fetchSession();
-            redirect("/admin-dashboard");
+            redirect("/admin");
         }
     }, [formState]);
 
