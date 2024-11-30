@@ -23,6 +23,7 @@ export const singInSchema = z.object({
         .regex(/^(?=.*\d).{1,}$/, {
             message: "حداقل شامل یک رقم باشد",
         })
+        // eslint-disable-next-line no-useless-escape
         .regex(/^(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>/?]).{1,}$/, {
             message: "حداقل شامل یک کارکتر باشد",
         }),

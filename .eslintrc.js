@@ -71,7 +71,7 @@ module.exports = {
         "no-duplicate-imports": ["error", { includeExports: true }],
         "no-undef": "warn",
         "no-use-before-define": "error",
-        "no-debugger": "off",
+        "no-debugger": "warn",
         "no-console": ["warn", { allow: ["log", "warn", "error", "info"] }],
         "no-var": "error",
 

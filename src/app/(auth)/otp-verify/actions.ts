@@ -1,7 +1,7 @@
 "use server";
 
 import db from "@/drizzle";
-import { user, userSchema } from "@/drizzle/schema/user/user";
+import { user } from "@/drizzle/schema/user/user";
 import { executeQuery } from "@/drizzle/utils/executeQuery";
 import { and, eq } from "drizzle-orm";
 import { OTPVerifySchema } from "./types";
@@ -14,7 +14,7 @@ export async function signInAction(formState: { success: boolean; message: strin
         const { phoneNumber, verificationCode } = validatedData.data;
         return executeAction({
             actionFn: async () =>
-                await signIn("credentials", {
+                await signIn("user", {
                     phoneNumber: phoneNumber,
                     verificationCode: verificationCode,
                     redirect: false,

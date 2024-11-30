@@ -5,7 +5,6 @@ import { executeAction } from "@/drizzle/utils/executeAction";
 import { eq } from "drizzle-orm";
 import { user } from "@/drizzle/schema/user/user";
 import { generateOTP } from "@/drizzle/utils/generateOTP";
-import { redirect } from "next/navigation";
 import { otpSignUpSchema, type OTPForm } from "./types";
 
 type NewUser = typeof user.$inferInsert;

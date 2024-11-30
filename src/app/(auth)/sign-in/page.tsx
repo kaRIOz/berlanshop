@@ -12,31 +12,32 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { singInSchema, type SignInForm } from "./types";
 
 import { Loading } from "@/components/loading";
+import { signInAction } from "./actions";
 
 const SignIn = () => {
     const [isPending, startTransition] = useTransition();
-    // const [formState, action] = useActionState(signInAction , undefined);
+    const [formState, action] = useActionState(signInAction, undefined);
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm<SignInForm>({ resolver: zodResolver(singInSchema) });
 
-    // useEffect(() => {
-    //     if (formState) {
-    //         debugger;
-    //         console.log("formState", formState);
-    //         const fetchSession = async () => await getSession();
-    //         fetchSession();
-    //         redirect("/admin-dashboard");
-    //     }
-    // }, [formState]);
+    useEffect(() => {
+        if (formState) {
+            debugger;
+            const fetchSession = async () => await getSession();
+            fetchSession();
+            redirect("/admin-dashboard");
+        }
+    }, [formState]);
 
     const onSubmit: SubmitHandler<SignInForm> = data => {
         const formData = new FormData();
-        formData.append("email", data.username);
+        formData.append("username", data.username);
         formData.append("password", data.password);
-        // startTransition(async () => await action(formData));
+
+        startTransition(async () => await action(formData));
     };
 
     return (
@@ -68,7 +69,7 @@ const SignIn = () => {
                                     رمز
                                 </label>
                                 <input
-                                    type="text"
+                                    type="password"
                                     {...register("password")}
                                     name="password"
                                     id="password"

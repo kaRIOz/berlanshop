@@ -28,7 +28,6 @@ const OTPVerify = () => {
 
     useEffect(() => {
         if (formState) {
-            debugger;
             console.log("formState", formState);
             const fetchSession = async () => await getSession();
             fetchSession();

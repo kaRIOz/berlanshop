@@ -13,12 +13,14 @@ export async function signInAction(formState: { success: boolean; message: strin
     if (validatedData.success) {
         const { username, password } = validatedData.data;
         return executeAction({
-            actionFn: async () =>
-                await signIn("credentials", {
+            actionFn: async () => {
+                debugger;
+                await signIn("admin", {
                     username: username,
                     password: password,
                     redirect: false,
-                }),
+                });
+            },
             isProtected: false,
             serverErrorMessage: "Error signing in",
             clientSuccessMessage: "Successfully signed in",
@@ -36,12 +38,13 @@ export async function signInByEmailAndPassword(data: unknown) {
                     columns: {
                         id: true,
                         username: true,
-                        password: true,
+                        firstName: true,
+                        lastName: true,
                     },
                     where: and(
                         // hash
                         eq(admin.username, validatedData.data.username),
-                        eq(admin.password, String(validatedData.data.password)),
+                        eq(admin.password, validatedData.data.password),
                     ),
                 });
             }
