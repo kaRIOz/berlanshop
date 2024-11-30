@@ -6,6 +6,7 @@ export const authConfig = {
             const { nextUrl } = request;
             const isAuthenticated = !!auth?.user;
             const authRoutes = ["/otp", "/otp-verify", "/sign-in", "/sign-up", "/forget-password"];
+            const adminRoutes = ["/admin-dashboard"];
             const isAuthRoutes = authRoutes.includes(nextUrl.pathname);
 
             if (isAuthenticated && isAuthRoutes) {

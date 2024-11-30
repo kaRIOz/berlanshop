@@ -71,3 +71,8 @@ Hamid Ft@HamidFattahi MINGW64 /d/Develop/Projects/berlanshop (develop)
 # The current project is a git repository on branch: develop
 
 # The following files have been changed since the last commit: .eslintrc.js,package-lock.json,package.json,src/app/shop/page.tsx,src/components/ui/button.tsx,src/components/ui/input.tsx,src/components/ui/menubar.tsx,src/components/ui/separator.tsx,src/components/ui/sheet.tsx,src/components/ui/tooltip.tsx,src/lib/utils.ts,tsconfig.json
+
+
+### Iman next Steps afte login otp :
+1.modal global
+2.login admin 
