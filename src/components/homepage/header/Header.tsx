@@ -6,14 +6,17 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 import { motion } from "framer-motion";
-import { navBarList } from "$/constance";
+import { navBarList } from "$/constants";
 
 import { HiMenuAlt3 } from "react-icons/hi";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { useSession } from "next-auth/react";
 import { Loading } from "@/components/loading";
+import { useSession } from "next-auth/react";
+import { Loading } from "@/components/loading";
 
 const Header = () => {
+    const { data, status } = useSession();
     const { data, status } = useSession();
     const [sidenav, setSidenav] = useState(false);
 

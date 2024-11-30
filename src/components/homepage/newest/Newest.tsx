@@ -9,7 +9,7 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/effect-cards";
 
-import { product } from "$/constance";
+import { product } from "$/constants";
 const Newest = () => {
     return (
         <>

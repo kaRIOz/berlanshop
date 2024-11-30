@@ -35,7 +35,7 @@ export const priceText = (value: number, rounding?: boolean): string => {
                 result = t + "هزار و " + (value % 1000) + " تومن";
             } else {
                 // if (value % 1000 === 500) {
-                result = t + "هزار و پونصد تومن";
+                result = t + " تومان";
                 // }
                 // else {
                 //   result = t + "هزار و " + (value % 1000) + " تومن";

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 
-import { menuItems } from "$/constance";
+import { menuItems } from "$/constants";
 
 const Sidebar = () => {
     const pathname = usePathname();

@@ -11,6 +11,8 @@ type Options<T> = {
     clientSuccessMessage?: string;
 };
 
+export type OperationResult = { success: boolean; message: string };
+
 export async function executeAction<T>({
     actionFn,
     isProtected = true,
