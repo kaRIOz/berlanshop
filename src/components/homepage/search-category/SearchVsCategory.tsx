@@ -12,7 +12,7 @@ const SearchVsCategory = () => {
     return (
         <div className="w-full bg-[#f5f5f3] relative ">
             <div className="flex justify-between items-center max-w-container mx-auto w-full h-20 lg:h-24  px-8">
-                <div className="relative w-3/4 lg:w-[600px]  h-[35px] md:h-[50px]  bg-white flex justify-between items-center gap-2  px-6 rounded-sm">
+                <div className="relative w-3/4 lg:w-[600px]  h-[35px] md:h-[50px]  bg-primary-content flex justify-between items-center gap-2  px-6 rounded-sm">
                     <FaSearch className="w-5 h-4 md:h-5" />
                     <input
                         type="text"

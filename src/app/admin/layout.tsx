@@ -1,19 +1,23 @@
 import React from "react";
 
-import Nabvar from "@/components/admin-dashboard/navbar/Navbar";
-import Sidebar from "@/components/admin-dashboard/sidebar/Sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import AdminSidebar from "@/components/admin-dashboard/sidebar/AppSidebar";
+
+// import Nabvar from "@/components/admin-dashboard/navbar/Navbar";
+// import Sidebar from "@/components/admin-dashboard/sidebar/Sidebar";
 
 const layout = ({ children }: { children: React.ReactNode }) => {
     return (
-        <div className="flex">
-            <div className="flex-none w-1/4 max-w-[300px]">
-                <Sidebar />
+        <SidebarProvider>
+            <div className="grid grid-cols-[auto,1fr] w-full">
+                <AdminSidebar />
+
+                <main className="flex flex-col overflow-auto m-2 ">
+                    <SidebarTrigger />
+                    {children}
+                </main>
             </div>
-            <div className="flex-1 p-4">
-                <Nabvar />
-                {children}
-            </div>
-        </div>
+        </SidebarProvider>
     );
 };
 

@@ -35,7 +35,7 @@ const Header = () => {
                                 {navBarList.map(({ id, title, link }) => (
                                     <Link
                                         key={id}
-                                        className={`hidden md:flex text-sm hover:font-Regular w-22 h-6 justify-center items-center px-4 ${pathname === link && "text-[#262626]"}  text-[#767676] hover:text-[#262626]`}
+                                        className={`hidden md:flex text-sm hover:font-Regular w-22 h-6 justify-center items-center px-4 ${pathname === link ? "text-[#262626] " : "text-[#767676] "}  hover:text-[#262626]`}
                                         href={link}
                                     >
                                         <li>{title}</li>

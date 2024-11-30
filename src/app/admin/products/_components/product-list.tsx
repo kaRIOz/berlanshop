@@ -19,9 +19,10 @@ type Props = {
 
 const ProductList = ({ products }: Props) => {
     const [pending, startTransition] = useTransition();
+
     return (
         <table className="table w-full mt-3">
-            <thead className="bg-gray-100 rounded-lg">
+            <thead className="bg-slate-200">
                 <tr>
                     <td>عنوان</td>
                     <td>توضیحات</td>

@@ -9,9 +9,9 @@ const AdminProducts = async () => {
     const products = await getProducts();
 
     return (
-        <div className="bg-white shadow-[0_5px_30px_-16px_rgba(0,0,0,0.2)] p-2 rounded-lg mt-3">
+        <div className="bg-primary-content border p-3 rounded-lg mt-3">
             <div className="flex items-center justify-between ">
-                <div className="flex items-center gap-2 p-2 rounded-lg bg-gray-50 w-max">
+                <div className="flex items-center gap-2 p-2 rounded-lg bg-slate-200 w-max">
                     <FaSearch />
                     <Search placeholder={"جستجو در سری محصولات شما"} />
                 </div>
