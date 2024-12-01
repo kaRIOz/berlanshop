@@ -17,8 +17,14 @@ import { Loading } from "@/components/loading";
 import { updateProduct } from "../[id]/edit/actions";
 
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import type { SelectCategoryModel } from "@/drizzle/schema/product/category";
 
-export function ProductForm({ product }: { product?: ProductSchema }) {
+type Props = {
+    categories: Pick<SelectCategoryModel, "id" | "nameFa" | "nameEn" | "thumbnail" | "parentId">[] | null;
+    product?: ProductSchema;
+};
+
+export function ProductForm({ product, categories }: Props) {
     const router = useRouter();
     const hiddenFileInputRef = useRef<HTMLInputElement | null>(null);
     const [preview, setPreview] = useState<string | null>(null);
