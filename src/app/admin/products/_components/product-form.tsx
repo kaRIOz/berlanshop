@@ -46,6 +46,7 @@ export function ProductForm({ product }: { product?: ProductSchema }) {
     );
     useEffect(() => {
         if (formState?.success) {
+            debugger;
             toast({
                 title: formState.message,
                 variant: "default",
@@ -66,7 +67,7 @@ export function ProductForm({ product }: { product?: ProductSchema }) {
         formData.append("description", data.description);
         formData.append("SKU", data.SKU);
         formData.append("thumbnail", data.thumbnail || "");
-        formData.append("categoryId", data.categoryId.toString() ?? "0");
+        formData.append("categoryId", data.categoryId.toString());
 
         console.log(Object.fromEntries(formData));
 
@@ -75,6 +76,8 @@ export function ProductForm({ product }: { product?: ProductSchema }) {
         } else if (product.mode === "edit") {
             startTransition(async () => action(formData));
         }
+
+        console.log(data);
     };
 
     // function to handle file input changes
@@ -104,7 +107,7 @@ export function ProductForm({ product }: { product?: ProductSchema }) {
     const triggerFileInput = () => hiddenFileInputRef.current?.click();
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>
                 <Select>
                     <SelectTrigger className="w-[180px]">

@@ -9,17 +9,20 @@ import { motion } from "framer-motion";
 import { navBarList } from "$/constants";
 
 import { HiMenuAlt3 } from "react-icons/hi";
-import { IoMdCloseCircleOutline } from "react-icons/io";
-import { IoPersonOutline } from "react-icons/io5";
+import { IoMdCloseCircleOutline, IoIosArrowBack } from "react-icons/io";
+import { IoPersonOutline, IoExitOutline, IoHeartOutline } from "react-icons/io5";
 import { MdArrowDropDown } from "react-icons/md";
+import { BsBasket3 } from "react-icons/bs";
+import { FiMessageSquare } from "react-icons/fi";
 
 import { useSession } from "next-auth/react";
 import { Loading } from "@/components/loading";
 
-const Header = () => {
-    const { data, status } = useSession();
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
+const Header = () => {
     const [sidenav, setSidenav] = useState(false);
+    const { data, status } = useSession();
 
     const pathname = usePathname();
 
@@ -61,10 +64,57 @@ const Header = () => {
                         )}
                         {status === "loading" && <Loading />}
                         {status === "authenticated" && (
-                            <div className="flex items-center cursor-pointer hover:bg-red-100 p-1 rounded-lg">
-                                <IoPersonOutline className="text-2xl" />
-                                <MdArrowDropDown />
-                            </div>
+                            <Popover>
+                                <PopoverTrigger className="flex items-center">
+                                    <IoPersonOutline className="text-2xl" />
+                                    <MdArrowDropDown className="text-lg" />
+                                </PopoverTrigger>
+                                <PopoverContent className="w-52">
+                                    <ul>
+                                        <li className=" hover:bg-slate-100 p-5 border-b">
+                                            <Link href={"/"}>
+                                                <div className=" flex items-center justify-between">
+                                                    {data.user.phoneNumber}
+
+                                                    <IoIosArrowBack />
+                                                </div>
+                                            </Link>
+                                        </li>
+                                        <li className=" hover:bg-slate-100 p-3 text-[14px] font-light">
+                                            <Link href={"/"}>
+                                                <div className="  flex items-center gap-4">
+                                                    <BsBasket3 />
+                                                    سفارش ها
+                                                </div>
+                                            </Link>
+                                        </li>
+                                        <li className=" hover:bg-slate-100 p-3 text-[14px] font-light">
+                                            <Link href={"/"}>
+                                                <div className="  flex items-center gap-4">
+                                                    <IoHeartOutline />
+                                                    علاقه مندی ها
+                                                </div>
+                                            </Link>
+                                        </li>
+                                        <li className=" hover:bg-slate-100 p-3 text-[14px] font-light">
+                                            <Link href={"/"}>
+                                                <div className="  flex items-center gap-4">
+                                                    <FiMessageSquare />
+                                                    پیام ها
+                                                </div>
+                                            </Link>
+                                        </li>
+                                        <li className=" hover:bg-slate-100 p-3 text-[14px] font-light">
+                                            <Link href={"/"}>
+                                                <div className=" flex items-center gap-4">
+                                                    <IoExitOutline />
+                                                    خروج
+                                                </div>
+                                            </Link>
+                                        </li>
+                                    </ul>
+                                </PopoverContent>
+                            </Popover>
                         )}
                     </div>
 
