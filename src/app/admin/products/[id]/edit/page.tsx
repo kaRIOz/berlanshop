@@ -6,7 +6,7 @@ export default async function EditProduct({ params: { id } }: { params: { id: st
     const product = await getProductsById(id);
     if (!product) notFound();
     return (
-        <>
+        <main className="w-4/5 mx-auto max-w-3xl">
             <h1 className="mb-4">ویرایش محصول </h1>
             <ProductForm
                 product={{
@@ -21,6 +21,6 @@ export default async function EditProduct({ params: { id } }: { params: { id: st
                     categoryId: product.categoryId,
                 }}
             />
-        </>
+        </main>
     );
 }

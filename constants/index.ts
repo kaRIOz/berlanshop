@@ -4,6 +4,7 @@ import { MdDashboard, MdSupervisedUserCircle, MdShoppingBag, MdOutlineMessage } 
 import { FaUsers } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 import { IoExitOutline } from "react-icons/io5";
+import { BiSolidCategory } from "react-icons/bi";
 
 export const navBarList: NavbarList[] = [
     {
@@ -76,6 +77,11 @@ export const menuItems = [
         title: "محصولات",
         path: "/admin/products",
         icon: MdShoppingBag,
+    },
+    {
+        title: "دسته بندی",
+        path: "/admin/categories",
+        icon: BiSolidCategory,
     },
     {
         title: "مشتریان",

@@ -20,7 +20,6 @@ export const updateProduct = async (id: number, formState: OperationResult | und
                     },
                     where: eq(product.id, +id),
                 });
-                debugger;
                 let imagePath = thisProduct?.thumbnail;
                 if (data.thumbnail != null && data.thumbnail.size > 0) {
                     await fs.unlink(`public${thisProduct?.thumbnail}`);

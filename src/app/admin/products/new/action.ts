@@ -13,7 +13,6 @@ export const addProduct = async (formState: OperationResult | undefined, formDat
             const validatedData = Object.fromEntries(formData);
             const { success, data } = productFormSchema.safeParse(validatedData);
             if (success) {
-                debugger;
                 await fs.mkdir("public/images/products", { recursive: true });
                 const imagePath = `/images/products/${crypto.randomUUID()}-${data.thumbnail?.name}`;
                 await fs.writeFile(`public${imagePath}`, Buffer.from(await data.thumbnail!.arrayBuffer()));

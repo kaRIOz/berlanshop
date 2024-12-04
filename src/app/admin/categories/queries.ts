@@ -4,23 +4,21 @@ import db from "@/drizzle";
 import { executeQuery } from "@/drizzle/utils/executeQuery";
 // import { unstable_cache } from "next/cache";
 
-export async function getProducts() {
+export async function getCategories() {
     return executeQuery({
         queryFn: async () => {
-            return await db.query.product.findMany({
+            return await db.query.category.findMany({
                 columns: {
                     id: true,
-                    name: true,
-                    price: true,
-                    description: true,
-                    SKU: true,
+                    nameFa: true,
+                    nameEn: true,
+                    parentId: true,
                     thumbnail: true,
-                    images: true,
-                    categoryId: true,
                 },
             });
         },
-        serverErrorMessage: "getProducts",
+
+        serverErrorMessage: "getCategories",
         isProtected: false,
     });
 }

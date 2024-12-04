@@ -46,7 +46,6 @@ export function ProductForm({ product }: { product?: ProductSchema }) {
     );
     useEffect(() => {
         if (formState?.success) {
-            debugger;
             toast({
                 title: formState.message,
                 variant: "default",
@@ -76,8 +75,6 @@ export function ProductForm({ product }: { product?: ProductSchema }) {
         } else if (product.mode === "edit") {
             startTransition(async () => action(formData));
         }
-
-        console.log(data);
     };
 
     // function to handle file input changes
@@ -122,32 +119,35 @@ export function ProductForm({ product }: { product?: ProductSchema }) {
                     </SelectContent>
                 </Select>
             </div>
-            <div className="space-y-2">
-                <Label htmlFor="name">اسم محصول</Label>
-                <Input {...register("name")} name="name" type="text" />
-                {errors.name && <div className="text-destructive">{errors.name.message}</div>}
-            </div>
-            <div className="space-y-2">
-                <Label htmlFor="priceInCents">قیمت محصول</Label>
-                <Input {...register("price")} name="price" type="number" />
-                {errors.price && <div className="text-destructive">{errors.price.message}</div>}
-            </div>
-            <div className="space-y-2">
-                <Label htmlFor="SKU">کد شناسایی محصول</Label>
-                <Input {...register("SKU")} name="SKU" type="number" />
-                {errors.SKU && <div className="text-destructive">{errors.SKU.message}</div>}
-            </div>
-            <div className="space-y-2">
-                <Label htmlFor="description">توضیحات</Label>
-                <Textarea
-                    {...register("description")}
-                    id="description"
-                    name="description"
-                    required
-                    defaultValue={product?.description}
-                    className="w-full h-16 resize-none"
-                />
-                {errors.description && <div className="text-destructive">{errors.description.message}</div>}
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                <div className="space-y-2">
+                    <Label htmlFor="name">اسم محصول</Label>
+                    <Input {...register("name")} name="name" type="text" />
+                    {errors.name && <div className="text-destructive">{errors.name.message}</div>}
+                </div>
+                <div className="space-y-2">
+                    <Label htmlFor="priceInCents">قیمت محصول</Label>
+                    <Input {...register("price")} name="price" type="number" />
+                    {errors.price && <div className="text-destructive">{errors.price.message}</div>}
+                </div>
+                <div className="space-y-2">
+                    <Label htmlFor="SKU">کد شناسایی محصول</Label>
+                    <Input {...register("SKU")} name="SKU" type="number" />
+                    {errors.SKU && <div className="text-destructive">{errors.SKU.message}</div>}
+                </div>
+                <div className="space-y-2">
+                    <Label htmlFor="description">توضیحات</Label>
+                    <Textarea
+                        {...register("description")}
+                        id="description"
+                        name="description"
+                        required
+                        defaultValue={product?.description}
+                        className="w-full h-10 resize-none"
+                    />
+                    {errors.description && <div className="text-destructive">{errors.description.message}</div>}
+                </div>
             </div>
             <div className="upload">
                 {!preview && (
@@ -162,21 +162,35 @@ export function ProductForm({ product }: { product?: ProductSchema }) {
 
                 {preview && (
                     <div className="preview">
-                        <Image src={preview} className="img" alt="profilePicture" height={50} width={50} />
+                        <div className="flex items-center gap-2">
+                            <p>عکس جدید :</p>
+                            <Image src={preview} className="img" alt="profilePicture" height={50} width={50} />
+                        </div>
 
-                        <div className="buttons">
-                            <button type="button" onClick={triggerFileInput}>
-                                Change Image
+                        <div className="mt-2">
+                            <button
+                                type="button"
+                                onClick={triggerFileInput}
+                                className="bg-orange-400 text-primary-content text-[12px] p-2 rounded-lg"
+                            >
+                                عوض کردن عکس
                             </button>
 
-                            <button type="button" onClick={removeImage}>
-                                Remove Image
+                            <button
+                                type="button"
+                                onClick={removeImage}
+                                className="bg-blue-400 text-primary-content text-[12px] p-2 rounded-lg"
+                            >
+                                حذف عکس
                             </button>
                         </div>
                     </div>
                 )}
                 {product && product.thumbnail && (
-                    <Image src={product.thumbnail} alt={`Product image-${product.name}`} height={50} width={50} />
+                    <div className="flex items-center gap-2 mt-2">
+                        <p>عکس : </p>
+                        <Image src={product.thumbnail} alt={`Product image-${product.name}`} height={50} width={50} />
+                    </div>
                 )}
                 <input
                     {...register("thumbnail")}
