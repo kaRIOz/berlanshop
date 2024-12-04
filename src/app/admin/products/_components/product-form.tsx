@@ -70,11 +70,7 @@ export function ProductForm({ product }: { product?: ProductSchema }) {
 
         console.log(Object.fromEntries(formData));
 
-        if (!product) {
-            startTransition(async () => action(formData));
-        } else if (product.mode === "edit") {
-            startTransition(async () => action(formData));
-        }
+        startTransition(async () => action(formData));
     };
 
     // function to handle file input changes

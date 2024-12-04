@@ -1,24 +1,24 @@
 "use server";
-import { product } from "@/drizzle/schema";
+import { category } from "@/drizzle/schema";
 import db from "@/drizzle";
 import { executeAction, type OperationResult } from "@/drizzle/utils/executeAction";
 import { eq } from "drizzle-orm";
 import fs from "fs/promises";
 import { revalidatePath } from "next/cache";
-import { productFormSchema } from "../../_components/product-form.types";
+import { categoryFormSchema } from "./../../_components/category-form.types";
 
-export const updateProduct = async (id: number, formState: OperationResult | undefined, formData: FormData) => {
+export const updateCategory = async (id: number, formState: OperationResult | undefined, formData: FormData) => {
     return executeAction({
         actionFn: async () => {
             const validatedData = Object.fromEntries(formData);
-            const { success, data } = productFormSchema.safeParse(validatedData);
+            const { success, data } = categoryFormSchema.safeParse(validatedData);
 
             if (success) {
-                const thisProduct = await db.query.product.findFirst({
+                const thisProduct = await db.query.category.findFirst({
                     columns: {
                         thumbnail: true,
                     },
-                    where: eq(product.id, +id),
+                    where: eq(category.id, +id),
                 });
                 let imagePath = thisProduct?.thumbnail;
                 if (data.thumbnail != null && data.thumbnail.size > 0) {
@@ -28,22 +28,20 @@ export const updateProduct = async (id: number, formState: OperationResult | und
                 }
 
                 await db
-                    .update(product)
+                    .update(category)
                     .set({
-                        name: data.name,
-                        price: data.price,
-                        description: data.description,
-                        SKU: data.SKU,
+                        nameFa: data.name,
+                        nameEn: data.path,
                         thumbnail: imagePath,
-                        categoryId: Number(data.categoryId),
+                        parentId: Number(data.parentId),
                     })
-                    .where(eq(product.id, +id));
+                    .where(eq(category.id, +id));
             }
 
-            revalidatePath("/admin/products");
+            revalidatePath("/admin/categories");
         },
         isProtected: false,
-        clientSuccessMessage: `محصول با موفقیت ویرایش شد`,
-        serverErrorMessage: "error in create product",
+        clientSuccessMessage: `دسته بندی با موفقیت ویرایش شد`,
+        serverErrorMessage: "error in create category",
     });
 };

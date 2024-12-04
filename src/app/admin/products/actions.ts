@@ -25,7 +25,7 @@ export const deleteProduct = async (id: number) => {
             revalidatePath("/products");
         },
         isProtected: false,
-        clientSuccessMessage: "محصوب با موفقیت حذف شد",
+        clientSuccessMessage: "محصول با موفقیت حذف شد",
         serverErrorMessage: "خطا در حذف محصول",
     });
 };

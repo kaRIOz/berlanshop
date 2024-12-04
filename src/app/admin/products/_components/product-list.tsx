@@ -8,6 +8,10 @@ import { deleteProduct } from "../actions";
 import { Loading } from "@/components/loading";
 import { toast } from "@/components/ui/use-toast";
 
+import { Button } from "@/components/ui/button";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { PopoverClose } from "@radix-ui/react-popover";
+
 type Props = {
     products:
         | Pick<
@@ -47,27 +51,55 @@ const ProductList = ({ products }: Props) => {
                         </td>
                         <td>{product.description}</td>
                         <td>{formatPrice(Number(product.price))} تومان</td>
-                        <td className="">
-                            <Link
-                                href={`/admin/products/${product.id}/edit`}
-                                className="bg-emerald-500 px-2 py-1 text-white  rounded-lg mx-1"
+                        <td className="space-x-1 space-x-reverse">
+                            <Button
+                                variant="secondary"
+                                asChild
+                                size="sm"
+                                className="bg-emerald-500 text-primary-content hover:bg-emerald-500/90"
                             >
-                                ویرایش
-                            </Link>
-                            <button
-                                onClick={async () => {
-                                    const response = await deleteProduct(product.id);
-                                    if (response) {
-                                        toast({
-                                            title: response.message,
-                                            variant: response.success === true ? "default" : "destructive",
-                                        });
-                                    }
-                                }}
-                                className="bg-red-500 px-2 py-1 text-white  rounded-lg "
-                            >
-                                {pending ? <Loading /> : "حذف"}
-                            </button>
+                                <Link href={`/admin/category/${product.id}/edit`}>ویرایش</Link>
+                            </Button>
+                            <Popover>
+                                <PopoverTrigger asChild>
+                                    <Button variant="destructive" size="sm">
+                                        حذف{" "}
+                                    </Button>
+                                </PopoverTrigger>
+
+                                <PopoverContent className="shadow-none bg-slate-50">
+                                    <div className="p-6">
+                                        <h1 className="text-center text-[14px]">
+                                            آیا شما می خواهید محصول را حذف کنید ؟
+                                        </h1>
+
+                                        <div className="flex justify-evenly items-center mt-4">
+                                            <Button
+                                                onClick={async () => {
+                                                    const response = await deleteProduct(product.id);
+                                                    if (response) {
+                                                        toast({
+                                                            title: response.message,
+                                                            variant:
+                                                                response.success === true ? "default" : "destructive",
+                                                        });
+                                                    }
+                                                }}
+                                                variant="destructive"
+                                                size="sm"
+                                            >
+                                                {pending ? <Loading /> : "بله"}
+                                            </Button>
+
+                                            <PopoverClose asChild>
+                                                <Button variant="default" size="sm">
+                                                    خیر
+                                                </Button>
+                                            </PopoverClose>
+                                        </div>
+                                    </div>
+                                </PopoverContent>
+                            </Popover>
                         </td>
                     </tr>
                 ))}

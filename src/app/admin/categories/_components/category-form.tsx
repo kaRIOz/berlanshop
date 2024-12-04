@@ -9,11 +9,12 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { addCategory } from "../new/action";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { CategorySchema, SelectCategoryModel } from "@/drizzle/schema/product/category";
 import { Loading } from "@/components/loading";
 import Image from "next/image";
 import { toast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
+import { CategorySchema } from "@/drizzle/schema/product/category";
+import { updateCategory } from "../[id]/edit/action";
 
 type Props = {
     categories:
@@ -25,11 +26,16 @@ type Props = {
               parentId: number | null;
           }[]
         | null;
+
+    category?: CategorySchema;
 };
 
-const CategoryForm: React.FC<Props> = ({ categories }: Props) => {
+const CategoryForm: React.FC<Props> = ({ categories, category }: Props) => {
     const router = useRouter();
-    const [formState, action] = useActionState(addCategory, undefined);
+    const [formState, action] = useActionState(
+        category?.mode == "edit" ? updateCategory.bind(null, category.id) : addCategory,
+        undefined,
+    );
     const [isPending, startTransition] = useTransition();
     const [preview, setPreview] = useState<string | null>(null);
 
@@ -40,8 +46,14 @@ const CategoryForm: React.FC<Props> = ({ categories }: Props) => {
         setValue,
         control,
         formState: { errors },
-    } = useForm<CategoryFormType>({ resolver: zodResolver(categoryFormSchema) });
-
+    } = useForm<CategoryFormType>({
+        resolver: zodResolver(categoryFormSchema),
+        defaultValues: {
+            name: category?.nameFa ?? "",
+            path: category?.nameEn ?? "",
+            thumbnail: null,
+        },
+    });
     const onSubmit: SubmitHandler<CategoryFormType> = data => {
         debugger;
         const formData = new FormData();
@@ -50,7 +62,6 @@ const CategoryForm: React.FC<Props> = ({ categories }: Props) => {
         formData.append("thumbnail", data.thumbnail || "");
         formData.append("parentId", data.parentId);
         startTransition(async () => action(formData));
-        console.log(data);
     };
 
     useEffect(() => {
@@ -116,6 +127,7 @@ const CategoryForm: React.FC<Props> = ({ categories }: Props) => {
                                 </SelectTrigger>
                                 <SelectContent>
                                     <SelectGroup>
+                                        <SelectItem value="0">مادر</SelectItem>
                                         {categories &&
                                             categories.map(category => (
                                                 <SelectItem key={category.id} value={`${category.id}`}>
@@ -165,6 +177,18 @@ const CategoryForm: React.FC<Props> = ({ categories }: Props) => {
                                 حذف عکس
                             </button>
                         </div>
+                    </div>
+                )}
+
+                {category && category.thumbnail && (
+                    <div className="flex items-center gap-2 mt-2">
+                        <p>عکس : </p>
+                        <Image
+                            src={category.thumbnail}
+                            alt={`category image-${category.nameEn}`}
+                            height={50}
+                            width={50}
+                        />
                     </div>
                 )}
                 <input
