@@ -13,17 +13,20 @@ export default async function Home() {
     console.log(categories);
 
     return (
-        <section className="w-full mx-auto ">
+        <section className="w-full  mx-auto ">
             <Header />
             <SearchVsCategory />
             <Banner />
-            <div className="flex gap-4 justify-center items-center">
-                {/* <h2>همه</h2>
+
+            <div className="w-full max-w-container">
+                <div className="flex gap-4 justify-center items-center">
+                    {/* <h2>همه</h2>
                 // {categories?.map(category => <h2 key={category.id}>{category.nameFa}</h2>)} */}
-            </div>
-            <div className="max-w-container mx-auto px-4">
-                <Sales />
-                <Newest />
+                </div>
+                <div className="mx-auto mt-12 px-10">
+                    <Sales />
+                    <Newest />
+                </div>
             </div>
 
             <Footer />

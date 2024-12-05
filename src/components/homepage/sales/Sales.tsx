@@ -8,24 +8,20 @@ import "./sales.css";
 
 const Sales = () => {
     return (
-        <section className="content">
-            <ul className="contactsheet">
-                <li>
-                    <Link href="/shop" className="relative">
-                        <img
-                            src="https://plus.unsplash.com/premium_photo-1665408932949-a8db7f9b55fc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8c2NhcmZ8ZW58MHx8MHx8fDA%3D"
-                            loading="lazy"
-                        />
-                        <h2 className="absolute bottom-5 left-5 text-white">شال بافت</h2>
-                    </Link>
+        <section className="">
+            <ul className="contactsheet text-center">
+                <li className="relative">
+                    <img
+                        src="https://plus.unsplash.com/premium_photo-1665408932949-a8db7f9b55fc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8c2NhcmZ8ZW58MHx8MHx8fDA%3D"
+                        loading="lazy"
+                    />
+                    <h2 className="absolute bottom-5 left-5 text-white text-[12px] md:text-[16px]">شال بافت</h2>
                 </li>
                 <li>
-                    <Link href="https://areabeyond.com">
-                        <img
-                            src="https://images.unsplash.com/photo-1527167598984-8802d8028eea?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8c2NhcmZ8ZW58MHx8MHx8fDA%3D"
-                            loading="lazy"
-                        />
-                    </Link>
+                    <img
+                        src="https://images.unsplash.com/photo-1527167598984-8802d8028eea?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8c2NhcmZ8ZW58MHx8MHx8fDA%3D"
+                        loading="lazy"
+                    />
                 </li>
                 <li>
                     <img

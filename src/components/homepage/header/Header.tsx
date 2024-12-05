@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -9,28 +9,42 @@ import { motion } from "framer-motion";
 import { navBarList } from "$/constants";
 
 import { HiMenuAlt3 } from "react-icons/hi";
-import { IoMdCloseCircleOutline, IoIosArrowBack } from "react-icons/io";
-import { IoPersonOutline, IoExitOutline, IoHeartOutline } from "react-icons/io5";
-import { MdArrowDropDown } from "react-icons/md";
+import { IoIosArrowBack } from "react-icons/io";
+import { IoExitOutline, IoHeartOutline } from "react-icons/io5";
+import { CiLocationOn } from "react-icons/ci";
+import { TfiShoppingCart } from "react-icons/tfi";
+
 import { BsBasket3 } from "react-icons/bs";
 import { FiMessageSquare } from "react-icons/fi";
+import { LuUser } from "react-icons/lu";
 
 import { useSession } from "next-auth/react";
 import { Loading } from "@/components/loading";
 
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+
+import { Button } from "@/components/ui/button";
 
 const Header = () => {
-    const [sidenav, setSidenav] = useState(false);
     const { data, status } = useSession();
 
     const pathname = usePathname();
 
     return (
-        <header className="w-full h-20 bg-white sticky top-0 z-50 shadow-sm ">
+        <header className="w-full h-14 md:h-20 bg-primary-content sticky top-0 z-50 shadow-sm ">
             <nav className="h-full px-4 max-w-container mx-auto relative">
                 <div className="h-full flex justify-between items-center">
-                    <div>
+                    <div className="flex flex-row-reverse gap-x-2  md:flex-row items-center ">
+                        <Link href="/" className="hidden md:inline-block">
+                            <Image src={"/Logo.png"} alt="Logo" width={100} height={50} />
+                        </Link>
                         <motion.ul
                             initial={{ y: 10, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
@@ -52,110 +66,118 @@ const Header = () => {
                     </div>
 
                     <div className="flex justify-between items-center space-x-5 space-x-reverse">
-                        <Link href="/">
-                            <Image src={"/Logo.png"} alt="Logo" width={100} height={50} />
-                        </Link>
                         {status === "unauthenticated" && (
-                            <button className="border-[1px] px-4 py-2 rounded-lg hover:bg-gray-100 text-[13px]">
-                                <Link href={"/otp"} className="w-full h-full">
+                            <Button className="px-2 py-1 md:py-2 rounded-lg bg-transparent" variant="outline">
+                                <Link href={"/otp"} className="text-[10px] md:text-[13px] md:w-full md:h-full ">
                                     ورود | ثبت نام
                                 </Link>
-                            </button>
+                            </Button>
                         )}
                         {status === "loading" && <Loading />}
                         {status === "authenticated" && (
-                            <Popover>
-                                <PopoverTrigger className="flex items-center">
-                                    <IoPersonOutline className="text-2xl" />
-                                    <MdArrowDropDown className="text-lg" />
-                                </PopoverTrigger>
-                                <PopoverContent className="w-52">
-                                    <ul>
-                                        <li className=" hover:bg-slate-100 p-5 border-b">
-                                            <Link href={"/"}>
-                                                <div className=" flex items-center justify-between">
-                                                    {data.user.phoneNumber}
+                            <div className="flex items-center gap-1 md:gap-4">
+                                <DropdownMenu modal={false}>
+                                    <DropdownMenuTrigger>
+                                        <Button variant="outline" size="icon" className="overflow-hidden rounded-full">
+                                            <LuUser className="w-5 h-5" />
+                                        </Button>
+                                    </DropdownMenuTrigger>
 
-                                                    <IoIosArrowBack />
-                                                </div>
+                                    <DropdownMenuContent align="start" className="w-56 shadow-none">
+                                        <DropdownMenuItem className="flex items-center justify-between p-3">
+                                            <IoIosArrowBack />
+                                            <Link href={"/profile"} className="">
+                                                {data.user.phoneNumber}
                                             </Link>
-                                        </li>
-                                        <li className=" hover:bg-slate-100 p-3 text-[14px] font-light">
-                                            <Link href={"/"}>
-                                                <div className="  flex items-center gap-4">
-                                                    <BsBasket3 />
-                                                    سفارش ها
-                                                </div>
+                                        </DropdownMenuItem>
+                                        <DropdownMenuSeparator />
+                                        <DropdownMenuItem className="flex items-center justify-end gap-4 p-3">
+                                            <Link href={"/profile/favorite"} className="w-full text-right">
+                                                علاقه مندی ها{" "}
                                             </Link>
-                                        </li>
-                                        <li className=" hover:bg-slate-100 p-3 text-[14px] font-light">
-                                            <Link href={"/"}>
-                                                <div className="  flex items-center gap-4">
-                                                    <IoHeartOutline />
-                                                    علاقه مندی ها
-                                                </div>
+                                            <IoHeartOutline />
+                                        </DropdownMenuItem>
+                                        <DropdownMenuItem className="flex items-center justify-end gap-4 p-3">
+                                            <Link href={"/profile/orders"} className="w-full text-right">
+                                                سفارشات
                                             </Link>
-                                        </li>
-                                        <li className=" hover:bg-slate-100 p-3 text-[14px] font-light">
-                                            <Link href={"/"}>
-                                                <div className="  flex items-center gap-4">
-                                                    <FiMessageSquare />
-                                                    پیام ها
-                                                </div>
+                                            <BsBasket3 />
+                                        </DropdownMenuItem>
+                                        <DropdownMenuItem className="flex items-center justify-end gap-4 p-3">
+                                            <Link href={"/profile/message"} className="w-full text-right">
+                                                پیام ها
                                             </Link>
-                                        </li>
-                                        <li className=" hover:bg-slate-100 p-3 text-[14px] font-light">
-                                            <Link href={"/"}>
-                                                <div className=" flex items-center gap-4">
-                                                    <IoExitOutline />
-                                                    خروج
-                                                </div>
+                                            <FiMessageSquare />
+                                        </DropdownMenuItem>
+                                        <DropdownMenuItem className="flex items-center justify-end gap-4 p-3">
+                                            <Link href={"/profile/location"} className="w-full text-right">
+                                                آدرس ها
                                             </Link>
-                                        </li>
-                                    </ul>
-                                </PopoverContent>
-                            </Popover>
+                                            <CiLocationOn />
+                                        </DropdownMenuItem>
+
+                                        <DropdownMenuSeparator />
+                                        <DropdownMenuItem className="flex items-center justify-end gap-4 p-3">
+                                            <Link href={"/"} className="w-full text-right">
+                                                خروج
+                                            </Link>
+                                            <IoExitOutline />
+                                        </DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                </DropdownMenu>
+                                <Button
+                                    variant="outline"
+                                    className="border-none bg-transparent shadow-none hover:bg-transparent rounded-full"
+                                >
+                                    <Link href={"/checkout"}>
+                                        <TfiShoppingCart className="text-[20px]" />
+                                    </Link>
+                                </Button>
+                            </div>
                         )}
                     </div>
-
-                    <HiMenuAlt3
-                        onClick={() => setSidenav(!sidenav)}
-                        className="inline-block md:hidden cursor-pointer absolute top-8 right-4 w-8 h-4"
-                    />
                 </div>
-                {sidenav && (
-                    <div className="fixed top-0 left-0 w-full h-screen bg-black text-gray-200 bg-opacity-50 z-50">
-                        <motion.div
-                            initial={{ x: 600, opacity: 0 }}
-                            animate={{ x: 0, opacity: 1 }}
-                            transition={{ duration: 0.5 }}
-                        >
-                            <div className="bg-black w-1/2 h-screen p-6">
-                                <div>
-                                    <div className="flex justify-between items-center shadow-md border-b-[1px] my-2">
-                                        <Image src={"/Logo.png"} alt="Logo" width={80} height={50} />
-                                        <IoMdCloseCircleOutline
-                                            className="text-2xl"
-                                            onClick={() => setSidenav(false)}
-                                        />
-                                    </div>
-                                </div>
-                                <ul className="flex flex-col gap-4 pt-2 text-gray-200">
-                                    {navBarList.map(item => (
-                                        <li
-                                            key={item.id}
-                                            className="font-normal hover:font-bold  text-lg text-gray-200 "
-                                        >
-                                            <Link href={item.link} onClick={() => setSidenav(false)}>
-                                                {item.title}
-                                            </Link>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </motion.div>
-                    </div>
-                )}
+                <Sheet modal={false}>
+                    <SheetTrigger
+                        asChild
+                        className="border-none shadow-none bg-transparent absolute top-3 right-8 md:hidden"
+                    >
+                        <Button variant={"outline"}>
+                            <HiMenuAlt3
+                                // onClick={() => setSidenav(!sidenav)}
+                                className="inline-block md:hidden cursor-pointer"
+                            />
+                        </Button>
+                    </SheetTrigger>
+                    <SheetContent className="w-[50%] md:w-[40px]">
+                        <SheetHeader>
+                            <SheetTitle>
+                                <Image
+                                    src={"/Logo.png"}
+                                    alt="Logo"
+                                    width={60}
+                                    height={50}
+                                    className="mb-8 block mx-auto"
+                                />
+                            </SheetTitle>
+                        </SheetHeader>
+
+                        <div className="">
+                            <ul className="flex flex-col pt-2">
+                                {navBarList.map(item => (
+                                    <li
+                                        key={item.id}
+                                        className="p-3 text-[9px] md:text-[13px] font-normal hover:pr-6 transition-all border-b"
+                                    >
+                                        <Link href={item.link} className="w-full">
+                                            {item.title}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </SheetContent>
+                </Sheet>
             </nav>
         </header>
     );
