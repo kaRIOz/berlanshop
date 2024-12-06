@@ -86,31 +86,29 @@ const Header = () => {
                                     <DropdownMenuContent align="start" className="w-56 shadow-none">
                                         <DropdownMenuItem className="flex items-center justify-between p-3">
                                             <IoIosArrowBack />
-                                            <Link href={"/profile"} className="">
-                                                {data.user.phoneNumber}
-                                            </Link>
+                                            <Link href={"/profile"}>{data.user.phoneNumber}</Link>
                                         </DropdownMenuItem>
                                         <DropdownMenuSeparator />
                                         <DropdownMenuItem className="flex items-center justify-end gap-4 p-3">
-                                            <Link href={"/profile/favorite"} className="w-full text-right">
+                                            <Link href={"/profile/favorites"} className="w-full text-right">
                                                 علاقه مندی ها{" "}
                                             </Link>
                                             <IoHeartOutline />
                                         </DropdownMenuItem>
                                         <DropdownMenuItem className="flex items-center justify-end gap-4 p-3">
                                             <Link href={"/profile/orders"} className="w-full text-right">
-                                                سفارشات
+                                                سفارش ها
                                             </Link>
                                             <BsBasket3 />
                                         </DropdownMenuItem>
                                         <DropdownMenuItem className="flex items-center justify-end gap-4 p-3">
-                                            <Link href={"/profile/message"} className="w-full text-right">
+                                            <Link href={"/profile/messages"} className="w-full text-right">
                                                 پیام ها
                                             </Link>
                                             <FiMessageSquare />
                                         </DropdownMenuItem>
                                         <DropdownMenuItem className="flex items-center justify-end gap-4 p-3">
-                                            <Link href={"/profile/location"} className="w-full text-right">
+                                            <Link href={"/profile/addresses"} className="w-full text-right">
                                                 آدرس ها
                                             </Link>
                                             <CiLocationOn />
