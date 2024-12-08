@@ -12,10 +12,16 @@ export const getProductsById = (id: string) => {
                     name: true,
                     description: true,
                     price: true,
-                    categoryId: true,
                     SKU: true,
-                    images: true,
                     thumbnail: true,
+                },
+                with: {
+                    category: {
+                        columns: {
+                            id: true,
+                            nameFa: true,
+                        },
+                    },
                 },
                 where: eq(product.id, +id),
             }),

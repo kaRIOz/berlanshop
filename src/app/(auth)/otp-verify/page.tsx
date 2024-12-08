@@ -55,6 +55,7 @@ const OTPVerify = () => {
                 </p>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="ml-auto mt-4 w-full">
+                    {/* honey pot */}
                     <input {...register("phoneNumber")} type="text" hidden className={`hidden`} />
                     <input
                         type="text"

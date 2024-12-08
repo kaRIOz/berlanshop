@@ -1,32 +1,27 @@
-.content {
-  padding: 0 1rem;
-  font-size: 2vw;
-  padding: 1rem;
-  text-align: center;
-}
-
 ul.contactsheet {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    gap: 4px;
 }
 ul.contactsheet:after {
-  content: "";
-  display: block;
-  flex-grow: 10; /* Prevent justify/stretch of last photo. 10 seems best */
+    content: "";
+    display: block;
+    flex-grow: 15; /* Prevent justify/stretch of last photo. 10 seems best */
 }
 .contactsheet li {
-  height: 40vh;
-  flex-grow: 1;
-  margin: 0 0.5rem 0.5rem 0;
-  list-style: none; /* override common/Normalize */
+    height: 40vh;
+    flex-grow: 1;
+    margin: 0 0.5rem 0.5rem 0;
+    list-style: none; /* override common/Normalize */
 }
 .contactsheet img {
-  max-height: 100%;
-  min-width: 100%;
-  object-fit: cover;
-  vertical-align: bottom;
-  border-radius: 0.6rem;
+    max-height: 100%;
+    min-width: 100%;
+    object-fit: cover;
+    vertical-align: bottom;
+    border-radius: 0.6rem;
 }
 .contactsheet img:hover {
     box-shadow: 0 0 0 0.1;
@@ -34,32 +29,33 @@ ul.contactsheet:after {
 
 /* Portrait: */
 @media (max-aspect-ratio: 1 / 1) {
-  .contactsheet li {
-    height: 30vh;
-  }
+    .contactsheet li {
+        height: 30vh;
+    }
 }
 
 /* Short screens: */
 @media (max-height: 480px) {
-  .contactsheet li {
-    height: 80vh;
-  }
+    .contactsheet li {
+        height: 50vh;
+    }
 }
 
 /* Smaller screens in portrait: */
 @media (max-aspect-ratio: 1 / 1) and (max-width: 480px) {
-  ul.contactsheet {
-    flex-direction: row;
-  }
+    ul.contactsheet {
+        flex-direction: row;
+    }
 
-  .contactsheet li {
-    height: auto;
-    width: 100%;
-  }
+    .contactsheet li {
+        height: auto;
+        display: contents;
+    }
 
-  .contactsheet img {
-    width: 100%;
-    max-height: 75vh;
-    min-width: 0;
-  }
+    .contactsheet img {
+        width: 30%;
+        max-height: 75vh;
+        min-width: 0;
+        flex-grow: 1;
+    }
 }

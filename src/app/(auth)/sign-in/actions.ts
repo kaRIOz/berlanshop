@@ -14,7 +14,6 @@ export async function signInAction(formState: { success: boolean; message: strin
         const { username, password } = validatedData.data;
         return executeAction({
             actionFn: async () => {
-                debugger;
                 await signIn("admin", {
                     username: username,
                     password: password,

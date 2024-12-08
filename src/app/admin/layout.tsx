@@ -9,7 +9,7 @@ import AdminSidebar from "@/components/admin-dashboard/sidebar/AppSidebar";
 const layout = ({ children }: { children: React.ReactNode }) => {
     return (
         <SidebarProvider>
-            <div className="grid grid-cols-[auto,1fr] w-full">
+            <div className="grid grid-cols-[auto,1fr] w-full scrollbar">
                 <AdminSidebar />
 
                 <main className="flex flex-col overflow-auto m-2 bg-primary-content border  p-3 rounded-lg">

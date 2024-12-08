@@ -39,7 +39,7 @@ const Banner = () => {
                     <Image src={"/imgBanner2.webp"} alt="imageBanner3" width={1550} height={100} />
                 </SwiperSlide>
             </Swiper>
-            <div className="w-5/6 mt-4 py-6 pb-8 m-auto grid grid-cols-2 md:grid-cols-4 border-b-[1px] max-w-container">
+            <div className="w-full mt-4 pt-6 pb-8 grid grid-cols-2 md:grid-cols-4 border-b-[1px]">
                 <div className="flex justify-center items-center space-x-3 space-x-reverse ">
                     <TbTruckDelivery className="text-[14px] md:text-2xl" />
                     <p className="font-semibold text-[12px] md:text-sm">ارسال سریع</p>
