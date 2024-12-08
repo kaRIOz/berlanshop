@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { FaSearch } from "react-icons/fa";
 import CategoryList from "./_components/category-list";
-import { getCategories, getCategoriesWithProductsCount } from "./queries";
+import { getCategoriesWithProductsCount } from "./queries";
 
 const AdminCategory = async () => {
     const categories = await getCategoriesWithProductsCount();
