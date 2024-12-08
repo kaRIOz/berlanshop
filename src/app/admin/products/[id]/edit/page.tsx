@@ -25,7 +25,6 @@ export default async function EditProduct({ params: { id } }: { params: { id: st
                         nameFa: product.category?.nameFa ?? "بدون دسته بندی",
                     },
                 }}
-                categories={categories}
             />
         </main>
     );

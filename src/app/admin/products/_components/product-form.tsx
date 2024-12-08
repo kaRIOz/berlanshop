@@ -16,12 +16,6 @@ import { Loading } from "@/components/loading";
 import { updateProduct } from "../[id]/edit/actions";
 
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import type { SelectCategoryModel } from "@/drizzle/schema/product/category";
-
-type Props = {
-    categories: Pick<SelectCategoryModel, "id" | "nameFa" | "nameEn" | "thumbnail" | "parentId">[] | null;
-    product?: ProductSchema;
-};
 
 type Props = {
     product?: {

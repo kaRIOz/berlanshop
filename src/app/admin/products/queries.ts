@@ -1,9 +1,7 @@
 "use server";
 
 import db from "@/drizzle";
-import { category } from "@/drizzle/schema";
 import { executeQuery } from "@/drizzle/utils/executeQuery";
-import { sql } from "drizzle-orm";
 
 export async function getProducts() {
     return executeQuery({

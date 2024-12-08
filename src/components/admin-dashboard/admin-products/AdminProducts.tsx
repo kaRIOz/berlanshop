@@ -13,17 +13,18 @@ import { useForm } from "react-hook-form";
 
 import Modal from "@/components/modal/Modal";
 
+const adminAddProductSchema = z.object({
+    title: z.string().min(1),
+    description: z.string().min(1),
+    price: z.string().min(1),
+});
+
+type addProductForm = z.infer<typeof adminAddProductSchema>;
+
 const AdminProductsList = ({ placeholder = "جستجوی کالاها" }) => {
     const [showModal, setShowModal] = useState(false);
     const [products, setProducts] = useState<addProductForm[]>([]);
 
-    const adminAddProductSchema = z.object({
-        title: z.string().min(1),
-        description: z.string().min(1),
-        price: z.string().min(1),
-    });
-
-    type addProductForm = z.infer<typeof adminAddProductSchema>;
     const { register, handleSubmit, reset } = useForm<addProductForm>({
         resolver: zodResolver(adminAddProductSchema),
     });

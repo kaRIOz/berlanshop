@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useActionState, useEffect, useTransition } from "react";
-import { SelectCategoryModel } from "@/drizzle/schema/product/category";
 import Link from "next/link";
 import { toast } from "@/components/ui/use-toast";
 import Image from "next/image";
