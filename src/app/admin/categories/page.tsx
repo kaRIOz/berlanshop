@@ -2,12 +2,11 @@ import Search from "@/components/admin-dashboard/search/Search";
 import Link from "next/link";
 import React from "react";
 import { FaSearch } from "react-icons/fa";
-import { getCategories } from "./queries";
 import CategoryList from "./_components/category-list";
+import { getCategories, getCategoriesWithProductsCount } from "./queries";
 
 const AdminCategory = async () => {
-    const categories = await getCategories();
-
+    const categories = await getCategoriesWithProductsCount();
     return (
         <div className="mt-3">
             <div className="flex items-center justify-between ">

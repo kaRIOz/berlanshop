@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useTransition } from "react";
+import React, { useActionState, useEffect, useTransition } from "react";
 import { SelectCategoryModel } from "@/drizzle/schema/product/category";
 import Link from "next/link";
 import { toast } from "@/components/ui/use-toast";
@@ -13,17 +13,37 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { PopoverClose } from "@radix-ui/react-popover";
 
 type Props = {
-    categories: Pick<SelectCategoryModel, "id" | "nameFa" | "nameEn" | "thumbnail" | "parentId">[] | null;
+    categories:
+        | {
+              id: number;
+              nameFa: string;
+              nameEn: string;
+              parentId: number | null;
+              thumbnail: string | null;
+              productCount: number;
+          }[]
+        | null;
 };
 const CategoryList = ({ categories }: Props) => {
+    console.log(categories);
     const [pending, startTransition] = useTransition();
+    const [state, action] = useActionState(deleteCategory, undefined);
+    useEffect(() => {
+        if (state) {
+            toast({
+                title: state.message,
+                variant: state.success === true ? "default" : "destructive",
+            });
+        }
+    }, [state]);
     return (
         <table className="table w-full mt-3">
             <thead className="bg-slate-200">
                 <tr>
                     <td>نام</td>
                     <td>مسیر</td>
-                    <td>parentId</td>
+                    <td>دسته بندی والد</td>
+                    <td>تعداد محصولات</td>
                     <td>اقدامات</td>
                 </tr>
             </thead>
@@ -33,7 +53,9 @@ const CategoryList = ({ categories }: Props) => {
                         <td>
                             <div className="flex justify-center items-center gap-2">
                                 <Image
-                                    src={category.thumbnail}
+                                    src={
+                                        category?.thumbnail ?? "/Logo.png"
+                                    } /* TODO: add default category image => "/images/default-category.png" */
                                     alt="img"
                                     width={50}
                                     height={50}
@@ -43,7 +65,10 @@ const CategoryList = ({ categories }: Props) => {
                             </div>
                         </td>
                         <td>{category.nameEn}</td>
-                        <td>{category.parentId ? category.parentId : "null"}</td>
+                        {/* REVIEW: bayad nameFa oon parentID render mishod na in @kaRIOz  */}
+                        {/* <td>{category.parentId ? category.parentId : "null"}</td> */}
+                        <td>{categories?.find(c => c.id === category.parentId)?.nameFa ?? "دسته بندی اصلی"}</td>
+                        <td>{category.productCount}</td>
                         <td className="space-x-1 space-x-reverse">
                             <Button
                                 variant="secondary"
@@ -51,7 +76,7 @@ const CategoryList = ({ categories }: Props) => {
                                 size="sm"
                                 className="bg-emerald-500 text-primary-content hover:bg-emerald-500/90"
                             >
-                                <Link href={`/admin/category/${category.id}/edit`}>ویرایش</Link>
+                                <Link href={`/admin/categories/${category.id}/edit`}>ویرایش</Link>
                             </Button>
                             <Popover>
                                 <PopoverTrigger asChild>
@@ -68,16 +93,9 @@ const CategoryList = ({ categories }: Props) => {
 
                                         <div className="flex justify-evenly items-center mt-4">
                                             <Button
-                                                onClick={async () => {
-                                                    const response = await deleteCategory(category.id);
-                                                    if (response) {
-                                                        toast({
-                                                            title: response.message,
-                                                            variant:
-                                                                response.success === true ? "default" : "destructive",
-                                                        });
-                                                    }
-                                                }}
+                                                onClick={async () =>
+                                                    await startTransition(async () => action(category.id))
+                                                }
                                                 variant="destructive"
                                                 size="sm"
                                             >

@@ -34,7 +34,7 @@ type Props = {
         | {
               id: number;
               nameFa: string;
-              thumbnail: string;
+              thumbnail: string | null;
               nameEn: string;
               parentId: number | null;
           }[]
@@ -128,22 +128,25 @@ export function ProductForm({ product, categories }: Props) {
                     name="categoryId"
                     control={control}
                     render={({ field }) => (
-                        <Select onValueChange={field.onChange} defaultValue={field.value.toString()}>
-                            <SelectTrigger className="w-[180px]">
-                                <SelectValue placeholder="دسته بندی ها" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectGroup>
-                                    <SelectItem value="0">بدون دسته بندی</SelectItem>
-                                    {categories &&
-                                        categories.map(category => (
-                                            <SelectItem key={category.id} value={`${category.id}`}>
-                                                {category.nameFa}
-                                            </SelectItem>
-                                        ))}
-                                </SelectGroup>
-                            </SelectContent>
-                        </Select>
+                        <>
+                            <Label htmlFor="categoryId">دسته بندی</Label>
+                            <Select onValueChange={field.onChange} defaultValue={field.value.toString()}>
+                                <SelectTrigger className="w-[180px]">
+                                    <SelectValue placeholder="دسته بندی ها" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectGroup>
+                                        <SelectItem value="0">بدون دسته بندی</SelectItem>
+                                        {categories &&
+                                            categories.map(category => (
+                                                <SelectItem key={category.id} value={`${category.id}`}>
+                                                    {category.nameFa}
+                                                </SelectItem>
+                                            ))}
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
+                        </>
                     )}
                 />
                 {errors.categoryId && <span>{errors.categoryId.message}</span>}

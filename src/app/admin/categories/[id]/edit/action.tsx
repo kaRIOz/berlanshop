@@ -12,7 +12,6 @@ export const updateCategory = async (id: number, formState: OperationResult | un
         actionFn: async () => {
             const validatedData = Object.fromEntries(formData);
             const { success, data } = categoryFormSchema.safeParse(validatedData);
-
             if (success) {
                 const thisProduct = await db.query.category.findFirst({
                     columns: {
@@ -21,7 +20,7 @@ export const updateCategory = async (id: number, formState: OperationResult | un
                     where: eq(category.id, +id),
                 });
                 let imagePath = thisProduct?.thumbnail;
-                if (data.thumbnail != null && data.thumbnail.size > 0) {
+                if (data.thumbnail instanceof File && data.thumbnail?.size > 0) {
                     await fs.unlink(`public${thisProduct?.thumbnail}`);
                     imagePath = `/images/products/${crypto.randomUUID()}-${data.thumbnail?.name}`;
                     await fs.writeFile(`public${imagePath}`, Buffer.from(await data.thumbnail!.arrayBuffer()));
@@ -32,8 +31,8 @@ export const updateCategory = async (id: number, formState: OperationResult | un
                     .set({
                         nameFa: data.name,
                         nameEn: data.path,
-                        thumbnail: imagePath,
-                        parentId: Number(data.parentId),
+                        thumbnail: !!imagePath ? imagePath : null,
+                        parentId: Number(data.parentId) === 0 ? null : Number(data.parentId),
                     })
                     .where(eq(category.id, +id));
             }

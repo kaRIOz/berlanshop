@@ -2,12 +2,12 @@
 
 import db from "@/drizzle";
 import { category } from "@/drizzle/schema";
-import { executeAction } from "@/drizzle/utils/executeAction";
+import { executeAction, type OperationResult } from "@/drizzle/utils/executeAction";
 import { eq } from "drizzle-orm";
 import fs from "fs/promises";
 import { revalidatePath } from "next/cache";
 
-export const deleteCategory = async (id: number) => {
+export const deleteCategory = async (formState: OperationResult | undefined, id: number) => {
     return executeAction({
         actionFn: async () => {
             const thisProduct = await db.query.category.findFirst({
@@ -16,8 +16,9 @@ export const deleteCategory = async (id: number) => {
                 },
                 where: eq(category.id, id),
             });
-
-            await fs.unlink(`public/test.png`);
+            if (!!thisProduct?.thumbnail) {
+                await fs.unlink(`public${thisProduct?.thumbnail}`);
+            }
             await db.delete(category).where(eq(category.id, id));
 
             revalidatePath("/admin/categories");

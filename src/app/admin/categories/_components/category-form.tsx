@@ -21,7 +21,7 @@ type Props = {
         | {
               id: number;
               nameFa: string;
-              thumbnail: string;
+              thumbnail: string | null;
               nameEn: string;
               parentId: number | null;
           }[]
@@ -52,14 +52,15 @@ const CategoryForm: React.FC<Props> = ({ categories, category }: Props) => {
             name: category?.nameFa ?? "",
             path: category?.nameEn ?? "",
             thumbnail: null,
+            parentId: category?.parentId ?? 0,
         },
     });
     const onSubmit: SubmitHandler<CategoryFormType> = data => {
         const formData = new FormData();
         formData.append("name", data.name);
         formData.append("path", data.path);
-        formData.append("thumbnail", data.thumbnail || "");
-        formData.append("parentId", data.parentId);
+        formData.append("thumbnail", data.thumbnail ?? "");
+        formData.append("parentId", `${data.parentId}`);
         startTransition(async () => action(formData));
     };
 
@@ -120,22 +121,25 @@ const CategoryForm: React.FC<Props> = ({ categories, category }: Props) => {
                         name="parentId"
                         control={control}
                         render={({ field }) => (
-                            <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                <SelectTrigger className="w-[180px]">
-                                    <SelectValue placeholder="دسته بندی ها" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectGroup>
-                                        <SelectItem value="0">مادر</SelectItem>
-                                        {categories &&
-                                            categories.map(category => (
-                                                <SelectItem key={category.id} value={`${category.id}`}>
-                                                    {category.nameFa}
-                                                </SelectItem>
-                                            ))}
-                                    </SelectGroup>
-                                </SelectContent>
-                            </Select>
+                            <>
+                                <Label htmlFor="parentId">دسته بندی والد</Label>
+                                <Select onValueChange={field.onChange} defaultValue={field.value?.toString()}>
+                                    <SelectTrigger className="w-[180px]">
+                                        <SelectValue placeholder="دسته بندی ها" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectGroup>
+                                            <SelectItem value="0">دسته بندی اصلی</SelectItem>
+                                            {categories &&
+                                                categories.map(cat => (
+                                                    <SelectItem key={cat.id} value={`${cat.id}`}>
+                                                        {cat.nameFa}
+                                                    </SelectItem>
+                                                ))}
+                                        </SelectGroup>
+                                    </SelectContent>
+                                </Select>
+                            </>
                         )}
                     />
                     {errors.parentId && <span>{errors.parentId.message}</span>}
@@ -201,7 +205,7 @@ const CategoryForm: React.FC<Props> = ({ categories, category }: Props) => {
             </div>
 
             <Button disabled={isPending} type="submit">
-                {isPending ? <Loading /> : "دخیره"}
+                {isPending ? <Loading /> : "ذخیره"}
             </Button>
         </form>
     );

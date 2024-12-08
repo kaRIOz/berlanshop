@@ -8,7 +8,7 @@ import { createInsertSchema } from "drizzle-zod";
 export const category = pgTable("category", {
     id: serial("id").primaryKey(),
     nameFa: varchar("name", { length: 255 }).notNull().unique(),
-    thumbnail: varchar("thumbnail", { length: 255 }).notNull(),
+    thumbnail: varchar("thumbnail", { length: 255 }),
     nameEn: varchar("link", { length: 255 }).notNull(),
     parentId: integer("parent_id").references((): AnyPgColumn => category.id, { onDelete: "set null" }),
     createdAt: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),

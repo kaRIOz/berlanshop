@@ -1,8 +1,9 @@
 "use server";
 
 import db from "@/drizzle";
+import { category, product } from "@/drizzle/schema";
 import { executeQuery } from "@/drizzle/utils/executeQuery";
-// import { unstable_cache } from "next/cache";
+import { count, eq } from "drizzle-orm";
 
 export async function getCategories() {
     return executeQuery({
@@ -22,3 +23,24 @@ export async function getCategories() {
         isProtected: false,
     });
 }
+export const getCategoriesWithProductsCount = async () => {
+    return executeQuery({
+        queryFn: async () => {
+            return await db
+                .select({
+                    id: category.id,
+                    nameFa: category.nameFa,
+                    nameEn: category.nameEn,
+                    parentId: category.parentId,
+                    thumbnail: category.thumbnail,
+                    productCount: count(product.id),
+                })
+                .from(category)
+                .leftJoin(product, eq(product.categoryId, category.id))
+                .groupBy(category.id);
+        },
+
+        serverErrorMessage: "getCategoriesWithProductsCount",
+        isProtected: false,
+    });
+};

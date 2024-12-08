@@ -5,9 +5,10 @@ import { notFound } from "next/navigation";
 import { getCategories } from "../../queries";
 
 const EditCategory = async ({ params: { id } }: { params: { id: string } }) => {
-    const categories = await getCategories();
-    const category = await getCategoriesById(id);
-    if (!categories || !category) notFound();
+    const categoryData = getCategoriesById(id);
+    const categoriesِِData = getCategories();
+    const [category, categories] = await Promise.all([categoryData, categoriesِِData]);
+    if (!category) notFound();
     return (
         <div>
             <CategoryForm
