@@ -11,13 +11,10 @@ export const product = pgTable("product", {
     description: varchar("description", { length: 255 }).notNull(),
     SKU: varchar("sku", { length: 255 }).notNull(),
     price: varchar("price", { length: 255 }).notNull(),
-    thumbnail: varchar("thumbnail", { length: 255 }).notNull(),
-    images: varchar("images", { length: 255 }),
-    categoryId: integer("category_id")
-        .notNull()
-        .references(() => category.id),
-    inventoryId: integer("inventory_id").references(() => category.id),
-    discountId: integer("discount_id").references(() => category.id),
+    thumbnail: varchar("thumbnail", { length: 255 }),
+    categoryId: integer("category_id").references(() => category.id, { onDelete: "set null" }),
+    inventoryId: integer("inventory_id").references(() => category.id, { onDelete: "set null" }),
+    discountId: integer("discount_id").references(() => discount.id, { onDelete: "set null" }),
     createdAt: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),
     updatedAt: timestamp("updated_at", { mode: "string" }),
     deletedAt: timestamp("deleted_at", { mode: "string" }),
@@ -44,11 +41,10 @@ const baseSchema = createInsertSchema(product, {
     id: schema => schema.id.min(1),
     name: schema => schema.name.min(1),
     description: schema => schema.description.min(1).max(255),
-    categoryId: schema => schema.categoryId.min(1),
+    categoryId: schema => schema.categoryId.min(1).nullable(),
     SKU: schema => schema.SKU.min(1),
     price: schema => schema.price.min(1),
     thumbnail: schema => schema.thumbnail.min(1),
-    images: schema => schema.images.min(1),
 });
 
 export const productSchema = z.union([
@@ -59,7 +55,6 @@ export const productSchema = z.union([
         description: baseSchema.shape.description,
         SKU: baseSchema.shape.SKU,
         thumbnail: baseSchema.shape.thumbnail,
-        images: baseSchema.shape.images,
         categoryId: baseSchema.shape.categoryId,
     }),
     z.object({
@@ -70,7 +65,6 @@ export const productSchema = z.union([
         description: baseSchema.shape.description,
         SKU: baseSchema.shape.SKU,
         thumbnail: baseSchema.shape.thumbnail,
-        images: baseSchema.shape.images,
         categoryId: baseSchema.shape.categoryId,
     }),
 ]);

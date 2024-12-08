@@ -10,7 +10,7 @@ export const category = pgTable("category", {
     nameFa: varchar("name", { length: 255 }).notNull().unique(),
     thumbnail: varchar("thumbnail", { length: 255 }).notNull(),
     nameEn: varchar("link", { length: 255 }).notNull(),
-    parentId: integer("parent_id").references((): AnyPgColumn => category.id),
+    parentId: integer("parent_id").references((): AnyPgColumn => category.id, { onDelete: "set null" }),
     createdAt: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),
     updatedAt: timestamp("updated_at", { mode: "string" }).notNull().defaultNow(),
 });

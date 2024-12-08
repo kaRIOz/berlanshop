@@ -21,7 +21,7 @@ export const updateProduct = async (id: number, formState: OperationResult | und
                     where: eq(product.id, +id),
                 });
                 let imagePath = thisProduct?.thumbnail;
-                if (data.thumbnail != null && data.thumbnail.size > 0) {
+                if (data.thumbnail instanceof File && data.thumbnail?.size > 0) {
                     await fs.unlink(`public${thisProduct?.thumbnail}`);
                     imagePath = `/images/products/${crypto.randomUUID()}-${data.thumbnail?.name}`;
                     await fs.writeFile(`public${imagePath}`, Buffer.from(await data.thumbnail!.arrayBuffer()));
@@ -35,7 +35,7 @@ export const updateProduct = async (id: number, formState: OperationResult | und
                         description: data.description,
                         SKU: data.SKU,
                         thumbnail: imagePath,
-                        categoryId: Number(data.categoryId),
+                        categoryId: Number(data.categoryId) === 0 ? null : Number(data.categoryId),
                     })
                     .where(eq(product.id, +id));
             }

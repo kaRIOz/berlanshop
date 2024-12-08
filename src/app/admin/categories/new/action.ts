@@ -10,7 +10,6 @@ import { categoryFormSchema } from "../_components/category-form.types";
 export const addCategory = async (formState: OperationResult | undefined, formData: FormData) => {
     return executeAction({
         actionFn: async () => {
-            debugger;
             const validatedData = Object.fromEntries(formData);
             const { success, data } = categoryFormSchema.safeParse(validatedData);
             if (success) {
@@ -28,7 +27,6 @@ export const addCategory = async (formState: OperationResult | undefined, formDa
                 revalidatePath("/");
                 revalidatePath("/categories");
             }
-            console.log(success);
         },
         isProtected: false,
         clientSuccessMessage: `دسته بندی  با موفقیت اضافه شد`,

@@ -55,7 +55,6 @@ const CategoryForm: React.FC<Props> = ({ categories, category }: Props) => {
         },
     });
     const onSubmit: SubmitHandler<CategoryFormType> = data => {
-        debugger;
         const formData = new FormData();
         formData.append("name", data.name);
         formData.append("path", data.path);

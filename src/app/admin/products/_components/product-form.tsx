@@ -5,8 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import Image from "next/image";
-import { useForm, type SubmitHandler } from "react-hook-form";
-import { type ProductSchema } from "@/drizzle/schema/product/product";
+import { Controller, useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "@/components/ui/use-toast";
 import { addProduct } from "../new/action";
@@ -18,13 +17,38 @@ import { updateProduct } from "../[id]/edit/actions";
 
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-export function ProductForm({ product }: { product?: ProductSchema }) {
+type Props = {
+    product?: {
+        id: number;
+        name: string;
+        description: string;
+        SKU: string;
+        price: string;
+        thumbnail: string | null;
+        category: {
+            id: number;
+            nameFa: string;
+        };
+    } | null;
+    categories:
+        | {
+              id: number;
+              nameFa: string;
+              thumbnail: string;
+              nameEn: string;
+              parentId: number | null;
+          }[]
+        | null;
+};
+
+export function ProductForm({ product, categories }: Props) {
     const router = useRouter();
     const hiddenFileInputRef = useRef<HTMLInputElement | null>(null);
     const [preview, setPreview] = useState<string | null>(null);
     const {
         register,
         handleSubmit,
+        control,
         setValue,
         formState: { errors, isSubmitting },
     } = useForm<ProductFromType>({
@@ -35,13 +59,13 @@ export function ProductForm({ product }: { product?: ProductSchema }) {
             description: product?.description ?? "",
             SKU: product?.SKU ?? "",
             thumbnail: null,
-            categoryId: product?.categoryId ?? 1,
+            categoryId: product?.category.id ?? 0,
         },
         mode: "onChange",
     });
     const [pending, startTransition] = useTransition();
     const [formState, action] = useActionState(
-        product?.mode === "edit" ? updateProduct.bind(null, product.id) : addProduct,
+        !!product ? updateProduct.bind(null, product.id) : addProduct,
         undefined,
     );
     useEffect(() => {
@@ -65,10 +89,8 @@ export function ProductForm({ product }: { product?: ProductSchema }) {
         formData.append("price", data.price);
         formData.append("description", data.description);
         formData.append("SKU", data.SKU);
-        formData.append("thumbnail", data.thumbnail || "");
-        formData.append("categoryId", data.categoryId.toString());
-
-        console.log(Object.fromEntries(formData));
+        formData.append("thumbnail", data.thumbnail ?? "");
+        formData.append("categoryId", `${data.categoryId}`);
 
         startTransition(async () => action(formData));
     };
@@ -102,18 +124,29 @@ export function ProductForm({ product }: { product?: ProductSchema }) {
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>
-                <Select>
-                    <SelectTrigger className="w-[180px]">
-                        <SelectValue placeholder="دسته بندی محصول" />
-                    </SelectTrigger>
-                    <SelectContent {...register("categoryId")}>
-                        <SelectGroup>
-                            <SelectItem value="شال">شال</SelectItem>
-                            <SelectItem value="روسری">روسری</SelectItem>
-                            <SelectItem value="مقنعه">مقنعه</SelectItem>
-                        </SelectGroup>
-                    </SelectContent>
-                </Select>
+                <Controller
+                    name="categoryId"
+                    control={control}
+                    render={({ field }) => (
+                        <Select onValueChange={field.onChange} defaultValue={field.value.toString()}>
+                            <SelectTrigger className="w-[180px]">
+                                <SelectValue placeholder="دسته بندی ها" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectGroup>
+                                    <SelectItem value="0">بدون دسته بندی</SelectItem>
+                                    {categories &&
+                                        categories.map(category => (
+                                            <SelectItem key={category.id} value={`${category.id}`}>
+                                                {category.nameFa}
+                                            </SelectItem>
+                                        ))}
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
+                    )}
+                />
+                {errors.categoryId && <span>{errors.categoryId.message}</span>}
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">

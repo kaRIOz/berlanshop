@@ -10,8 +10,6 @@ export default async function Home() {
     const categoriesData = getCategories();
     const [categories] = await Promise.all([categoriesData]);
 
-    console.log(categories);
-
     return (
         <section className="w-full  mx-auto ">
             <Header />

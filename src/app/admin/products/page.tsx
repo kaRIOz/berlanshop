@@ -7,7 +7,6 @@ import ProductList from "./_components/product-list";
 
 const AdminProducts = async () => {
     const products = await getProducts();
-
     return (
         <div className="mt-3">
             <div className="flex items-center justify-between">

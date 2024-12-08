@@ -8,8 +8,6 @@ import CategoryList from "./_components/category-list";
 const AdminCategory = async () => {
     const categories = await getCategories();
 
-    console.log(categories);
-
     return (
         <div className="mt-3">
             <div className="flex items-center justify-between ">
