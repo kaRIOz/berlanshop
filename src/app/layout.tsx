@@ -32,9 +32,7 @@ export default function RootLayout({
             <body className={`${vazir.className} antialiased bg-gray-50`}>
                 <AuthProvider>
                     <Toaster />
-                    <div>
-                        <main>{children}</main>
-                    </div>
+                    <main>{children}</main>
                 </AuthProvider>
             </body>
         </html>

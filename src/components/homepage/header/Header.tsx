@@ -51,17 +51,15 @@ const Header = () => {
                             transition={{ duration: 0.5 }}
                             className="flex items-center  z-50 p-0 gap-2"
                         >
-                            <>
-                                {navBarList.map(({ id, title, link }) => (
-                                    <Link
-                                        key={id}
-                                        className={`hidden md:flex text-sm hover:font-Regular w-22 h-6 justify-center items-center px-4 ${pathname === link ? "text-[#262626] " : "text-[#767676] "}  hover:text-[#262626]`}
-                                        href={link}
-                                    >
-                                        <li>{title}</li>
-                                    </Link>
-                                ))}
-                            </>
+                            {navBarList.map(({ id, title, link }) => (
+                                <Link
+                                    key={id}
+                                    className={`hidden md:flex text-sm hover:font-Regular w-22 h-6 justify-center items-center px-4 ${pathname === link ? "text-[#262626] " : "text-[#767676] "}  hover:text-[#262626]`}
+                                    href={link}
+                                >
+                                    <li>{title}</li>
+                                </Link>
+                            ))}
                         </motion.ul>
                     </div>
 
@@ -78,9 +76,10 @@ const Header = () => {
                             <div className="flex items-center gap-1 md:gap-4">
                                 <DropdownMenu modal={false}>
                                     <DropdownMenuTrigger>
-                                        <Button variant="outline" size="icon" className="overflow-hidden rounded-full">
-                                            <LuUser className="w-5 h-5" />
-                                        </Button>
+                                        {/* //! IMAAN ERROR WAS HERE IF YOU SEE THIS COMMENT AND CHECKED WHY WE HAD ERROR HERE PLEASE DETELE IT  */}
+                                        {/* <Button variant="outline" size="icon" className="overflow-hidden rounded-full"> */}
+                                        <LuUser className="w-5 h-5" />
+                                        {/* </Button> */}
                                     </DropdownMenuTrigger>
 
                                     <DropdownMenuContent align="start" className="w-56 shadow-none">

@@ -7,16 +7,18 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
 
+const userInfoSchema = z.object({
+    name: z.string().min(1),
+    phoneNumber: z.string().min(1),
+    email: z.string().min(1).email(),
+    password: z.string().min(1),
+});
+
+type UserInfoType = z.infer<typeof userInfoSchema>;
+
 const InterceptedEdit = () => {
     const { data } = useSession();
-    const userInfoSchema = z.object({
-        name: z.string().min(1),
-        phoneNumber: z.string().min(1),
-        email: z.string().min(1).email(),
-        password: z.string().min(1),
-    });
 
-    type UserInfoType = z.infer<typeof userInfoSchema>;
     const {
         register,
         handleSubmit,
