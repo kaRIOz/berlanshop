@@ -16,7 +16,7 @@ const ProfileSidebar = () => {
     const { data } = useSession();
 
     return (
-        <div className="lg:h-screen lg:max-w-[335px] lg:col-span-2 border border-gray-100 rounded-lg">
+        <div className="lg:h-screen lg:max-w-[330px] lg:col-span-2 lg:border border-gray-100 rounded-lg">
             <div className="sticky top-0">
                 <div className="flex justify-between items-center py-[14px] mx-[14px] border-b">
                     <div className=" text-[14px]">

@@ -57,9 +57,7 @@ const ProductList = ({ products }: Props) => {
                             <td>
                                 <div className="flex justify-center items-center gap-2">
                                     <Image
-                                        src={
-                                            product.thumbnail ?? "/Logo.png"
-                                        } /* TODO: add default product image => "/images/default-product.png" */
+                                        src={product.thumbnail ?? `${process.env.NEXT_DEFAULT_PRODUCT_IMAGE}`}
                                         alt="img"
                                         width={50}
                                         height={50}

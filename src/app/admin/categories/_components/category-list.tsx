@@ -52,9 +52,7 @@ const CategoryList = ({ categories }: Props) => {
                         <td>
                             <div className="flex justify-center items-center gap-2">
                                 <Image
-                                    src={
-                                        category?.thumbnail ?? "/Logo.png"
-                                    } /* TODO: add default category image => "/images/default-category.png" */
+                                    src={category?.thumbnail ?? `${process.env.NEXT_DEFAULT_CATEGORY_IMAGE}`}
                                     alt="img"
                                     width={50}
                                     height={50}
