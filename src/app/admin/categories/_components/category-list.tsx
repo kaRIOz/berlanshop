@@ -10,6 +10,7 @@ import { deleteCategory } from "../action";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { PopoverClose } from "@radix-ui/react-popover";
+import env from "@/configs/env";
 
 type Props = {
     categories:
@@ -52,7 +53,7 @@ const CategoryList = ({ categories }: Props) => {
                         <td>
                             <div className="flex justify-center items-center gap-2">
                                 <Image
-                                    src={category?.thumbnail ?? `${process.env.NEXT_DEFAULT_CATEGORY_IMAGE}`}
+                                    src={category?.thumbnail ?? `${env.NEXT_DEFAULT_CATEGORY_IMAGE}`}
                                     alt="img"
                                     width={50}
                                     height={50}

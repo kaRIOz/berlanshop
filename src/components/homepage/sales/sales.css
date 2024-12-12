@@ -1,6 +1,7 @@
 ul.contactsheet {
     width: 100%;
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     margin: 0 auto;
     gap: 4px;
@@ -8,19 +9,19 @@ ul.contactsheet {
 ul.contactsheet:after {
     content: "";
     display: block;
-    flex-grow: 15; /* Prevent justify/stretch of last photo. 10 seems best */
+    flex-grow: 10; /* Prevent justify/stretch of last photo. 10 seems best */
 }
-.contactsheet li {
-    height: 40vh;
+.contactsheet li div{
+    height: 60vh;
+    width: 40vh;
     flex-grow: 1;
     margin: 0 0.5rem 0.5rem 0;
     list-style: none; /* override common/Normalize */
 }
 .contactsheet img {
-    max-height: 100%;
+    height: 100%;
     min-width: 100%;
     object-fit: cover;
-    vertical-align: bottom;
     border-radius: 0.6rem;
 }
 .contactsheet img:hover {
@@ -29,15 +30,16 @@ ul.contactsheet:after {
 
 /* Portrait: */
 @media (max-aspect-ratio: 1 / 1) {
-    .contactsheet li {
-        height: 30vh;
+    .contactsheet li div{
+        height: 20vh;
     }
 }
 
 /* Short screens: */
 @media (max-height: 480px) {
-    .contactsheet li {
-        height: 50vh;
+    .contactsheet li div{
+        height: 10vh;
+        width: 50vh;
     }
 }
 
@@ -47,15 +49,9 @@ ul.contactsheet:after {
         flex-direction: row;
     }
 
-    .contactsheet li {
+    .contactsheet li div{
         height: auto;
         display: contents;
     }
 
-    .contactsheet img {
-        width: 30%;
-        max-height: 75vh;
-        min-width: 0;
-        flex-grow: 1;
-    }
 }

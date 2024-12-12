@@ -11,8 +11,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useForm } from "react-hook-form";
 
-import Modal from "@/components/modal/Modal";
-
 const adminAddProductSchema = z.object({
     title: z.string().min(1),
     description: z.string().min(1),
@@ -57,7 +55,7 @@ const AdminProductsList = ({ placeholder = "جستجوی کالاها" }) => {
                     <>
                         <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
                             <div className="relative my-6 mx-auto ">
-                                <Modal className="bg-white rounded-sm p-4 w-[800] max-w-3xl">
+                                <div className="bg-white rounded-sm p-4 w-[800] max-w-3xl">
                                     <h1 className="text-center mb-5">کالای جدید</h1>
                                     <form onSubmit={handleSubmit(onsSubmit)} className="flex flex-col space-y-4">
                                         <input
@@ -87,7 +85,7 @@ const AdminProductsList = ({ placeholder = "جستجوی کالاها" }) => {
                                             ثبت
                                         </button>
                                     </form>
-                                </Modal>
+                                </div>
                             </div>
                         </div>
                         <div className="opacity-70 fixed inset-0 z-40 bg-black"></div>

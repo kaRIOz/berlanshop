@@ -4,11 +4,12 @@ import { z } from "zod";
 
 import { product } from "@/drizzle/schema";
 import { createInsertSchema } from "drizzle-zod";
+import env from "@/configs/env";
 
 export const category = pgTable("category", {
     id: serial("id").primaryKey(),
     nameFa: varchar("name", { length: 255 }).notNull().unique(),
-    thumbnail: varchar("thumbnail", { length: 255 }),
+    thumbnail: varchar("thumbnail", { length: 255 }).default(`${env.NEXT_DEFAULT_CATEGORY_IMAGE}`),
     nameEn: varchar("link", { length: 255 }).notNull(),
     parentId: integer("parent_id").references((): AnyPgColumn => category.id, { onDelete: "set null" }),
     createdAt: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),

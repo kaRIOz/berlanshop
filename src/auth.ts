@@ -1,9 +1,10 @@
 /* eslint-disable no-unused-vars */
 import NextAuth, { type DefaultSession, type User } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { signInByPhoneNumber } from "./app/(auth)/otp-verify/actions";
+
 import { signInByEmailAndPassword } from "./app/(auth)/sign-in/actions";
 import { authConfig } from "./auth.config";
+import { signInByPhoneNumber } from "./app/otp-verify/actions";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
     ...authConfig,
@@ -71,11 +72,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }),
     ],
     callbacks: {
-        jwt({ token, user }) {
+        jwt({ token, user, trigger }) {
             if (user) {
                 token.id = user.id;
                 token.user = { ...user };
             }
+            // if(trigger === 'update'){
+            //     const updatedUser = await
+            // }
             return token;
         },
         session({ session, token }) {

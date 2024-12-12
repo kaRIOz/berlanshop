@@ -18,7 +18,7 @@ import { BsBasket3 } from "react-icons/bs";
 import { FiMessageSquare } from "react-icons/fi";
 import { LuUser } from "react-icons/lu";
 
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { Loading } from "@/components/loading";
 
 import {
@@ -65,21 +65,20 @@ const Header = () => {
 
                     <div className="flex justify-between items-center space-x-5 space-x-reverse">
                         {status === "unauthenticated" && (
-                            <Button className="px-2 py-1 md:py-2 rounded-lg bg-transparent" variant="outline">
-                                <Link href={"/otp"} className="text-[10px] md:text-[13px] md:w-full md:h-full ">
+                            <Link href={"/otp"} className="text-[10px] md:text-[13px] md:w-full md:h-full ">
+                                <Button className="px-2 py-1 md:py-2 rounded-lg bg-transparent" variant="outline">
                                     ورود | ثبت نام
-                                </Link>
-                            </Button>
+                                </Button>
+                            </Link>
                         )}
                         {status === "loading" && <Loading />}
                         {status === "authenticated" && (
                             <div className="flex items-center gap-1 md:gap-4">
                                 <DropdownMenu modal={false}>
-                                    <DropdownMenuTrigger>
-                                        {/* //! IMAAN ERROR WAS HERE IF YOU SEE THIS COMMENT AND CHECKED WHY WE HAD ERROR HERE PLEASE DETELE IT  */}
-                                        {/* <Button variant="outline" size="icon" className="overflow-hidden rounded-full"> */}
-                                        <LuUser className="w-5 h-5" />
-                                        {/* </Button> */}
+                                    <DropdownMenuTrigger asChild>
+                                        <Button variant="outline" size="icon" className="overflow-hidden rounded-full">
+                                            <LuUser className="w-5 h-5" />
+                                        </Button>
                                     </DropdownMenuTrigger>
 
                                     <DropdownMenuContent align="start" className="w-56 shadow-none">
@@ -115,18 +114,21 @@ const Header = () => {
 
                                         <DropdownMenuSeparator />
                                         <DropdownMenuItem className="flex items-center justify-end gap-4 p-3">
-                                            <Link href={"/"} className="w-full text-right">
+                                            <button
+                                                className="w-full text-right"
+                                                onClick={() => signOut({ redirect: false })}
+                                            >
                                                 خروج
-                                            </Link>
+                                            </button>
                                             <IoExitOutline />
                                         </DropdownMenuItem>
                                     </DropdownMenuContent>
                                 </DropdownMenu>
                                 <Button
                                     variant="outline"
-                                    className="border-none bg-transparent shadow-none hover:bg-transparent rounded-full"
+                                    className="border-none bg-transparent shadow-none hover:border rounded-full"
                                 >
-                                    <Link href={"/checkout"}>
+                                    <Link href={"/profile/basket"}>
                                         <TfiShoppingCart className="text-[20px]" />
                                     </Link>
                                 </Button>
@@ -140,10 +142,7 @@ const Header = () => {
                         className="border-none shadow-none bg-transparent absolute top-3 right-8 md:hidden"
                     >
                         <Button variant={"outline"}>
-                            <HiMenuAlt3
-                                // onClick={() => setSidenav(!sidenav)}
-                                className="inline-block md:hidden cursor-pointer"
-                            />
+                            <HiMenuAlt3 className="inline-block md:hidden cursor-pointer" />
                         </Button>
                     </SheetTrigger>
                     <SheetContent className="w-[50%] md:w-[40px]">

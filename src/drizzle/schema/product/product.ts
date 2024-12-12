@@ -4,6 +4,7 @@ import { cartItem, category, discount, inventory, orderItems } from "@/drizzle/s
 import { relations, type InferSelectModel } from "drizzle-orm";
 import { z } from "zod";
 import { createInsertSchema } from "drizzle-zod";
+import env from "@/configs/env";
 
 export const product = pgTable("product", {
     id: serial("id").notNull().primaryKey(),
@@ -11,7 +12,7 @@ export const product = pgTable("product", {
     description: varchar("description", { length: 255 }).notNull(),
     SKU: varchar("sku", { length: 255 }).notNull(),
     price: varchar("price", { length: 255 }).notNull(),
-    thumbnail: varchar("thumbnail", { length: 255 }),
+    thumbnail: varchar("thumbnail", { length: 255 }).default(`${env.NEXT_DEFAULT_PRODUCT_IMAGE}`),
     categoryId: integer("category_id").references(() => category.id, { onDelete: "set null" }),
     inventoryId: integer("inventory_id").references(() => category.id, { onDelete: "set null" }),
     discountId: integer("discount_id").references(() => discount.id, { onDelete: "set null" }),

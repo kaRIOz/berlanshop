@@ -66,7 +66,7 @@ module.exports = {
         "react/prop-types": "off",
         "react/react-in-jsx-scope": "off",
         "no-extra-boolean-cast": "off",
-        "no-unused-vars": "warn",
+        "no-unused-vars": "off",
         "@typescript-eslint/no-unused-vars": "off",
         "no-duplicate-imports": ["error", { includeExports: true }],
         "no-undef": "warn",

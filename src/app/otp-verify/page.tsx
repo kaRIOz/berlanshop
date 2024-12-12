@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect, useSearchParams } from "next/navigation";
 
-import { useForm, type SubmitHandler } from "react-hook-form";
+import { useForm, Controller, type SubmitHandler } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loading } from "@/components/loading";
@@ -12,6 +12,7 @@ import { OTPVerifySchema, type OTPVerifyType } from "./types";
 import { signInAction } from "./actions";
 import { getSession } from "next-auth/react";
 import { toast } from "@/components/ui/use-toast";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 
 const OTPVerify = () => {
     const phoneNumber = useSearchParams().get("phoneNumber");
@@ -19,11 +20,13 @@ const OTPVerify = () => {
     const {
         register,
         handleSubmit,
+        control,
         formState: { errors },
     } = useForm<OTPVerifyType>({
         resolver: zodResolver(OTPVerifySchema),
         defaultValues: { phoneNumber: phoneNumber as string },
     });
+
     const [isPending, startTransition] = useTransition();
     const [formState, action] = useActionState(signInAction, undefined);
 
@@ -46,8 +49,8 @@ const OTPVerify = () => {
         startTransition(async () => await action(formData));
     };
     return (
-        <div className="h-screen flex justify-center items-center  mx-auto">
-            <div className="bg-white border-[1px] w-full flex flex-col items-center max-w-[400px] px-6 py-4 rounded-md">
+        <div className="flex justify-center items-center">
+            <div className=" w-full flex flex-col items-center max-w-[350px] rounded-md">
                 <Image src={"/Logo.png"} alt="Logo" width={150} height={100} />
                 <h2 className="ml-auto mt-4">کد تایید را وارد کنید</h2>
                 <p className="ml-auto mt-6 text-[13px] text-gray-600 font-light">
@@ -57,12 +60,21 @@ const OTPVerify = () => {
                 <form onSubmit={handleSubmit(onSubmit)} className="ml-auto mt-4 w-full">
                     {/* honey pot */}
                     <input {...register("phoneNumber")} type="text" hidden className={`hidden`} />
-                    <input
-                        type="text"
-                        className={`w-full px-4 py-3 text-sm outline-none border border-blue-500 rounded-lg text-center`}
-                        autoComplete="off"
-                        {...register("verificationCode")}
-                        autoFocus
+                    <Controller
+                        name="verificationCode"
+                        control={control}
+                        render={({ field }) => (
+                            <InputOTP maxLength={6} {...field}>
+                                <InputOTPGroup className="gap-2">
+                                    <InputOTPSlot index={5} />
+                                    <InputOTPSlot index={4} />
+                                    <InputOTPSlot index={3} />
+                                    <InputOTPSlot index={2} />
+                                    <InputOTPSlot index={1} />
+                                    <InputOTPSlot index={0} />
+                                </InputOTPGroup>
+                            </InputOTP>
+                        )}
                     />
                     {errors.verificationCode && (
                         <span className="text-[11px] text-red-500">{errors.verificationCode.message}</span>
@@ -74,7 +86,6 @@ const OTPVerify = () => {
                     >
                         {!isPending ? "تایید" : <Loading />}
                     </button>
-
                     <Link href={"/otp"}>
                         <button className="w-full text-sm border border-red-500 py-1 mb-4 rounded-lg active:scale-95">
                             {" "}

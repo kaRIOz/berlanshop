@@ -57,8 +57,8 @@ const OTPSign = () => {
     };
 
     return (
-        <div className="h-screen flex justify-center items-center  mx-auto">
-            <div className="bg-white border-[1px] w-full flex flex-col items-center max-w-[400px] px-6 py-4 rounded-md">
+        <div className="flex justify-center items-center mx-auto">
+            <div className="w-full flex flex-col items-center max-w-[350px] rounded-md">
                 <Image src={"/Logo.png"} alt="Logo" width={150} height={100} />
                 <h2 className="ml-auto mt-4">ورود | ثبت نام</h2>
                 <p className="ml-auto mt-10 text-[13px] text-gray-600 font-light">
