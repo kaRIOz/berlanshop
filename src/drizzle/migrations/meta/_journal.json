@@ -43,6 +43,13 @@
       "when": 1734031448612,
       "tag": "0005_funny_lady_deathstrike",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1734035243545,
+      "tag": "0006_dark_puck",
+      "breakpoints": true
     }
   ]
 }

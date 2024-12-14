@@ -10,7 +10,6 @@ import { toast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { PopoverClose } from "@radix-ui/react-popover";
-import env from "@/configs/env";
 
 type Props = {
     products:
@@ -20,7 +19,7 @@ type Props = {
               description: string;
               SKU: string;
               price: string;
-              thumbnail: string | null;
+              thumbnail: string;
               category: {
                   nameFa: string;
               } | null;
@@ -58,7 +57,7 @@ const ProductList = ({ products }: Props) => {
                             <td>
                                 <div className="flex justify-center items-center gap-2">
                                     <Image
-                                        src={product.thumbnail ?? `${env.NEXT_DEFAULT_PRODUCT_IMAGE}`}
+                                        src={product.thumbnail ?? `${process.env.NEXT_DEFAULT_PRODUCT_IMAGE}`}
                                         alt="img"
                                         width={50}
                                         height={50}

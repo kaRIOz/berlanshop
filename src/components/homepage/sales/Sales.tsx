@@ -19,7 +19,7 @@ const Sales = async () => {
                     return (
                         <li key={category.nameEn}>
                             <div className="relative">
-                                <Image src={category.thumbnail ?? ""} alt="category" width={100} height={100} />
+                                <Image src={category.thumbnail} alt="category" width={100} height={100} />
                                 <h2 className="absolute bottom-5 left-5 text-white text-[12px] md:text-[20px]">
                                     {category.nameFa}
                                 </h2>

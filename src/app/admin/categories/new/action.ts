@@ -6,6 +6,7 @@ import db from "@/drizzle";
 import { category } from "@/drizzle/schema";
 import { revalidatePath } from "next/cache";
 import { categoryFormSchema } from "../_components/category-form.types";
+import env from "@/configs/env";
 
 export const addCategory = async (formState: OperationResult | undefined, formData: FormData) => {
     return executeAction({
@@ -13,7 +14,7 @@ export const addCategory = async (formState: OperationResult | undefined, formDa
             const validatedData = Object.fromEntries(formData);
             const { success, data } = categoryFormSchema.safeParse(validatedData);
             if (success) {
-                let imagePath = "";
+                let imagePath = env.NEXT_DEFAULT_CATEGORY_IMAGE;
                 if (data.thumbnail instanceof File && data.thumbnail?.size > 0) {
                     await fs.mkdir("public/images/categories", { recursive: true });
                     imagePath = `/images/categories/${crypto.randomUUID()}-${data.thumbnail?.name}`;
@@ -23,7 +24,7 @@ export const addCategory = async (formState: OperationResult | undefined, formDa
                     nameFa: data.name,
                     nameEn: data.path,
                     parentId: Number(data.parentId) === 0 ? null : Number(data.parentId),
-                    thumbnail: !!imagePath ? imagePath : null,
+                    thumbnail: imagePath,
                 });
                 revalidatePath("/admin/categories");
                 revalidatePath("/");

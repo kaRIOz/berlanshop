@@ -2,21 +2,23 @@
 
 import React from "react";
 import Image from "next/image";
-import { useBasketStore } from "@/store/basket.store";
+import { useBasketStore } from "@/stores/basket.store";
 
 type Props = {
-    id: number;
-    name: string;
-    description: string;
-    thumbnail: string | null;
-    SKU: string;
-    price: string;
-    category: {
-        nameFa: string;
+    product: {
+        id: number;
+        name: string;
+        description: string;
+        thumbnail: string;
+        SKU: string;
+        price: string;
+        category: {
+            nameFa: string;
+        } | null;
     };
 };
 
-const ProductCard = ({ id, name, description, thumbnail, SKU, price }: Props) => {
+const ProductCard = ({ product }: Props) => {
     const addItem = useBasketStore(state => state.addItem);
     const basket = useBasketStore(state => state.basket);
     const totalPrice = useBasketStore(state => state.totalPrice);
@@ -24,26 +26,32 @@ const ProductCard = ({ id, name, description, thumbnail, SKU, price }: Props) =>
 
     return (
         <div className="w-64  hover:shadow-md transition-all ease-in-out ">
-            <Image width={200} height={200} src={thumbnail ?? ""} alt={name} className="w-full h-80 object-cover" />
+            <Image
+                width={200}
+                height={200}
+                src={product.thumbnail}
+                alt={product.name}
+                className="w-full h-80 object-cover"
+            />
             <div className="flex flex-col p-2">
-                <h2 className="font-medium">{name}</h2>
-                <p className="text-[11px] font-light text-gray-400">{description} </p>
+                <h2 className="font-medium">{product.name}</h2>
+                <p className="text-[11px] font-light text-gray-400">{product.description} </p>
                 <div className="flex justify-between items-center mt-2">
                     <button
                         className="text-[10px] bg-blue-500 p-2 rounded text-white"
                         onClick={() =>
                             addItem({
-                                id: id,
-                                name: name,
-                                description: description,
-                                thumbnail: thumbnail ?? "",
-                                price: price,
+                                id: product.id,
+                                title: product.name,
+                                description: product.description,
+                                thumbnail: product.thumbnail ?? "",
+                                price: Number(product.price),
                             })
                         }
                     >
                         اضافه کردن به سبد خرید
                     </button>
-                    <p className="">{price}</p>
+                    <p className="">{product.price}</p>
                 </div>
             </div>
         </div>

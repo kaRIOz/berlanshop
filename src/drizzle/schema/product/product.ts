@@ -12,7 +12,7 @@ export const product = pgTable("product", {
     description: varchar("description", { length: 255 }).notNull(),
     SKU: varchar("sku", { length: 255 }).notNull(),
     price: varchar("price", { length: 255 }).notNull(),
-    thumbnail: varchar("thumbnail", { length: 255 }).default(`${env.NEXT_DEFAULT_PRODUCT_IMAGE}`),
+    thumbnail: varchar("thumbnail", { length: 255 }).notNull().default(`${env.NEXT_DEFAULT_PRODUCT_IMAGE}`),
     categoryId: integer("category_id").references(() => category.id, { onDelete: "set null" }),
     inventoryId: integer("inventory_id").references(() => category.id, { onDelete: "set null" }),
     discountId: integer("discount_id").references(() => discount.id, { onDelete: "set null" }),

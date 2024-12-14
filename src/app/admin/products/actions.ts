@@ -1,5 +1,6 @@
 "use server";
 
+import env from "@/configs/env";
 import db from "@/drizzle";
 import { product } from "@/drizzle/schema";
 import { executeAction, type OperationResult } from "@/drizzle/utils/executeAction";
@@ -16,7 +17,7 @@ export const deleteProduct = async (state: OperationResult | undefined, id: numb
                 },
                 where: eq(product.id, +id),
             });
-            if (!!thisProduct?.thumbnail) {
+            if (thisProduct?.thumbnail !== env.NEXT_DEFAULT_PRODUCT_IMAGE) {
                 await fs.unlink(`public${thisProduct?.thumbnail}`);
             }
             await db.delete(product).where(eq(product.id, +id));

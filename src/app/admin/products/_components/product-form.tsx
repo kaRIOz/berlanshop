@@ -24,7 +24,7 @@ type Props = {
         description: string;
         SKU: string;
         price: string;
-        thumbnail: string | null;
+        thumbnail: string;
         category: {
             id: number;
             nameFa: string;
@@ -34,7 +34,7 @@ type Props = {
         | {
               id: number;
               nameFa: string;
-              thumbnail: string | null;
+              thumbnail: string;
               nameEn: string;
               parentId: number | null;
           }[]
@@ -58,7 +58,7 @@ export function ProductForm({ product, categories }: Props) {
             price: product?.price ?? "",
             description: product?.description ?? "",
             SKU: product?.SKU ?? "",
-            thumbnail: null,
+            thumbnail: product?.thumbnail ?? process.env.NEXT_DEFAULT_PRODUCT_IMAGE,
             categoryId: product?.category.id ?? 0,
         },
         mode: "onChange",

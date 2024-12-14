@@ -7,7 +7,7 @@ type BasketItem = {
     description: string;
     title: string;
     thumbnail: string;
-    quantity: number;
+    quantity?: number;
 };
 
 interface State {

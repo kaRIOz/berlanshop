@@ -1,5 +1,6 @@
 "use server";
 
+import env from "@/configs/env";
 import db from "@/drizzle";
 import { category } from "@/drizzle/schema";
 import { executeAction, type OperationResult } from "@/drizzle/utils/executeAction";
@@ -10,14 +11,14 @@ import { revalidatePath } from "next/cache";
 export const deleteCategory = async (formState: OperationResult | undefined, id: number) => {
     return executeAction({
         actionFn: async () => {
-            const thisProduct = await db.query.category.findFirst({
+            const thisCategory = await db.query.category.findFirst({
                 columns: {
                     thumbnail: true,
                 },
                 where: eq(category.id, id),
             });
-            if (!!thisProduct?.thumbnail) {
-                await fs.unlink(`public${thisProduct?.thumbnail}`);
+            if (thisCategory?.thumbnail !== env.NEXT_DEFAULT_CATEGORY_IMAGE) {
+                await fs.unlink(`public${thisCategory?.thumbnail}`);
             }
             await db.delete(category).where(eq(category.id, id));
 
