@@ -40,15 +40,15 @@ const ProductCard = ({ product }: Props) => {
                 <div className="flex justify-between items-center mt-2">
                     <button
                         className="text-[10px] bg-blue-500 p-2 rounded text-white"
-                        onClick={() =>
+                        onClick={() => {
                             addToCart({
                                 id: product.id,
                                 title: product.name,
                                 description: product.description,
                                 thumbnail: product.thumbnail ?? "",
                                 price: Number(product.price),
-                            })
-                        }
+                            });
+                        }}
                     >
                         اضافه کردن به سبد خرید
                     </button>

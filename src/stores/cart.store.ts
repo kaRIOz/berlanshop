@@ -60,10 +60,15 @@ export const useCartStore = create<State & Actions>((set, get) => ({
             const itemToRemove = state.cart.find(item => item.id === id);
             if (itemToRemove) {
                 const updatedCart = state.cart.filter(item => item.id !== id);
+                // Update totalItems
+                const newTotalItems = Math.max(0, state.totalItems - (itemToRemove.quantity || 1));
+
+                // Update totalPrice
+                const newTotalPrice = state.totalPrice - itemToRemove.price * (itemToRemove.quantity || 1);
                 return {
                     cart: updatedCart,
-                    totalItems: state.totalItems - (itemToRemove.quantity || 0),
-                    totalPrice: state.totalPrice - itemToRemove.price,
+                    totalItems: newTotalItems,
+                    totalPrice: newTotalPrice,
                 };
             } else {
                 return state;
