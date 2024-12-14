@@ -7,7 +7,7 @@ export type Product = {
     description: string;
     title: string;
     thumbnail: string;
-    quantity: number;
+    quantity?: number;
 };
 
 interface State {
@@ -18,7 +18,8 @@ interface State {
 
 interface Actions {
     addToCart: (Item: Product) => void;
-    removeFromCart: (Item: Product) => void;
+    removeFromCart: (id: number) => void;
+    updateQty: (type: "increment" | "decrement", id: number) => void;
 }
 
 const INITIAL_STATE: State = {
@@ -54,11 +55,42 @@ export const useCartStore = create<State & Actions>((set, get) => ({
             }));
         }
     },
-    removeFromCart: (product: Product) => {
-        set(state => ({
-            cart: state.cart.filter(item => item.id !== product.id),
-            totalItems: state.totalItems - 1,
-            totalPrice: state.totalPrice - product.price,
-        }));
+    removeFromCart: (id: number) => {
+        set(state => {
+            const itemToRemove = state.cart.find(item => item.id === id);
+            if (itemToRemove) {
+                const updatedCart = state.cart.filter(item => item.id !== id);
+                return {
+                    cart: updatedCart,
+                    totalItems: state.totalItems - (itemToRemove.quantity || 0),
+                    totalPrice: state.totalPrice - itemToRemove.price,
+                };
+            } else {
+                return state;
+            }
+        });
+    },
+
+    updateQty: (type, id) => {
+        const cart = get().cart.find(item => item.id === id);
+        console.log({ cart, type });
+
+        if (!cart) return;
+
+        if (cart.quantity === 1 && type === "decrement") {
+            get().removeFromCart(id);
+        }
+        if (typeof cart.quantity === "number") {
+            cart.quantity = type === "increment" ? cart.quantity + 1 : cart?.quantity - 1;
+
+            set({
+                cart: [...get().cart],
+                totalPrice: get().cart.reduce((total, item) => {
+                    const itemQuantity = item.quantity ?? 0;
+                    return total + itemQuantity * item.price;
+                }, 0),
+                totalItems: get().cart.reduce((total, item) => total + (item.quantity ?? 0), 0),
+            });
+        }
     },
 }));

@@ -17,7 +17,7 @@ const userInfoSchema = z.object({
 
 type UserInfoType = z.infer<typeof userInfoSchema>;
 
-const InterceptedEdit = () => {
+const InterceptedEdit = ({ title }: { title: string }) => {
     const { data } = useSession();
 
     const {
@@ -30,9 +30,7 @@ const InterceptedEdit = () => {
         console.log("hi");
     };
     return (
-        <Modal>
-            <h1>ویرایش اطلاعات</h1>
-
+        <Modal title="ویرایش اطلاعات">
             <form className="grid grid-cols-2 items-stretch gap-3 p-3" onSubmit={handleSubmit(onsubmit)}>
                 <div>
                     <label htmlFor="name" className="text-[14px] font-medium opacity-70">

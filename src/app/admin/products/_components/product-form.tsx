@@ -16,6 +16,7 @@ import { Loading } from "@/components/loading";
 import { updateProduct } from "../[id]/edit/actions";
 
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import env from "@/configs/env";
 
 type Props = {
     product?: {
@@ -89,7 +90,7 @@ export function ProductForm({ product, categories }: Props) {
         formData.append("price", data.price);
         formData.append("description", data.description);
         formData.append("SKU", data.SKU);
-        formData.append("thumbnail", data.thumbnail ?? "");
+        formData.append("thumbnail", data.thumbnail ?? `${process.env.NEXT_DEFAULT_PRODUCT_IMAGE}`);
         formData.append("categoryId", `${data.categoryId}`);
 
         startTransition(async () => action(formData));
