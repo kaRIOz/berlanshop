@@ -3,6 +3,8 @@
 import React from "react";
 import Image from "next/image";
 import { useCartStore } from "@/stores/cart.store";
+import { addToFavorite, removeFromFavorite } from "@/app/shop/actions";
+import { useSession } from "next-auth/react";
 
 type Props = {
     product: {
@@ -10,15 +12,14 @@ type Props = {
         name: string;
         thumbnail: string;
         description: string;
-        SKU: string;
         price: string;
-        category: {
-            nameFa: string;
-        } | null;
+        isFavorite: unknown;
     };
 };
 
 const ProductCard = ({ product }: Props) => {
+    const { data } = useSession();
+    const userId = data?.user?.id ? Number(data.user.id) : undefined;
     const addToCart = useCartStore(state => state.addToCart);
     const cart = useCartStore(state => state.cart);
     const totalPrice = useCartStore(state => state.totalPrice);
@@ -26,7 +27,15 @@ const ProductCard = ({ product }: Props) => {
     console.log({ cart, totalPrice, totalItems });
 
     return (
-        <div className="w-64 hover:shadow-md transition-all ease-in-out ">
+        <div className="relative w-64 hover:shadow-md transition-all ease-in-out ">
+            <div
+                onClick={() =>
+                    product.isFavorite ? removeFromFavorite(product.id, userId) : addToFavorite(product.id, userId)
+                }
+                className="absolute cursor-pointer top-4 left-4"
+            >
+                {product.isFavorite ? "Liked" : "Like"}
+            </div>
             <Image
                 width={200}
                 height={200}

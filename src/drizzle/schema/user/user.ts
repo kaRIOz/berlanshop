@@ -2,7 +2,7 @@ import { InferSelectModel, relations } from "drizzle-orm";
 import { integer, pgTable, serial, timestamp, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
-import { address, shoppingSession } from "@/drizzle/schema";
+import { address, shoppingSession, favorites } from "@/drizzle/schema";
 
 export const user = pgTable("user", {
     id: serial("id").notNull().primaryKey(),
@@ -21,6 +21,7 @@ export const user = pgTable("user", {
 export const userRelations = relations(user, ({ many, one }) => ({
     address: many(address),
     shoppingSession: one(shoppingSession),
+    favorites: many(favorites),
 }));
 
 const baseSchema = createInsertSchema(user, {

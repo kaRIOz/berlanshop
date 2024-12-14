@@ -1,6 +1,6 @@
 //table
 import { integer, pgTable, serial, timestamp, varchar } from "drizzle-orm/pg-core";
-import { cartItem, category, discount, inventory, orderItems } from "@/drizzle/schema";
+import { cartItem, category, discount, favorites, inventory, orderItems } from "@/drizzle/schema";
 import { relations, type InferSelectModel } from "drizzle-orm";
 import { z } from "zod";
 import { createInsertSchema } from "drizzle-zod";
@@ -21,7 +21,7 @@ export const product = pgTable("product", {
     deletedAt: timestamp("deleted_at", { mode: "string" }),
 });
 
-export const productRelations = relations(product, ({ one }) => ({
+export const productRelations = relations(product, ({ one, many }) => ({
     category: one(category, {
         fields: [product.categoryId],
         references: [category.id],
@@ -36,6 +36,7 @@ export const productRelations = relations(product, ({ one }) => ({
     }),
     cartItems: one(cartItem),
     orderItems: one(orderItems),
+    favorites: many(favorites),
 }));
 
 const baseSchema = createInsertSchema(product, {

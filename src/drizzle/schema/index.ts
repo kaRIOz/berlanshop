@@ -12,3 +12,4 @@ export { shoppingSession, shoppingSessionRelations } from "@/drizzle/schema/bask
 export { orderItems, orderItemsRelations } from "@/drizzle/schema/order/order-items";
 export { orderDetails, orderDetailsRelations } from "@/drizzle/schema/order/order-details";
 export { paymentDetails, paymentDetailsRelations } from "@/drizzle/schema/order/payment-details";
+export { favorites, favoritesRelations } from "@/drizzle/schema/user/favorites";
