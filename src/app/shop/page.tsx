@@ -4,10 +4,11 @@ import Header from "@/components/homepage/header/Header";
 import SearchVsCategory from "@/components/homepage/search-category/SearchVsCategory";
 import { getProducts } from "../admin/products/queries";
 import ProductCard from "@/components/product-card";
+import { notFound } from "next/navigation";
 
 const ShopPage = async () => {
     const products = await getProducts();
-
+    if (!products) notFound();
     return (
         <>
             <Header />

@@ -1,55 +1,55 @@
 {
-  "version": "7",
-  "dialect": "postgresql",
-  "entries": [
-    {
-      "idx": 0,
-      "version": "7",
-      "when": 1732731776648,
-      "tag": "0000_tense_eternals",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1733654399968,
-      "tag": "0001_melodic_fenris",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1733658675933,
-      "tag": "0002_foamy_marauders",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1733659915188,
-      "tag": "0003_chilly_zzzax",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "7",
-      "when": 1733664952489,
-      "tag": "0004_common_tyrannus",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "7",
-      "when": 1734031448612,
-      "tag": "0005_funny_lady_deathstrike",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "7",
-      "when": 1734035243545,
-      "tag": "0006_dark_puck",
-      "breakpoints": true
-    }
-  ]
+    "version": "7",
+    "dialect": "postgresql",
+    "entries": [
+        {
+            "idx": 0,
+            "version": "7",
+            "when": 1732731776648,
+            "tag": "0000_tense_eternals",
+            "breakpoints": true
+        },
+        {
+            "idx": 1,
+            "version": "7",
+            "when": 1733654399968,
+            "tag": "0001_melodic_fenris",
+            "breakpoints": true
+        },
+        {
+            "idx": 2,
+            "version": "7",
+            "when": 1733658675933,
+            "tag": "0002_foamy_marauders",
+            "breakpoints": true
+        },
+        {
+            "idx": 3,
+            "version": "7",
+            "when": 1733659915188,
+            "tag": "0003_chilly_zzzax",
+            "breakpoints": true
+        },
+        {
+            "idx": 4,
+            "version": "7",
+            "when": 1733664952489,
+            "tag": "0004_common_tyrannus",
+            "breakpoints": true
+        },
+        {
+            "idx": 5,
+            "version": "7",
+            "when": 1734031448612,
+            "tag": "0005_funny_lady_deathstrike",
+            "breakpoints": true
+        },
+        {
+            "idx": 6,
+            "version": "7",
+            "when": 1734035243545,
+            "tag": "0006_dark_puck",
+            "breakpoints": true
+        }
+    ]
 }

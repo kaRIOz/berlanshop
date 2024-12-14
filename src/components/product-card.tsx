@@ -2,14 +2,14 @@
 
 import React from "react";
 import Image from "next/image";
-import { useBasketStore } from "@/stores/basket.store";
+import { useCartStore } from "@/stores/cart.store";
 
 type Props = {
     product: {
         id: number;
         name: string;
-        description: string;
         thumbnail: string;
+        description: string;
         SKU: string;
         price: string;
         category: {
@@ -19,13 +19,14 @@ type Props = {
 };
 
 const ProductCard = ({ product }: Props) => {
-    const addItem = useBasketStore(state => state.addItem);
-    const basket = useBasketStore(state => state.basket);
-    const totalPrice = useBasketStore(state => state.totalPrice);
-    console.log({ basket, totalPrice });
+    const addToCart = useCartStore(state => state.addToCart);
+    const cart = useCartStore(state => state.cart);
+    const totalPrice = useCartStore(state => state.totalPrice);
+    const totalItems = useCartStore(state => state.totalItems);
+    console.log({ cart, totalPrice, totalItems });
 
     return (
-        <div className="w-64  hover:shadow-md transition-all ease-in-out ">
+        <div className="w-64 hover:shadow-md transition-all ease-in-out ">
             <Image
                 width={200}
                 height={200}
@@ -40,7 +41,7 @@ const ProductCard = ({ product }: Props) => {
                     <button
                         className="text-[10px] bg-blue-500 p-2 rounded text-white"
                         onClick={() =>
-                            addItem({
+                            addToCart({
                                 id: product.id,
                                 title: product.name,
                                 description: product.description,
