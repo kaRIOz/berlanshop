@@ -1,16 +1,14 @@
-"use server";
-
 import { auth } from "@/auth";
 import db from "@/drizzle";
-import { favorites, product } from "@/drizzle/schema";
+import { category, favorites, product, user } from "@/drizzle/schema";
 import { executeQuery } from "@/drizzle/utils/executeQuery";
-import { and, eq, exists } from "drizzle-orm";
+import { and, count, eq, exists, sql } from "drizzle-orm";
 
 export async function getUserFavorites() {
     return executeQuery({
         queryFn: async (userId?: number) => {
             if (userId) {
-                await db
+                return await db
                     .select({
                         id: product.id,
                         name: product.name,
@@ -22,16 +20,6 @@ export async function getUserFavorites() {
                     .leftJoin(favorites, eq(favorites.productId, product.id))
                     .where(eq(favorites.userId, userId))
                     .groupBy(product.id);
-                // await db.query.product.findMany({
-                //     columns: {
-                //         id: true,
-                //         name: true,
-                //         thumbnail: true,
-                //         description: true,
-                //         price: true,
-                //     },
-                //     where: and(eq(favorites.userId, userId), eq(favorites.productId, product.id)),
-                // });
             }
         },
         serverErrorMessage: "getUserFavorites",

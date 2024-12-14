@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 
 const Favorites = async () => {
     const favorites = await getUserFavorites();
-    console.log(favorites);
     return <div>Favorites</div>;
 };
 
