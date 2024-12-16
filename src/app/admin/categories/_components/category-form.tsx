@@ -17,7 +17,7 @@ import { CategorySchema } from "@/drizzle/schema/product/category";
 import { updateCategory } from "../[id]/edit/action";
 
 type Props = {
-    categories:
+    categories?:
         | {
               id: number;
               nameFa: string;

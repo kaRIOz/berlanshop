@@ -6,13 +6,12 @@ export default function AuthLayout({
     otpverify,
 }: Readonly<{
     children: React.ReactNode;
-    otp: React.ReactNode;
-    otpverify: React.ReactNode;
+    otp: never;
+    otpverify: never;
 }>) {
     return (
         <>
             {children}
-
             {otp}
             {otpverify}
         </>

@@ -3,7 +3,8 @@ import { ProductForm } from "../../_components/product-form";
 import { getProductsById } from "./queries";
 import { getCategories } from "@/app/admin/categories/queries";
 
-export default async function EditProduct({ params: { id } }: { params: { id: string } }) {
+export default async function EditProduct({ params }: { params: Promise<{ id: string }> }) {
+    const id = (await params).id;
     const productData = getProductsById(id);
     const categoriesData = getCategories();
     const [product, categories] = await Promise.all([productData, categoriesData]);

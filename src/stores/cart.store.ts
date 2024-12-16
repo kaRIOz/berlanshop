@@ -27,7 +27,7 @@ const INITIAL_STATE: State = {
     totalItems: 0,
     totalPrice: 0,
 };
-
+// TODO: @kaRIOz updateQty handle quantity number instaed of type for number input
 export const useCartStore = create<State & Actions>((set, get) => ({
     cart: INITIAL_STATE.cart,
     totalItems: INITIAL_STATE.totalItems,
@@ -40,6 +40,7 @@ export const useCartStore = create<State & Actions>((set, get) => ({
             const updatedCart = cart.map(item =>
                 item.id === product.id ? { ...item, quantity: (item.quantity as number) + 1 } : item,
             );
+
             set(state => ({
                 cart: updatedCart,
                 totalItems: state.totalItems + 1,

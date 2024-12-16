@@ -17,7 +17,7 @@ const userInfoSchema = z.object({
 
 type UserInfoType = z.infer<typeof userInfoSchema>;
 
-const InterceptedEdit = ({ title }: { title: string }) => {
+const InterceptedEdit = () => {
     const { data } = useSession();
 
     const {

@@ -3,7 +3,7 @@
 import React from "react";
 import { Dialog, DialogOverlay, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { useRouter } from "next/navigation";
-const Modal = ({ children, title }: { children: React.ReactNode; title: string }) => {
+const Modal = ({ children, title }: { children: React.ReactNode; title?: string }) => {
     const router = useRouter();
     const handleOpenChange = () => router.back();
     return (

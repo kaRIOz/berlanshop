@@ -12,7 +12,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { PopoverClose } from "@radix-ui/react-popover";
 
 type Props = {
-    categories:
+    categories?:
         | {
               id: number;
               nameFa: string;
