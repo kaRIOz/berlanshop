@@ -13,9 +13,9 @@ const ShopPage = async () => {
         <>
             <Header />
             <SearchVsCategory />
-            <section className="w-9/12 mx-auto">
+            <section className="w-[95%] md:w-11/12 mx-auto">
                 <h2 className="my-4 text-center">فروشگاه</h2>
-                <article className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 ">
+                <article className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 grid-cols-[repeat(250px, 1fr)]">
                     {products?.map(product => <ProductCard key={product.id} product={product} />)}
                 </article>
             </section>

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -31,11 +31,13 @@ import {
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 
 import { Button } from "@/components/ui/button";
+import { useCartStore } from "@/stores/cart.store";
 
 const Header = () => {
     const { data, status } = useSession();
-
     const pathname = usePathname();
+    const totalItems = useCartStore(state => state.totalItems);
+    const [openDropdown, setOpenDropdown] = useState(false);
 
     return (
         <header className="w-full h-14 md:h-20 bg-primary-content sticky top-0 z-50 shadow-sm ">
@@ -124,12 +126,18 @@ const Header = () => {
                                         </DropdownMenuItem>
                                     </DropdownMenuContent>
                                 </DropdownMenu>
+
                                 <Button
                                     variant="outline"
-                                    className="border-none bg-transparent shadow-none hover:border rounded-full"
+                                    className="border-none bg-transparent shadow-none hover:border rounded-full relative"
                                 >
+                                    {totalItems >= 1 && (
+                                        <span className="flex items-center justify-center text-[12px] w-[18px] h-[18px] absolute bottom-0 right-0 bg-red-500 text-primary-content rounded">
+                                            {totalItems}
+                                        </span>
+                                    )}
                                     <Link href={"/profile/basket"}>
-                                        <TfiShoppingCart className="text-[20px]" />
+                                        <TfiShoppingCart />
                                     </Link>
                                 </Button>
                             </div>
