@@ -17,7 +17,6 @@ export const deleteProduct = async (state: OperationResult | undefined, id: numb
                 },
                 where: eq(product.id, +id),
             });
-            debugger;
             if (thisProduct?.thumbnail !== env.NEXT_DEFAULT_PRODUCT_IMAGE) {
                 await fs.unlink(`public${thisProduct?.thumbnail}`);
             }

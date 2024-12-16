@@ -1,6 +1,6 @@
 import React from "react";
 
-const layout = ({ children, modal }: { children: React.ReactNode; modal: React.ReactNode }) => {
+const layout = ({ children, modal }: { children: React.ReactNode; modal: never }) => {
     return (
         <>
             {modal}

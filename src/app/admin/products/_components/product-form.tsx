@@ -31,7 +31,7 @@ type Props = {
             nameFa: string;
         };
     } | null;
-    categories:
+    categories?:
         | {
               id: number;
               nameFa: string;
@@ -219,12 +219,14 @@ export function ProductForm({ product, categories }: Props) {
                         </div>
                     </div>
                 )}
-                {product && product.thumbnail && (
+                {product && product.thumbnail !== process.env.NEXT_DEFAULT_PRODUCT_IMAGE ? (
+                    // ? REFACTOR: <form action={deleteCurrentThumbnail}>
                     <div className="flex items-center gap-2 mt-2">
                         <p>عکس : </p>
                         <Image src={product.thumbnail} alt={`Product image-${product.name}`} height={50} width={50} />
                     </div>
-                )}
+                ) : // </form>
+                null}
                 <input
                     {...register("thumbnail")}
                     ref={hiddenFileInputRef}

@@ -28,8 +28,8 @@ export default function RootLayout({
     otpverify,
 }: Readonly<{
     children: React.ReactNode;
-    otp: React.ReactNode;
-    otpverify: React.ReactNode;
+    otp: never;
+    otpverify: never;
 }>) {
     return (
         <html lang="en" dir="rtl" suppressHydrationWarning>

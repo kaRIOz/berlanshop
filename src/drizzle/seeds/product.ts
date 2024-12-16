@@ -1,8 +1,7 @@
 import { DB } from "@/drizzle";
 import { product } from "@/drizzle/schema";
-import { ProductSchema } from "@/drizzle/schema/product/product";
 
-const mock: ProductSchema[] = [
+const mock = [
     {
         name: "شال ایمان",
         description: "شال ایمان با تولید ساده و مناسب برای ایمان و دریافت کالاهای موبایل",

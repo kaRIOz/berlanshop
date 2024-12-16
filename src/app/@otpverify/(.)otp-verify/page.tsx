@@ -1,11 +1,11 @@
 import Modal from "@/components/modal/Modal";
 import React from "react";
-import OTPVerify from "../../otp-verify/page";
+import OTPClient from "@/app/otp-verify/_components/otp-client";
 
 const InterceptedOtpVerify = () => {
     return (
         <Modal>
-            <OTPVerify />
+            <OTPClient />
         </Modal>
     );
 };

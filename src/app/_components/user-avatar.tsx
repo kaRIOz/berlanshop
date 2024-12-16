@@ -1,23 +1,23 @@
-import Link from "next/link";
+// import Link from "next/link";
 
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { SelectUserModel } from "@/drizzle/schema/user/user";
+// import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+// import { SelectUserModel } from "@/drizzle/schema/user/user";
 
-type Props = {
-    data?: Pick<SelectUserModel, "id" | "fullName">;
-    href?: string;
-};
-export function UserAvatar({ data, ...props }: Props) {
-    const { href = `/posts/user/${data?.id}` } = props;
+// type Props = {
+//     data?: Pick<SelectUserModel, "id" | "fullName">;
+//     href?: string;
+// };
+// export function UserAvatar({ data, ...props }: Props) {
+//     const { href = `/posts/user/${data?.id}` } = props;
 
-    return (
-        <Link href={href}>
-            <div className="flex items-center gap-2">
-                <Avatar>
-                    <AvatarFallback>{data?.fullName[0]}</AvatarFallback>
-                </Avatar>
-                <p>{data?.fullName}</p>
-            </div>
-        </Link>
-    );
-}
+//     return (
+//         <Link href={href}>
+//             <div className="flex items-center gap-2">
+//                 <Avatar>
+//                     <AvatarFallback>{data?.fullName[0]}</AvatarFallback>
+//                 </Avatar>
+//                 <p>{data?.fullName}</p>
+//             </div>
+//         </Link>
+//     );
+// }

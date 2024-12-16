@@ -6,9 +6,9 @@ import { executeAction } from "@/drizzle/utils/executeAction";
 import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
-export const addToFavorite = async (productId: number, userId?: number) => {
+export const addToFavorite = async (productId: number) => {
     return executeAction({
-        actionFn: async () => {
+        actionFn: async (userId?: number) => {
             if (userId) {
                 await db.insert(favorites).values({ productId: productId, userId: userId });
                 revalidatePath("/shop");
@@ -20,9 +20,9 @@ export const addToFavorite = async (productId: number, userId?: number) => {
     });
 };
 
-export const removeFromFavorite = async (productId: number, userId?: number) => {
+export const removeFromFavorite = async (productId: number) => {
     return executeAction({
-        actionFn: async () => {
+        actionFn: async (userId?: number) => {
             if (userId) {
                 await db.delete(favorites).where(and(eq(favorites.productId, productId), eq(favorites.userId, userId)));
                 revalidatePath("/shop");
