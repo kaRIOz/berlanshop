@@ -13,7 +13,7 @@ import { getSession } from "next-auth/react";
 import { toast } from "@/components/ui/use-toast";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { OTPVerifySchema, type OTPVerifyType } from "../types";
-import { signInAction } from "@/app/(auth)/sign-in/actions";
+import { signInAction } from "../actions";
 
 const OTPClient = () => {
     const phoneNumber = useSearchParams().get("phoneNumber");

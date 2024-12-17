@@ -30,7 +30,6 @@ export async function signInByPhoneNumber(data: unknown) {
     return executeQuery({
         queryFn: async () => {
             const validatedData = OTPVerifySchema.safeParse(data);
-
             if (validatedData.success) {
                 return await db.query.user.findFirst({
                     columns: {
