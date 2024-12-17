@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
 import { useCopyToClipboard } from "usehooks-ts";
+import Link from "next/link";
 
 const OTPSign = () => {
     const router = useRouter();
@@ -82,7 +83,9 @@ const OTPSign = () => {
                         type="submit"
                         className="w-full mt-6 mb-10 bg-red-500 text-white py-2 rounded-lg active:scale-95"
                     >
-                        {!isPending ? "ورود" : <Loading />}
+                        <Link href={"/otp-verify"} replace>
+                            {!isPending ? "ورود" : <Loading />}
+                        </Link>
                     </button>
                 </form>
             </div>

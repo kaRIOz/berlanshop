@@ -25,11 +25,9 @@ export const metadata: Metadata = {
 export default function RootLayout({
     children,
     otp,
-    otpverify,
 }: Readonly<{
     children: React.ReactNode;
     otp: never;
-    otpverify: never;
 }>) {
     return (
         <html lang="en" dir="rtl" suppressHydrationWarning>
@@ -39,7 +37,6 @@ export default function RootLayout({
                     <main>{children}</main>
                 </AuthProvider>
                 {otp}
-                {otpverify}
             </body>
         </html>
     );

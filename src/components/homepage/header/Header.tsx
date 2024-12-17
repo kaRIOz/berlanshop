@@ -37,7 +37,6 @@ const Header = () => {
     const { data, status } = useSession();
     const pathname = usePathname();
     const totalItems = useCartStore(state => state.totalItems);
-    const [openDropdown, setOpenDropdown] = useState(false);
 
     return (
         <header className="w-full h-14 md:h-20 bg-primary-content sticky top-0 z-50 shadow-sm ">
@@ -83,31 +82,33 @@ const Header = () => {
                                         </Button>
                                     </DropdownMenuTrigger>
 
-                                    <DropdownMenuContent align="start" className="w-56 shadow-none">
-                                        <DropdownMenuItem className="flex items-center justify-between p-3">
-                                            <IoIosArrowBack />
-                                            <Link href={"/profile"}>{data.user.phoneNumber}</Link>
-                                        </DropdownMenuItem>
+                                    <DropdownMenuContent align="start" className="w-44 md:w-56 shadow-none">
+                                        <Link href={"/profile"} className="w-full">
+                                            <DropdownMenuItem className="flex items-center justify-between p-2 md:p-3 text-[14px] md:text-[16px] cursor-pointer ">
+                                                <IoIosArrowBack />
+                                                {data.user.phoneNumber}
+                                            </DropdownMenuItem>
+                                        </Link>
                                         <DropdownMenuSeparator />
-                                        <DropdownMenuItem className="flex items-center justify-end gap-4 p-3">
+                                        <DropdownMenuItem className="flex items-center justify-end gap-4 p-2 md:p-3 text-[14px] md:text-[16px] ">
                                             <Link href={"/profile/favorites"} className="w-full text-right">
                                                 علاقه مندی ها{" "}
                                             </Link>
                                             <IoHeartOutline />
                                         </DropdownMenuItem>
-                                        <DropdownMenuItem className="flex items-center justify-end gap-4 p-3">
+                                        <DropdownMenuItem className="flex items-center justify-end gap-4 p-2 md:p-3 text-[14px] md:text-[16px] ">
                                             <Link href={"/profile/orders"} className="w-full text-right">
                                                 سفارش ها
                                             </Link>
                                             <BsBasket3 />
                                         </DropdownMenuItem>
-                                        <DropdownMenuItem className="flex items-center justify-end gap-4 p-3">
+                                        <DropdownMenuItem className="flex items-center justify-end gap-4 p-2 md:p-3 text-[14px] md:text-[16px] ">
                                             <Link href={"/profile/messages"} className="w-full text-right">
                                                 پیام ها
                                             </Link>
                                             <FiMessageSquare />
                                         </DropdownMenuItem>
-                                        <DropdownMenuItem className="flex items-center justify-end gap-4 p-3">
+                                        <DropdownMenuItem className="flex items-center justify-end gap-4 p-2 md:p-3 text-[14px] md:text-[16px] ">
                                             <Link href={"/profile/addresses"} className="w-full text-right">
                                                 آدرس ها
                                             </Link>
@@ -115,7 +116,7 @@ const Header = () => {
                                         </DropdownMenuItem>
 
                                         <DropdownMenuSeparator />
-                                        <DropdownMenuItem className="flex items-center justify-end gap-4 p-3">
+                                        <DropdownMenuItem className="flex items-center justify-end gap-4 p-2 md:p-3 text-[14px] md:text-[16px] ">
                                             <button
                                                 className="w-full text-right"
                                                 onClick={() => signOut({ redirect: false })}
@@ -127,19 +128,17 @@ const Header = () => {
                                     </DropdownMenuContent>
                                 </DropdownMenu>
 
-                                <Button
-                                    variant="outline"
-                                    className="border-none bg-transparent shadow-none hover:border rounded-full relative"
-                                >
+                                <button className="border-none bg-transparent shadow-none hover:border rounded-full relative">
                                     {totalItems >= 1 && (
-                                        <span className="flex items-center justify-center text-[12px] w-[18px] h-[18px] absolute bottom-0 right-0 bg-red-500 text-primary-content rounded">
+                                        <span className="flex items-center justify-center text-[12px] w-[18px] h-[18px] absolute -bottom-3 -right-3 bg-red-500 text-primary-content rounded">
                                             {totalItems}
                                         </span>
                                     )}
+
                                     <Link href={"/profile/basket"}>
-                                        <TfiShoppingCart />
+                                        <TfiShoppingCart className="text-2xl" />
                                     </Link>
-                                </Button>
+                                </button>
                             </div>
                         )}
                     </div>
