@@ -3,7 +3,7 @@
 import db from "@/drizzle";
 import { executeQuery } from "@/drizzle/utils/executeQuery";
 
-export async function getProducts() {
+export async function getAdminProducts() {
     return executeQuery({
         queryFn: async () => {
             return await db.query.product.findMany({
@@ -30,7 +30,7 @@ export async function getProducts() {
                 },
             });
         },
-        serverErrorMessage: "getProducts",
+        serverErrorMessage: "getAdminProducts",
         isProtected: false,
     });
 }

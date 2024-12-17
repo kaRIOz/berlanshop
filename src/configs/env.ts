@@ -21,6 +21,10 @@ const envSchema = z.object({
     NEXT_PUBLIC_SERVER_URL: z.string().min(1),
     DB_MIGRATING: stringBoolean,
     DB_SEEDING: stringBoolean,
+    NEXT_DEFAULT_PRODUCT_IMAGE: z.string().min(1),
+    NEXT_DEFAULT_CATEGORY_IMAGE: z.string().min(1),
+    NEXT_DEFAULT_USER_IMAGE: z.string().min(1),
+    NEXT_DEFAULT_ADMIN_IMAGE: z.string().min(1),
 });
 
 expand(config());

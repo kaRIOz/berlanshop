@@ -31,7 +31,7 @@ export const updateCategory = async (id: number, formState: OperationResult | un
                     .set({
                         nameFa: data.name,
                         nameEn: data.path,
-                        thumbnail: !!imagePath ? imagePath : null,
+                        thumbnail: imagePath,
                         parentId: Number(data.parentId) === 0 ? null : Number(data.parentId),
                     })
                     .where(eq(category.id, +id));

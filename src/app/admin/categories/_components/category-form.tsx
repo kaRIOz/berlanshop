@@ -17,11 +17,11 @@ import { CategorySchema } from "@/drizzle/schema/product/category";
 import { updateCategory } from "../[id]/edit/action";
 
 type Props = {
-    categories:
+    categories?:
         | {
               id: number;
               nameFa: string;
-              thumbnail: string | null;
+              thumbnail: string;
               nameEn: string;
               parentId: number | null;
           }[]
@@ -49,9 +49,9 @@ const CategoryForm: React.FC<Props> = ({ categories, category }: Props) => {
     } = useForm<CategoryFormType>({
         resolver: zodResolver(categoryFormSchema),
         defaultValues: {
-            name: category?.nameFa ?? "",
-            path: category?.nameEn ?? "",
-            thumbnail: null,
+            name: category?.nameFa,
+            path: category?.nameEn,
+            thumbnail: category?.thumbnail ?? process.env.NEXT_DEFAULT_CATEGORY_IMAGE,
             parentId: category?.parentId ?? 0,
         },
     });

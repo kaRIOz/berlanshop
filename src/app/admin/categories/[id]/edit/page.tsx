@@ -4,7 +4,8 @@ import { getCategoriesById } from "./queries";
 import { notFound } from "next/navigation";
 import { getCategories } from "../../queries";
 
-const EditCategory = async ({ params: { id } }: { params: { id: string } }) => {
+export default async function EditCategory({ params }: { params: Promise<{ id: string }> }) {
+    const id = (await params).id;
     const categoryData = getCategoriesById(id);
     const categoriesِِData = getCategories();
     const [category, categories] = await Promise.all([categoryData, categoriesِِData]);
@@ -23,6 +24,4 @@ const EditCategory = async ({ params: { id } }: { params: { id: string } }) => {
             />
         </div>
     );
-};
-
-export default EditCategory;
+}

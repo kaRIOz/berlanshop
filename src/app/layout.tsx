@@ -24,18 +24,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
     children,
+    otp,
 }: Readonly<{
     children: React.ReactNode;
+    otp: never;
 }>) {
     return (
         <html lang="en" dir="rtl" suppressHydrationWarning>
             <body className={`${vazir.className} antialiased bg-gray-50`}>
                 <AuthProvider>
                     <Toaster />
-                    <div>
-                        <main>{children}</main>
-                    </div>
+                    <main>{children}</main>
                 </AuthProvider>
+                {otp}
             </body>
         </html>
     );

@@ -1,12 +1,14 @@
 import React from "react";
 import Link from "next/link";
-import { getProducts } from "./queries";
+import { getAdminProducts } from "./queries";
 import { FaSearch } from "react-icons/fa";
 import Search from "@/components/admin-dashboard/search/Search";
 import ProductList from "./_components/product-list";
+import { notFound } from "next/navigation";
 
 const AdminProducts = async () => {
-    const products = await getProducts();
+    const products = await getAdminProducts();
+    if (!products) notFound();
     return (
         <div className="mt-3">
             <div className="flex items-center justify-between">

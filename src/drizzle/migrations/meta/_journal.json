@@ -36,6 +36,41 @@
       "when": 1733664952489,
       "tag": "0004_common_tyrannus",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1734031448612,
+      "tag": "0005_funny_lady_deathstrike",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1734035243545,
+      "tag": "0006_dark_puck",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1734205296277,
+      "tag": "0007_gifted_jack_flag",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1734206558000,
+      "tag": "0008_sleepy_punisher",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1734207719603,
+      "tag": "0009_jazzy_george_stacy",
+      "breakpoints": true
     }
   ]
 }

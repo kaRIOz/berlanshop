@@ -1,9 +1,10 @@
 //table
 import { integer, pgTable, serial, timestamp, varchar } from "drizzle-orm/pg-core";
-import { cartItem, category, discount, inventory, orderItems } from "@/drizzle/schema";
+import { cartItem, category, discount, favorites, inventory, orderItems } from "@/drizzle/schema";
 import { relations, type InferSelectModel } from "drizzle-orm";
 import { z } from "zod";
 import { createInsertSchema } from "drizzle-zod";
+import env from "@/configs/env";
 
 export const product = pgTable("product", {
     id: serial("id").notNull().primaryKey(),
@@ -11,7 +12,7 @@ export const product = pgTable("product", {
     description: varchar("description", { length: 255 }).notNull(),
     SKU: varchar("sku", { length: 255 }).notNull(),
     price: varchar("price", { length: 255 }).notNull(),
-    thumbnail: varchar("thumbnail", { length: 255 }),
+    thumbnail: varchar("thumbnail", { length: 255 }).notNull().default(`${env.NEXT_DEFAULT_PRODUCT_IMAGE}`),
     categoryId: integer("category_id").references(() => category.id, { onDelete: "set null" }),
     inventoryId: integer("inventory_id").references(() => category.id, { onDelete: "set null" }),
     discountId: integer("discount_id").references(() => discount.id, { onDelete: "set null" }),
@@ -20,7 +21,7 @@ export const product = pgTable("product", {
     deletedAt: timestamp("deleted_at", { mode: "string" }),
 });
 
-export const productRelations = relations(product, ({ one }) => ({
+export const productRelations = relations(product, ({ one, many }) => ({
     category: one(category, {
         fields: [product.categoryId],
         references: [category.id],
@@ -35,6 +36,7 @@ export const productRelations = relations(product, ({ one }) => ({
     }),
     cartItems: one(cartItem),
     orderItems: one(orderItems),
+    favorites: many(favorites),
 }));
 
 const baseSchema = createInsertSchema(product, {

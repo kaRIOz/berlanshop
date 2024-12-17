@@ -1,0 +1,1 @@
+ALTER TABLE "favorites" DROP COLUMN IF EXISTS "id";

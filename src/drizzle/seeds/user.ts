@@ -1,9 +1,8 @@
 import { DB } from "@/drizzle";
 import { user } from "@/drizzle/schema";
-import { UserSchema } from "@/drizzle/schema/user/user";
 
 const mock = () => {
-    const data: Omit<Extract<UserSchema, { mode: "signUp" }>, "mode">[] = [
+    const data /* Omit<Extract<UserSchema, { mode: "signUp" }>, "mode">[] */ = [
         {
             fullName: " ایمان جعفری ایناللو",
             age: 25,

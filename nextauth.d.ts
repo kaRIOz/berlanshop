@@ -3,11 +3,13 @@
 import { JWT } from "next-auth/jwt";
 
 export interface UserToken {
+    id?: string;
     firstName?: string;
     lastName?: string;
     email?: string | null | undefined;
     age?: string;
     phoneNumber?: string;
+    role?: string;
     exp?: number;
     iss?: string;
     aud?: string;
