@@ -60,6 +60,11 @@ const config: Config = {
             fontFamily: {
                 vazir: "var(--font-vazir)",
             },
+            fontSize: {
+                small: "10px",
+                regular: "12px",
+                medium: "14px",
+            },
 
             colors: {
                 ...tailwindColors,
