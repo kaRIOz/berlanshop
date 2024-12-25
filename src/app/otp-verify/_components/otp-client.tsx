@@ -51,7 +51,7 @@ const OTPClient = () => {
     };
 
     return (
-        <div className="flex justify-center items-center">
+        <div className="h-full flex justify-center items-center">
             <div className=" w-full flex flex-col items-center max-w-[350px] rounded-md">
                 <Image src={"/Logo.png"} alt="Logo" width={150} height={100} />
                 <h2 className="ml-auto mt-4">کد تایید را وارد کنید</h2>

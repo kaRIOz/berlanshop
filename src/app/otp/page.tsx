@@ -2,7 +2,7 @@ import OTPSign from "./_components/otp-sign";
 
 export default async function OTPPage() {
     return (
-        <section>
+        <section className="h-screen">
             <OTPSign />
         </section>
     );

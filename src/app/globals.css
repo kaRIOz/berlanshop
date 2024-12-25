@@ -117,5 +117,7 @@
     .tbody td {
         @apply text-gray-500 text-[12px] border-b rounded-lg;
     }
-
+}
+.leaflet-bottom.leaflet-right {
+    display: none;
 }

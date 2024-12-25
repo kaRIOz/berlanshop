@@ -7,13 +7,13 @@ import { Button } from "../ui/button";
 import { IoClose } from "react-icons/io5";
 import { DialogTitle } from "@radix-ui/react-dialog";
 
-const Modal = ({ children }: { children: React.ReactNode }) => {
+const OTPModal = ({ children }: { children: React.ReactNode }) => {
     const router = useRouter();
     const handleOpenChange = () => router.back();
     return (
         <Dialog defaultOpen={true} open={true} onOpenChange={handleOpenChange}>
-            <DialogOverlay className="overflow-y-hidden">
-                <DialogContent className=" w-3/4 lg:w-full lg:p-2">
+            <DialogOverlay className="overflow-y-hidden ">
+                <DialogContent className="w-3/4 lg:w-full p-4 lg:p-2 rounded-md">
                     <Button onClick={() => router.push("/")} variant="ghost" className="w-8 h-8 mr-auto">
                         <IoClose />
                     </Button>
@@ -25,4 +25,4 @@ const Modal = ({ children }: { children: React.ReactNode }) => {
     );
 };
 
-export default Modal;
+export default OTPModal;
