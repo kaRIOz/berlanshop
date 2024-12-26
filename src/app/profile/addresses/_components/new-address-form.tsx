@@ -19,12 +19,13 @@ type UserAddress = {
     state?: string;
     city?: string;
     formatted_address?: string;
-    setMapStep: boolean;
+    setMapStep: (step: boolean) => void;
 };
 
-const NewAddressForm = ({ city, formatted_address: addressDetails, state }: UserAddress) => {
+const NewAddressForm = ({ city, formatted_address: addressDetails, state, setMapStep }: UserAddress) => {
     console.log({ city, formatted_address: addressDetails, state });
     //api call args: city ,fullAddress, postalCode ,postalCode
+    const { data } = useSession();
     return (
         <form className="flex flex-col p-3">
             <div className=" border-b flex items-center px-3 pb-2 -mt-8 gap-3">

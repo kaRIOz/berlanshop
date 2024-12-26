@@ -11,4 +11,4 @@ export const userAddressFormSchema = z.object({
         .regex(/\b(?!(\d)\1{3})[13-9]{4}[1346-9][013-9]{5}\b/g, { message: "کد پستی شما نادرست می‌باشد" }),
 });
 
-export type AddressForm = z.infer<typeof userAddressFormSchema>;
+export type AddressFormType = z.infer<typeof userAddressFormSchema>;
