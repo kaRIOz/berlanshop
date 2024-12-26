@@ -4,7 +4,7 @@ import { isRedirectError } from "next/dist/client/components/redirect";
 
 type Options<T> = {
     actionFn: {
-        (userId?: number): Promise<T>;
+        (userId?: number, role?: string): Promise<T>;
     };
     isProtected?: boolean;
     serverErrorMessage?: string;
@@ -24,8 +24,9 @@ export async function executeAction<T>({
             const session = await auth();
             if (!session) throw new Error("Not authorized");
             const userId = session.user.id ? Number(session.user.id) : undefined;
+            const userRole = session.user.role ? session.user.role : undefined;
             if (userId) {
-                await actionFn(userId);
+                await actionFn(userId, userRole);
             }
         } else {
             await actionFn();

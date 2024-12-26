@@ -10,7 +10,10 @@ import env from "@/configs/env";
 
 export const addCategory = async (formState: OperationResult | undefined, formData: FormData) => {
     return executeAction({
-        actionFn: async () => {
+        actionFn: async (_, role) => {
+            if (role !== "admin") {
+                throw new Error("Not authorized");
+            }
             const validatedData = Object.fromEntries(formData);
             const { success, data } = categoryFormSchema.safeParse(validatedData);
             if (success) {
@@ -31,7 +34,7 @@ export const addCategory = async (formState: OperationResult | undefined, formDa
                 revalidatePath("/categories");
             }
         },
-        isProtected: false,
+        isProtected: true,
         clientSuccessMessage: `دسته بندی  با موفقیت اضافه شد`,
         serverErrorMessage: "error in create product",
     });

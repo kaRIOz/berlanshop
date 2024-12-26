@@ -9,7 +9,10 @@ import { categoryFormSchema } from "./../../_components/category-form.types";
 
 export const updateCategory = async (id: number, formState: OperationResult | undefined, formData: FormData) => {
     return executeAction({
-        actionFn: async () => {
+        actionFn: async (_, role) => {
+            if (role !== "admin") {
+                throw new Error("Not authorized");
+            }
             const validatedData = Object.fromEntries(formData);
             const { success, data } = categoryFormSchema.safeParse(validatedData);
             if (success) {
@@ -39,7 +42,7 @@ export const updateCategory = async (id: number, formState: OperationResult | un
 
             revalidatePath("/admin/categories");
         },
-        isProtected: false,
+        isProtected: true,
         clientSuccessMessage: `دسته بندی با موفقیت ویرایش شد`,
         serverErrorMessage: "error in create category",
     });

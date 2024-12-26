@@ -5,8 +5,9 @@ import { eq } from "drizzle-orm";
 
 export const getCategoriesById = (id: string) => {
     return executeQuery({
-        queryFn: async () =>
-            await db.query.category.findFirst({
+        queryFn: async (_, role) =>
+            role === "admin" &&
+            (await db.query.category.findFirst({
                 columns: {
                     id: true,
                     nameFa: true,
@@ -15,8 +16,8 @@ export const getCategoriesById = (id: string) => {
                     thumbnail: true,
                 },
                 where: eq(category.id, +id),
-            }),
+            })),
         serverErrorMessage: "getCategoriesById",
-        isProtected: false,
+        isProtected: true,
     });
 };

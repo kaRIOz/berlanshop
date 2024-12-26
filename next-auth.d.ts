@@ -1,25 +1,25 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-object-type */
+import "next-auth";
 import { JWT } from "next-auth/jwt";
+export enum Role {
+    user = "user",
+    admin = "admin",
+}
 
 export interface UserToken {
     id?: string;
     firstName?: string;
     lastName?: string;
-    email?: string | null | undefined;
+    email?: string | null;
     age?: string;
     phoneNumber?: string;
-    role?: string;
+    role?: Role.admin | Role.user;
     exp?: number;
     iss?: string;
     aud?: string;
 }
 export interface UserSession extends UserToken {}
-
-export enum Role {
-    user = "user",
-    admin = "admin",
-}
 
 declare module "next-auth" {
     /**
@@ -32,7 +32,7 @@ declare module "next-auth" {
         email?: string;
         phoneNumber?: string;
         age?: string;
-        role?: Role;
+        role?: Role.admin | Role.user;
         subscribed?: boolean;
     }
     /**
@@ -53,5 +53,38 @@ declare module "next-auth/jwt" {
     /** Returned by the `jwt` callback and `auth`, when using JWT sessions */
     interface JWT {
         user: UserToken;
+        role: string;
+    }
+}
+
+declare module "@auth/core/jwt" {
+    interface JWT {
+        user: UserToken;
+        role: string;
+    }
+    interface User {
+        firstName?: string;
+        lastName?: string;
+        email?: string;
+        phoneNumber?: string;
+        age?: string;
+        role?: Role.admin | Role.user;
+        subscribed?: boolean;
+    }
+}
+
+declare module "@auth/core/types" {
+    interface JWT {
+        user: UserToken;
+        role: string;
+    }
+    interface User {
+        firstName?: string;
+        lastName?: string;
+        email?: string;
+        phoneNumber?: string;
+        age?: string;
+        role?: Role.admin | Role.user;
+        subscribed?: boolean;
     }
 }

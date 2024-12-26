@@ -7,7 +7,10 @@ import { count, eq } from "drizzle-orm";
 
 export async function getCategories() {
     return executeQuery({
-        queryFn: async () => {
+        queryFn: async (_, role) => {
+            if (role !== "admin") {
+                throw new Error("Not authorized");
+            }
             return await db.query.category.findMany({
                 columns: {
                     id: true,
@@ -20,7 +23,7 @@ export async function getCategories() {
         },
 
         serverErrorMessage: "getCategories",
-        isProtected: false,
+        isProtected: true,
     });
 }
 export const getCategoriesWithProductsCount = async () => {

@@ -5,7 +5,10 @@ import { executeQuery } from "@/drizzle/utils/executeQuery";
 
 export async function getAdminProducts() {
     return executeQuery({
-        queryFn: async () => {
+        queryFn: async (_, role) => {
+            if (role !== "admin") {
+                throw new Error("Not authorized");
+            }
             return await db.query.product.findMany({
                 columns: {
                     id: true,
@@ -31,6 +34,6 @@ export async function getAdminProducts() {
             });
         },
         serverErrorMessage: "getAdminProducts",
-        isProtected: false,
+        isProtected: true,
     });
 }

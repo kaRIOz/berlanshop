@@ -9,11 +9,11 @@ import { productFormSchema } from "../../_components/product-form.types";
 
 export const updateProduct = async (id: number, formState: OperationResult | undefined, formData: FormData) => {
     return executeAction({
-        actionFn: async () => {
+        actionFn: async (_, role) => {
             const validatedData = Object.fromEntries(formData);
             const { success, data } = productFormSchema.safeParse(validatedData);
 
-            if (success) {
+            if (success && role === "admin") {
                 const thisProduct = await db.query.product.findFirst({
                     columns: {
                         thumbnail: true,
@@ -42,7 +42,7 @@ export const updateProduct = async (id: number, formState: OperationResult | und
 
             revalidatePath("/admin/products");
         },
-        isProtected: false,
+        isProtected: true,
         clientSuccessMessage: `محصول با موفقیت ویرایش شد`,
         serverErrorMessage: "error in create product",
     });

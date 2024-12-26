@@ -40,6 +40,14 @@ export async function signInByEmailAndPassword(data: unknown) {
                         firstName: true,
                         lastName: true,
                     },
+                    with: {
+                        role: {
+                            columns: {
+                                roleName: true,
+                                permissions: true,
+                            },
+                        },
+                    },
                     where: and(
                         // hash
                         eq(admin.username, validatedData.data.username),

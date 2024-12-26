@@ -38,6 +38,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                         firstName: dbUser.firstName,
                         lastName: dbUser.lastName,
                         phoneNumber: dbUser.phoneNumber,
+                        role: "user",
                     } as User;
                 } catch (e) {
                     throw new Error("Error signing in Auth");
@@ -58,12 +59,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     if (!dbUser) {
                         throw new Error("User not found / Wrong credentials");
                     }
-
                     return {
                         id: dbUser.id.toString(),
                         email: dbUser.username,
                         firstName: dbUser.firstName,
                         lastName: dbUser.lastName,
+                        role: dbUser.role.roleName,
                     } as User;
                 } catch (e) {
                     throw new Error("Error signing in Auth");
@@ -80,6 +81,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             // if(trigger === 'update'){
             //     const updatedUser = await
             // }
+            console.log(token);
             return token;
         },
         session({ session, token }) {

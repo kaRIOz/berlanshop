@@ -5,8 +5,9 @@ import { eq } from "drizzle-orm";
 
 export const getProductsById = (id: string) => {
     return executeQuery({
-        queryFn: async () =>
-            await db.query.product.findFirst({
+        queryFn: async (_, role) =>
+            role === "admin" &&
+            (await db.query.product.findFirst({
                 columns: {
                     id: true,
                     name: true,
@@ -24,8 +25,8 @@ export const getProductsById = (id: string) => {
                     },
                 },
                 where: eq(product.id, +id),
-            }),
+            })),
         serverErrorMessage: "getProductsById",
-        isProtected: false,
+        isProtected: true,
     });
 };

@@ -9,9 +9,6 @@ import Image from "next/image";
 const Sales = async () => {
     const categoriesData = getCategories();
     const [categories] = await Promise.all([categoriesData]);
-
-    console.log(categories);
-
     return (
         <section className="">
             <ul className="contactsheet text-center">

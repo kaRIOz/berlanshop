@@ -24,7 +24,6 @@ type Props = {
         | null;
 };
 const CategoryList = ({ categories }: Props) => {
-    console.log(categories);
     const [pending, startTransition] = useTransition();
     const [state, action] = useActionState(deleteCategory, undefined);
     useEffect(() => {

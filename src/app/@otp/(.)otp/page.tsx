@@ -7,9 +7,6 @@ import OTPSign from "@/app/otp/_components/otp-sign";
 
 const InterceptedOtp = () => {
     const pathname = usePathname();
-
-    console.log(pathname);
-
     return (
         pathname === "/otp" && (
             <Modal>

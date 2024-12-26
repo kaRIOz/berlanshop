@@ -10,7 +10,10 @@ import { revalidatePath } from "next/cache";
 
 export const deleteProduct = async (state: OperationResult | undefined, id: number) => {
     return executeAction({
-        actionFn: async () => {
+        actionFn: async (_, role) => {
+            if (role !== "admin") {
+                throw new Error("Not authorized");
+            }
             const thisProduct = await db.query.product.findFirst({
                 columns: {
                     thumbnail: true,
@@ -25,7 +28,7 @@ export const deleteProduct = async (state: OperationResult | undefined, id: numb
             revalidatePath("/");
             revalidatePath("/products");
         },
-        isProtected: false,
+        isProtected: true,
         clientSuccessMessage: "محصول با موفقیت حذف شد",
         serverErrorMessage: "خطا در حذف محصول",
     });

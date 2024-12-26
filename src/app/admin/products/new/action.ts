@@ -10,10 +10,10 @@ import env from "@/configs/env";
 
 export const addProduct = async (formState: OperationResult | undefined, formData: FormData) => {
     return executeAction({
-        actionFn: async () => {
+        actionFn: async (_, role) => {
             const validatedData = Object.fromEntries(formData);
             const { success, data } = productFormSchema.safeParse(validatedData);
-            if (success) {
+            if (success && role === "admin") {
                 let imagePath = env.NEXT_DEFAULT_PRODUCT_IMAGE;
 
                 if (data.thumbnail instanceof File && data.thumbnail?.size > 0) {
@@ -34,7 +34,7 @@ export const addProduct = async (formState: OperationResult | undefined, formDat
                 revalidatePath("/products");
             }
         },
-        isProtected: false,
+        isProtected: true,
         clientSuccessMessage: `محصول با موفقیت اضافه شد`,
         serverErrorMessage: "error in create product",
     });

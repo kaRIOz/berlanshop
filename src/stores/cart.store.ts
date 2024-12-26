@@ -79,8 +79,6 @@ export const useCartStore = create<State & Actions>((set, get) => ({
 
     updateQty: (type, id) => {
         const cart = get().cart.find(item => item.id === id);
-        console.log({ cart, type });
-
         if (!cart) return;
 
         if (cart.quantity === 1 && type === "decrement") {
