@@ -6,36 +6,35 @@ import { MdOutlineAddLocation } from "react-icons/md";
 
 import Link from "next/link";
 import AddressList from "./_components/address-list";
+import { getUserAddressList } from "./queries";
 
-type Addresse = {
+export type Addresse = {
     id: number;
-    address: string;
+    fullAddress: string;
+    province: string;
     city: string;
-    No: string;
-    Unit: string;
-    zipCode: string;
-    phoneNumber: string;
-    name: string;
+    postalCode: string;
 };
 
-const addresses: Addresse[] = [
-    {
-        id: 1,
-        address: "خ جمهوری ، خ حافظ ، ب ب هور ",
-        city: "تهران",
-        No: "64",
-        Unit: "1",
-        zipCode: "1388964782",
-        phoneNumber: "09191234567",
-        name: "ایمان",
-    },
-];
+// const addresses: Addresse[] = [
+//     {
+//         id: 1,
+//         address: "خ جمهوری ، خ حافظ ، ب ب هور ",
+//         city: "تهران",
+//         No: "64",
+//         Unit: "1",
+//         zipCode: "1388964782",
+//         phoneNumber: "09191234567",
+//         name: "ایمان",
+//     },
+// ];
 
-const Addresses = () => {
+export default async function Addresses() {
+    const addresses = await getUserAddressList();
     return (
         <div className="overflow-hidden">
             <h1 className="border-b mb-2">آدرس ها</h1>
-            {!addresses.length ? (
+            {addresses && addresses.length === 0 ? (
                 <div className="w-4/5 mx-auto flex flex-col items-center">
                     <Image
                         className="w-[16vw] min-w-32"
@@ -54,10 +53,8 @@ const Addresses = () => {
                     </Link>
                 </div>
             ) : (
-                <AddressList />
+                <AddressList addresses={addresses!} />
             )}
         </div>
     );
-};
-
-export default Addresses;
+}

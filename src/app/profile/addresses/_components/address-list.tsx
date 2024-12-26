@@ -6,41 +6,20 @@ import { FaCity, FaRegEnvelope } from "react-icons/fa";
 import { FaPhone } from "react-icons/fa6";
 import { MdOutlineAddLocation } from "react-icons/md";
 import { IoMdPerson } from "react-icons/io";
+import type { Addresse } from "../page";
 
-type Addresse = {
-    id: number;
-    address: string;
-    city: string;
-    No: string;
-    Unit: string;
-    zipCode: string;
-    phoneNumber: string;
-    name: string;
+type Props = {
+    addresses: Addresse[];
 };
 
-const addresses: Addresse[] = [
-    {
-        id: 1,
-        address: "خ جمهوری ، خ حافظ ، ب ب هور ",
-        city: "تهران",
-        No: "64",
-        Unit: "1",
-        zipCode: "1388964782",
-        phoneNumber: "09191234567",
-        name: "ایمان",
-    },
-];
-
-const AddressList = () => {
+const AddressList = ({ addresses }: Props) => {
     return (
         <div>
             {addresses.map(address => (
                 <div key={address.id}>
                     <div className="border-b">
                         <div className="flex justify-between items-center my-4">
-                            <h3 className="text-regular lg:text-medium opacity-85">
-                                {address.address} پ : {address.No} ، و : {address.Unit}
-                            </h3>
+                            <h3 className="text-regular lg:text-medium opacity-85">{address.fullAddress}</h3>
                             <HiOutlineDotsVertical />
                         </div>
 
@@ -50,15 +29,15 @@ const AddressList = () => {
                         </div>
                         <div className="flex items-center gap-2 mb-1 lg:mb-2">
                             <FaRegEnvelope className="opacity-50" />
-                            <p className="text-regular lg:text-medium opacity-50">{address.zipCode}</p>
+                            <p className="text-regular lg:text-medium opacity-50">{address.postalCode}</p>
                         </div>
                         <div className="flex items-center gap-2 mb-1 lg:mb-2">
                             <FaPhone className="opacity-50" />
-                            <p className="text-regular lg:text-medium opacity-50">{address.phoneNumber}</p>
+                            {/* <p className="text-regular lg:text-medium opacity-50">{address.phoneNumber}</p> */}
                         </div>
                         <div className="flex items-center gap-2 mb-1 lg:mb-2">
                             <IoMdPerson className="opacity-50" />
-                            <p className="text-regular lg:text-medium opacity-50">{address.name}</p>
+                            {/* <p className="text-regular lg:text-medium opacity-50">{address.name}</p> */}
                         </div>
                     </div>
 
