@@ -2,11 +2,16 @@ import React from "react";
 
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import AdminSidebar from "@/components/admin-dashboard/sidebar/AppSidebar";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
 // import Nabvar from "@/components/admin-dashboard/navbar/Navbar";
 // import Sidebar from "@/components/admin-dashboard/sidebar/Sidebar";
 
-const layout = ({ children }: { children: React.ReactNode }) => {
+export default async function AdminLayout({ children }: { children: React.ReactNode }) {
+    const session = await auth();
+    if (session?.user.role !== "admin") redirect("/");
+
     return (
         <SidebarProvider>
             <div className="grid grid-cols-[auto,1fr] w-full scrollbar">
@@ -19,6 +24,4 @@ const layout = ({ children }: { children: React.ReactNode }) => {
             </div>
         </SidebarProvider>
     );
-};
-
-export default layout;
+}

@@ -65,7 +65,7 @@ export const authConfig = {
         async authorized({ auth, request }) {
             const { nextUrl } = request;
             const isAuthenticated = !!auth?.user;
-            const isAdminRole = auth?.user.role === "admin";
+            // const isAdminRole = auth?.user.role === "admin";
             const authRoutes = ["/otp", "/otp-verify", "/sign-in", "/sign-up", "/forget-password"];
             const adminRoutes = ["/admin"];
             const userRoutes = ["/profile"];
@@ -74,11 +74,13 @@ export const authConfig = {
             const isUserRoutes = userRoutes.includes(nextUrl.pathname);
             if (isAuthenticated && isAuthRoutes) {
                 return Response.redirect(new URL("/", nextUrl));
-            } else if (!isAdminRole && isAdminRoutes) {
-                return Response.redirect(new URL("/", nextUrl));
-            } else if (!isAuthenticated && (isUserRoutes || isAdminRoutes)) {
-                return Response.redirect(new URL("/", nextUrl));
-            } else {
+            }
+            //  else if (!isAdminRole && isAdminRoutes) {
+            //     return Response.redirect(new URL("/", nextUrl));
+            // } else if (!isAuthenticated && (isUserRoutes || isAdminRoutes)) {
+            //     return Response.redirect(new URL("/", nextUrl));
+            // }
+            else {
                 return true;
             }
         },

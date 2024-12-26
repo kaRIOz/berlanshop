@@ -1,8 +1,12 @@
+import { auth } from "@/auth";
 import Header from "@/components/homepage/header/Header";
 import ProfileSidebar from "@/components/profile/sidebar/profile-sidebar";
+import { redirect } from "next/navigation";
 import React from "react";
 
-const layout = ({ children }: { children: React.ReactNode }) => {
+export default async function ProfileLayout({ children }: { children: React.ReactNode }) {
+    const session = await auth();
+    if (!session?.user.role) redirect("/");
     return (
         <>
             <Header />
@@ -12,6 +16,4 @@ const layout = ({ children }: { children: React.ReactNode }) => {
             </div>
         </>
     );
-};
-
-export default layout;
+}
