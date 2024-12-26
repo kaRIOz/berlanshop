@@ -11,25 +11,33 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
+import { useSession } from "next-auth/react";
+
+import { FaArrowRight } from "react-icons/fa6";
 
 type UserAddress = {
     state?: string;
     city?: string;
     formatted_address?: string;
+    setMapStep: boolean;
 };
 
-const NewAddressForm = ({ city, formatted_address: addressDetails, state }: UserAddress) => {
-    console.log({ city, formatted_address: addressDetails, state });
+const NewAddressForm = ({ city, formatted_address: addressDetails, state, setMapStep }: UserAddress) => {
+    const { data } = useSession();
 
     return (
         <form className="flex flex-col p-3">
-            <h1 className="px-3 pb-2 -mt-8 border-b z-0">جزییات آدرس</h1>
+            <div className=" border-b flex items-center px-3 pb-2 -mt-8 gap-3">
+                <FaArrowRight onClick={() => setMapStep(false)} className="cursor-pointer" />
+                <h1>جزییات آدرس</h1>
+            </div>
+            <h1>{state}</h1>
 
             <div className="my-4 grid grid-cols-2 gap-2">
                 <div className="col-span-2">
                     <Textarea
                         value={addressDetails}
-                        className="w-full focus-visible:ring-0 focus-visible:ring-offset-0  focus:border-blue-500 mb-1 placeholder:opacity-60 placeholder:text-regular md:text-medium border-2 max-h-44"
+                        className="w-full focus-visible:ring-0 focus-visible:ring-offset-0  focus:border-blue-500 mb-1 placeholder:opacity-60 placeholdertext-regular md:text-medium border-2 max-h-44"
                     />
                 </div>
                 <div>
@@ -103,6 +111,7 @@ const NewAddressForm = ({ city, formatted_address: addressDetails, state }: User
                         <Input
                             type="text"
                             className="w-full focus-visible:ring-0 focus-visible:ring-offset-0  focus:border-blue-500 mb-1 placeholder:opacity-60 placeholder:text-regular md:text-medium border-2"
+                            value={data?.user.phoneNumber}
                         />
                     </div>
                 </div>

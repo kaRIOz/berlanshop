@@ -170,7 +170,7 @@ const Map = () => {
                     </button>
                 </section>
             ) : (
-                <NewAddressForm {...userAddress} />
+                <NewAddressForm {...userAddress} setMapStep={setMapStep} />
             )}
         </>
     );
