@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useTransition } from "react";
+import React, { createRef, useEffect, useRef, useState, useTransition, type MutableRefObject } from "react";
 import { MapContainer, Marker, TileLayer, useMapEvent, ZoomControl } from "react-leaflet";
 import L from "leaflet";
 
@@ -6,7 +6,6 @@ import "leaflet/dist/leaflet.css";
 
 import { Input } from "../ui/input";
 import NewAddressForm from "@/app/profile/addresses/_components/new-address-form";
-import { MapRef } from "react-leaflet/MapContainer";
 import { Loading } from "../loading";
 
 type Coordinate = {
@@ -41,7 +40,7 @@ const Map = () => {
     const [searchResults, setSearchResults] = useState<SearchResultItem[]>([]);
     const [userAddress, setUserAddress] = useState<InitialAddress>();
     const [isPending, startTransition] = useTransition();
-    const mapRef = useRef<MapRef>();
+    const mapRef = useRef<L.Map | null>(null);
 
     const tehranFilter = searchResults.filter(item => item.region === "تهران، استان تهران");
 
@@ -122,7 +121,9 @@ const Map = () => {
                         className="h-96 w-full"
                         center={coordinate}
                         zoom={15}
-                        ref={mapRef}
+                        ref={map => {
+                            mapRef.current = map;
+                        }}
                         zoomControl={false}
                     >
                         <TileLayer

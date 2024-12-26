@@ -22,9 +22,9 @@ type UserAddress = {
     setMapStep: boolean;
 };
 
-const NewAddressForm = ({ city, formatted_address: addressDetails, state, setMapStep }: UserAddress) => {
-    const { data } = useSession();
-
+const NewAddressForm = ({ city, formatted_address: addressDetails, state }: UserAddress) => {
+    console.log({ city, formatted_address: addressDetails, state });
+    //api call args: city ,fullAddress, postalCode ,postalCode
     return (
         <form className="flex flex-col p-3">
             <div className=" border-b flex items-center px-3 pb-2 -mt-8 gap-3">
@@ -36,8 +36,8 @@ const NewAddressForm = ({ city, formatted_address: addressDetails, state, setMap
             <div className="my-4 grid grid-cols-2 gap-2">
                 <div className="col-span-2">
                     <Textarea
-                        value={addressDetails}
-                        className="w-full focus-visible:ring-0 focus-visible:ring-offset-0  focus:border-blue-500 mb-1 placeholder:opacity-60 placeholdertext-regular md:text-medium border-2 max-h-44"
+                        defaultValue={addressDetails}
+                        className="w-full focus-visible:ring-0 focus-visible:ring-offset-0  focus:border-blue-500 mb-1 placeholder:opacity-60 placeholder:text-regular md:text-medium border-2 max-h-44"
                     />
                 </div>
                 <div>
