@@ -76,7 +76,7 @@ export const authConfig = {
                 return Response.redirect(new URL("/", nextUrl));
             } else if (!isAdminRole && isAdminRoutes) {
                 return Response.redirect(new URL("/", nextUrl));
-            } else if (!isAuthenticated && isUserRoutes) {
+            } else if (!isAuthenticated && (isUserRoutes || isAdminRoutes)) {
                 return Response.redirect(new URL("/", nextUrl));
             } else {
                 return true;
