@@ -32,8 +32,6 @@ const NewAddressForm = ({ city, formatted_address: addressDetails, state, setMap
                 <FaArrowRight onClick={() => setMapStep(false)} className="cursor-pointer" />
                 <h1>جزییات آدرس</h1>
             </div>
-            <h1>{state}</h1>
-
             <div className="my-4 grid grid-cols-2 gap-2">
                 <div className="col-span-2">
                     <Textarea
@@ -112,7 +110,7 @@ const NewAddressForm = ({ city, formatted_address: addressDetails, state, setMap
                         <Input
                             type="text"
                             className="w-full focus-visible:ring-0 focus-visible:ring-offset-0  focus:border-blue-500 mb-1 placeholder:opacity-60 placeholder:text-regular md:text-medium border-2"
-                            value={data?.user.phoneNumber}
+                            defaultValue={data?.user.phoneNumber}
                         />
                     </div>
                 </div>
