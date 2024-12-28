@@ -1,11 +1,11 @@
 import React, { createRef, useEffect, useRef, useState, useTransition, type MutableRefObject } from "react";
 import { MapContainer, Marker, TileLayer, useMapEvent, ZoomControl } from "react-leaflet";
 import L from "leaflet";
-
 import "leaflet/dist/leaflet.css";
 
+import NewAddressForm from "@/app/profile/addresses/_components/address-form";
+
 import { Input } from "../ui/input";
-import NewAddressForm from "@/app/profile/addresses/_components/new-address-form";
 import { Loading } from "../loading";
 
 type Coordinate = {
@@ -86,7 +86,7 @@ const Map = () => {
             const { state, city, formatted_address } = data;
             setUserAddress({ city: city, state: state, formatted_address: formatted_address });
             setMapStep(true);
-            console.log(userAddress);
+            // console.log(userAddress);
         } catch (error) {
             console.error(error);
         }
