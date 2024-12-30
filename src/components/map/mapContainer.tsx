@@ -116,7 +116,7 @@ const Map = () => {
         <>
             {!mapStep ? (
                 <section className="relative flex flex-col w-full">
-                    <h1 className="px-3 pb-2 -mt-6">آدرس جدید</h1>
+                    <h1 className="px-3 pb-3 md:-mt-6">آدرس جدید</h1>
                     <MapContainer
                         className="h-96 w-full"
                         center={coordinate}
@@ -135,7 +135,7 @@ const Map = () => {
                         <Marker position={coordinate} icon={icon} />
                         <ZoomControl position="topright" />
                     </MapContainer>
-                    <div className="w-3/4 md:w-4/5  absolute top-5 left-1/2 -translate-x-1/2 z-[1000]">
+                    <div className="w-3/4 md:w-4/5  absolute top-12 md:top-5 left-1/2 -translate-x-[60%] md:-translate-x-1/2 z-[1000]">
                         <Input
                             type="text"
                             placeholder="جستجوی معابر و محله ها "

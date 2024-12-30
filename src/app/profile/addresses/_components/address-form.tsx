@@ -1,3 +1,4 @@
+"use client";
 import React, { useActionState, useEffect, useState, useTransition } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -18,7 +19,7 @@ import { useForm, Controller, type SubmitHandler } from "react-hook-form";
 import { userAddressFormSchema, type AddressFormType } from "./address-form.types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { provinces, cities } from "$/constants";
-import { addAddress } from "../new-address/action";
+import { addAddress } from "../new/action";
 import { Loading } from "@/components/loading";
 
 type UserAddress = {
@@ -27,11 +28,16 @@ type UserAddress = {
     formatted_address?: string;
     setMapStep: (step: boolean) => void;
 };
-
+type City = {
+    id: number;
+    name: string;
+    slug: string;
+    province_id: number;
+};
 const NewAddressForm = ({ city, formatted_address: addressDetails, state, setMapStep }: UserAddress) => {
     //api call args: city ,fullAddress, postalCode ,postalCode
-    const [selectedProvince, setSelectedProvince] = useState<number>();
-    const [filteredCities, setFilteredCities] = useState<string[]>([]);
+    // const [selectedProvince, setSelectedProvince] = useState<number>(8);
+    // const [cities, setCities] = useState<City[]>([]);
     const { data } = useSession();
     const [isPending, startTransition] = useTransition();
     const [formState, action] = useActionState(addAddress, undefined);
@@ -56,7 +62,7 @@ const NewAddressForm = ({ city, formatted_address: addressDetails, state, setMap
 
     return (
         <form className="flex flex-col p-3" onSubmit={handleSubmit(onSubmit)}>
-            <div className=" border-b flex items-center px-3 pb-2 -mt-8 gap-3">
+            <div className=" border-b flex items-center px-3 pb-2  md:-mt-8 gap-3">
                 <FaArrowRight onClick={() => setMapStep(false)} className="cursor-pointer" />
                 <h1>جزییات آدرس</h1>
             </div>
@@ -105,7 +111,15 @@ const NewAddressForm = ({ city, formatted_address: addressDetails, state, setMap
                                         <SelectValue placeholder="شهر" />
                                     </SelectTrigger>
                                     <SelectContent>
-                                        <SelectGroup></SelectGroup>
+                                        <SelectGroup>
+                                            {cities
+                                                .filter(item => item.id === 1)
+                                                .map(item => (
+                                                    <SelectItem key={item.id} value={item.name}>
+                                                        {item.name}
+                                                    </SelectItem>
+                                                ))}
+                                        </SelectGroup>
                                     </SelectContent>
                                 </Select>
                                 {errors.city && <span className="text-small text-red-500">{errors.city.message}</span>}

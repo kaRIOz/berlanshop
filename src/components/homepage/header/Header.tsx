@@ -39,7 +39,7 @@ const Header = () => {
     const totalItems = useCartStore(state => state.totalItems);
 
     return (
-        <header className="w-full h-14 md:h-20 bg-primary-content sticky top-0 z-50 shadow-sm ">
+        <header className="w-full h-14 md:h-20 bg-primary-content sticky top-0 z-[1001] shadow-sm ">
             <nav className="h-full px-4 max-w-container mx-auto relative">
                 <div className="h-full flex justify-between items-center">
                     <div className="flex flex-row-reverse gap-x-2  md:flex-row items-center ">
@@ -152,7 +152,7 @@ const Header = () => {
                             <HiMenuAlt3 className="inline-block md:hidden cursor-pointer" />
                         </Button>
                     </SheetTrigger>
-                    <SheetContent className="w-[50%] md:w-[40px]">
+                    <SheetContent className="w-[50%] md:w-[40px] z-[1002]">
                         <SheetHeader>
                             <SheetTitle>
                                 <Image

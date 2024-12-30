@@ -30,7 +30,7 @@ const InterceptedEdit = () => {
         console.log("hi");
     };
     return (
-        <UserModal title="ویرایش اطلاعات">
+        <UserModal>
             <form className="grid grid-cols-2 items-stretch gap-3 p-3" onSubmit={handleSubmit(onsubmit)}>
                 <div>
                     <label htmlFor="name" className="text-[14px] font-medium opacity-70">
