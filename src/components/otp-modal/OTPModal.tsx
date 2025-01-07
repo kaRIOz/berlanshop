@@ -13,7 +13,7 @@ const OTPModal = ({ children }: { children: React.ReactNode }) => {
     return (
         <Dialog defaultOpen={true} open={true} onOpenChange={handleOpenChange}>
             <DialogOverlay className="overflow-y-hidden ">
-                <DialogContent className="w-3/4 lg:w-full p-4 lg:p-2 rounded-md">
+                <DialogContent className="w-3/4 lg:max-w-[550px] p-4 lg:p-2 rounded-md">
                     <Button onClick={() => router.push("/")} variant="ghost" className="w-8 h-8 mr-auto">
                         <IoClose />
                     </Button>

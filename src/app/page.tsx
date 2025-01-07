@@ -9,7 +9,6 @@ export default async function Home() {
     return (
         <section className="w-full  mx-auto ">
             <Header />
-            <SearchVsCategory />
             <Banner />
 
             <div className="w-full max-w-container mx-auto mt-12 px-10">

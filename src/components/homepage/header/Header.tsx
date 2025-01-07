@@ -4,54 +4,33 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
 
-import { motion } from "framer-motion";
-import { navBarList } from "$/constants";
-
-import { HiMenuAlt3 } from "react-icons/hi";
-import { IoIosArrowBack } from "react-icons/io";
-import { IoExitOutline, IoHeartOutline } from "react-icons/io5";
-import { CiLocationOn } from "react-icons/ci";
-import { TfiShoppingCart } from "react-icons/tfi";
-
-import { BsBasket3 } from "react-icons/bs";
-import { FiMessageSquare } from "react-icons/fi";
-import { LuUser } from "react-icons/lu";
-
-import { signOut, useSession } from "next-auth/react";
+import MobileSidebar from "@/components/mobile-sidebar/MobileSidebar";
+import UserDropdown from "@/components/user-dropdown/UserDropdown";
 import { Loading } from "@/components/loading";
 
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { navBarList } from "$/constants";
 
 import { Button } from "@/components/ui/button";
-import { useCartStore } from "@/stores/cart.store";
+
+import UserBasketHover from "@/components/user-basket-hover/UserBasketHover";
 
 const Header = () => {
     const { data, status } = useSession();
     const pathname = usePathname();
-    const totalItems = useCartStore(state => state.totalItems);
 
     return (
-        <header className="w-full h-14 md:h-20 bg-primary-content sticky top-0 z-[1001] shadow-sm ">
-            <nav className="h-full px-4 max-w-container mx-auto relative">
+        <header
+            className={`w-full md:h-full bg-primary-content sticky top-0 ${pathname === "otp" && "otp-verify" ? " z-[1001] " : "z-30"} shadow-sm `}
+        >
+            <nav className="px-4 py-2 max-w-container mx-auto relative">
                 <div className="h-full flex justify-between items-center">
                     <div className="flex flex-row-reverse gap-x-2  md:flex-row items-center ">
                         <Link href="/" className="hidden md:inline-block">
                             <Image src={"/Logo.png"} alt="Logo" width={100} height={50} />
                         </Link>
-                        <motion.ul
-                            initial={{ y: 10, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ duration: 0.5 }}
-                            className="flex items-center  z-50 p-0 gap-2"
-                        >
+                        <ul className="flex items-center  z-50 p-0 gap-2">
                             {navBarList.map(({ id, title, link }) => (
                                 <Link
                                     key={id}
@@ -61,7 +40,7 @@ const Header = () => {
                                     <li>{title}</li>
                                 </Link>
                             ))}
-                        </motion.ul>
+                        </ul>
                     </div>
 
                     <div className="flex justify-between items-center space-x-5 space-x-reverse">
@@ -74,113 +53,14 @@ const Header = () => {
                         )}
                         {status === "loading" && <Loading />}
                         {status === "authenticated" && (
-                            <div className="flex items-center gap-1 md:gap-4">
-                                <DropdownMenu modal={false}>
-                                    <DropdownMenuTrigger asChild>
-                                        <Button variant="outline" size="icon" className="overflow-hidden rounded-full">
-                                            <LuUser className="w-5 h-5" />
-                                        </Button>
-                                    </DropdownMenuTrigger>
-
-                                    <DropdownMenuContent align="start" className="w-44 md:w-56 shadow-none">
-                                        <Link href={"/profile"} className="w-full">
-                                            <DropdownMenuItem className="flex items-center justify-between p-2 md:p-3 text-[14px] md:text-[16px] cursor-pointer ">
-                                                <IoIosArrowBack />
-                                                {data.user.phoneNumber}
-                                            </DropdownMenuItem>
-                                        </Link>
-                                        <DropdownMenuSeparator />
-                                        <DropdownMenuItem className="flex items-center justify-end gap-4 p-2 md:p-3 text-[14px] md:text-[16px] ">
-                                            <Link href={"/profile/favorites"} className="w-full text-right">
-                                                علاقه مندی ها{" "}
-                                            </Link>
-                                            <IoHeartOutline />
-                                        </DropdownMenuItem>
-                                        <DropdownMenuItem className="flex items-center justify-end gap-4 p-2 md:p-3 text-[14px] md:text-[16px] ">
-                                            <Link href={"/profile/orders"} className="w-full text-right">
-                                                سفارش ها
-                                            </Link>
-                                            <BsBasket3 />
-                                        </DropdownMenuItem>
-                                        <DropdownMenuItem className="flex items-center justify-end gap-4 p-2 md:p-3 text-[14px] md:text-[16px] ">
-                                            <Link href={"/profile/messages"} className="w-full text-right">
-                                                پیام ها
-                                            </Link>
-                                            <FiMessageSquare />
-                                        </DropdownMenuItem>
-                                        <DropdownMenuItem className="flex items-center justify-end gap-4 p-2 md:p-3 text-[14px] md:text-[16px] ">
-                                            <Link href={"/profile/addresses"} className="w-full text-right">
-                                                آدرس ها
-                                            </Link>
-                                            <CiLocationOn />
-                                        </DropdownMenuItem>
-
-                                        <DropdownMenuSeparator />
-                                        <DropdownMenuItem className="flex items-center justify-end gap-4 p-2 md:p-3 text-[14px] md:text-[16px] ">
-                                            <button
-                                                className="w-full text-right"
-                                                onClick={() => signOut({ redirect: false })}
-                                            >
-                                                خروج
-                                            </button>
-                                            <IoExitOutline />
-                                        </DropdownMenuItem>
-                                    </DropdownMenuContent>
-                                </DropdownMenu>
-
-                                <button className="border-none bg-transparent shadow-none hover:border rounded-full relative">
-                                    {totalItems >= 1 && (
-                                        <span className="flex items-center justify-center text-[12px] w-[18px] h-[18px] absolute -bottom-3 -right-3 bg-red-500 text-primary-content rounded">
-                                            {totalItems}
-                                        </span>
-                                    )}
-
-                                    <Link href={"/profile/basket"}>
-                                        <TfiShoppingCart className="text-2xl" />
-                                    </Link>
-                                </button>
+                            <div className="flex items-center gap-x-4 ">
+                                <UserDropdown />
+                                <UserBasketHover />
                             </div>
                         )}
                     </div>
                 </div>
-                <Sheet modal={false}>
-                    <SheetTrigger
-                        asChild
-                        className="border-none shadow-none bg-transparent absolute top-3 right-8 md:hidden"
-                    >
-                        <Button variant={"outline"}>
-                            <HiMenuAlt3 className="inline-block md:hidden cursor-pointer" />
-                        </Button>
-                    </SheetTrigger>
-                    <SheetContent className="w-[50%] md:w-[40px] z-[1002]">
-                        <SheetHeader>
-                            <SheetTitle>
-                                <Image
-                                    src={"/Logo.png"}
-                                    alt="Logo"
-                                    width={60}
-                                    height={50}
-                                    className="mb-8 block mx-auto"
-                                />
-                            </SheetTitle>
-                        </SheetHeader>
-
-                        <div className="">
-                            <ul className="flex flex-col pt-2">
-                                {navBarList.map(item => (
-                                    <li
-                                        key={item.id}
-                                        className="p-3 text-[9px] md:text-[13px] font-normal hover:pr-6 transition-all border-b"
-                                    >
-                                        <Link href={item.link} className="w-full">
-                                            {item.title}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </SheetContent>
-                </Sheet>
+                <MobileSidebar />
             </nav>
         </header>
     );

@@ -12,7 +12,6 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 // icons
-
 import { TbTruckDelivery, TbCreditCardPay } from "react-icons/tb";
 import { SiAdguard } from "react-icons/si";
 import { GiBackup } from "react-icons/gi";
