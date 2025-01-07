@@ -30,31 +30,31 @@ const UserDropdown = () => {
 
             <DropdownMenuContent align="start" className="w-44 md:w-56 shadow-none">
                 <Link href={"/profile"} className="w-full">
-                    <DropdownMenuItem className="flex items-center justify-between p-2 md:p-3 text-[14px] md:text-[16px] cursor-pointer ">
+                    <DropdownMenuItem className="flex items-center justify-between p-2 md:p-3 text-medium md:text-[16px] cursor-pointer text-hard-blue">
                         <IoIosArrowBack />
                         {data?.user.phoneNumber}
                     </DropdownMenuItem>
                 </Link>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem className="flex items-center justify-end gap-4 p-2 md:p-3 text-[14px] md:text-[16px] ">
+                <DropdownMenuItem className="flex items-center justify-end gap-4 p-2 md:p-3 text-medium md:text-[16px] text-hard-blue">
                     <Link href={"/profile/favorites"} className="w-full text-right">
-                        علاقه مندی ها{" "}
+                        علاقه مندی ها
                     </Link>
                     <IoHeartOutline />
                 </DropdownMenuItem>
-                <DropdownMenuItem className="flex items-center justify-end gap-4 p-2 md:p-3 text-[14px] md:text-[16px] ">
+                <DropdownMenuItem className="flex items-center justify-end gap-4 p-2 md:p-3 text-medium md:text-[16px] text-hard-blue">
                     <Link href={"/profile/orders"} className="w-full text-right">
                         سفارش ها
                     </Link>
                     <BsBasket3 />
                 </DropdownMenuItem>
-                <DropdownMenuItem className="flex items-center justify-end gap-4 p-2 md:p-3 text-[14px] md:text-[16px] ">
+                <DropdownMenuItem className="flex items-center justify-end gap-4 p-2 md:p-3 text-medium md:text-[16px] text-hard-blue">
                     <Link href={"/profile/messages"} className="w-full text-right">
                         پیام ها
                     </Link>
                     <FiMessageSquare />
                 </DropdownMenuItem>
-                <DropdownMenuItem className="flex items-center justify-end gap-4 p-2 md:p-3 text-[14px] md:text-[16px] ">
+                <DropdownMenuItem className="flex items-center justify-end gap-4 p-2 md:p-3 text-medium md:text-[16px] text-hard-blue">
                     <Link href={"/profile/addresses"} className="w-full text-right">
                         آدرس ها
                     </Link>
@@ -62,7 +62,7 @@ const UserDropdown = () => {
                 </DropdownMenuItem>
 
                 <DropdownMenuSeparator />
-                <DropdownMenuItem className="flex items-center justify-end gap-4 p-2 md:p-3 text-[14px] md:text-[16px] ">
+                <DropdownMenuItem className="flex items-center justify-end gap-4 p-2 md:p-3 text-medium md:text-[16px] ">
                     <button className="w-full text-right" onClick={() => signOut({ redirect: false })}>
                         خروج
                     </button>

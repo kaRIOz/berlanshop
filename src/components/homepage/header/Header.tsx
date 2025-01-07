@@ -34,7 +34,7 @@ const Header = () => {
                             {navBarList.map(({ id, title, link }) => (
                                 <Link
                                     key={id}
-                                    className={`hidden md:flex text-sm hover:font-Regular w-22 h-6 justify-center items-center px-4 ${pathname === link ? "text-[#262626] " : "text-[#767676] "}  hover:text-[#262626]`}
+                                    className={`hidden md:flex text-sm hover:font-Regular w-22 h-6 justify-center items-center px-4 ${pathname === link ? "text-hard-blue " : "text-[#767676] "}  hover:text-hard-blue`}
                                     href={link}
                                 >
                                     <li>{title}</li>
@@ -45,7 +45,7 @@ const Header = () => {
 
                     <div className="flex justify-between items-center space-x-5 space-x-reverse">
                         {status === "unauthenticated" && (
-                            <Link href={"/otp"} className="text-[10px] md:text-[13px] md:w-full md:h-full ">
+                            <Link href={"/otp"} className="text-small md:text-[13px] md:w-full md:h-full ">
                                 <Button className="px-2 py-1 md:py-2 rounded-lg bg-transparent" variant="outline">
                                     ورود | ثبت نام
                                 </Button>

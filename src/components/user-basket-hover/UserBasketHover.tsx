@@ -47,6 +47,7 @@ const UserBasketHover = () => {
                 align="end"
                 className="hidden md:inline-block w-[400px]"
             >
+                {!!totalItems && <p className="text-gray-400 text-medium font-medium m-4">{totalItems} کالا</p>}
                 <ScrollArea className="[&>[data-radix-scroll-area-viewport]]:max-h-[384px]" dir="rtl">
                     <BasketList />
                     {!!totalItems && (

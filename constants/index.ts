@@ -30,7 +30,7 @@ export const navBarList: NavbarList[] = [
     {
         id: 5,
         title: "علاقه مندی ها",
-        link: "/favorite",
+        link: "/favorites",
     },
 ];
 

@@ -41,9 +41,9 @@ const ProductCard = ({ product }: Props) => {
                 </div>
 
                 <div className="p-2">
-                    <h2 className="text-[14px]">{name}</h2>
-                    <p className="text-[10px] opacity-30">{description}</p>
-                    <p className="font-medium text-left mt-4 text-[14px] md:text-[16px]">
+                    <h2 className="text-medium text-hard-blue font-semibold">{name}</h2>
+                    <p className="text-small opacity-30">{description}</p>
+                    <p className="font-semibold text-left mt-4 text-medium md:text-[16px]">
                         {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                     </p>
                     <CardFooter className="flex justify-between items-center p-0 md:pb-0 pt-3 mt-1 md:mt-3">
