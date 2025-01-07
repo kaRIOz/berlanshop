@@ -46,7 +46,10 @@ const Header = () => {
                     <div className="flex justify-between items-center space-x-5 space-x-reverse">
                         {status === "unauthenticated" && (
                             <Link href={"/otp"} className="text-small md:text-[13px] md:w-full md:h-full ">
-                                <Button className="px-2 py-1 md:py-2 rounded-lg bg-transparent" variant="outline">
+                                <Button
+                                    className="text-hard-blue px-2 py-1 md:py-2 rounded-lg bg-transparent"
+                                    variant="outline"
+                                >
                                     ورود | ثبت نام
                                 </Button>
                             </Link>

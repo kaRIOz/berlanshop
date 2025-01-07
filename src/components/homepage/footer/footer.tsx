@@ -9,7 +9,7 @@ const Footer = () => {
     return (
         <footer className="w-full mx-auto px-16 py-16 grid grid-cols-2 gap-y-4 md:gap-y-0   content-center  md:grid md:grid-cols-4 md:place-content-start  bg-[#f5f5f3]">
             <div>
-                <h3 className="mb-8 font-medium">خرید از برلن شاپ</h3>
+                <h3 className="mb-8 font-semibold text-hard-blue">خرید از برلن شاپ</h3>
                 <ul className="flex flex-col space-y-3 relative">
                     <li className="footer-li">خرید شال</li>
                     <li className="footer-li">خرید روسری</li>
@@ -18,7 +18,7 @@ const Footer = () => {
                 </ul>
             </div>
             <div>
-                <h3 className="mb-8 font-medium">خدمات مشتریان</h3>
+                <h3 className="mb-8 font-semibold text-hard-blue">خدمات مشتریان</h3>
                 <ul className="flex flex-col space-y-3 relative">
                     <li className="footer-li">پرسش های متدوال</li>
                     <li className="footer-li">راهنمای خرید</li>
@@ -27,7 +27,7 @@ const Footer = () => {
                 </ul>
             </div>
             <div>
-                <h3 className="mb-8 font-medium">ارتباط با ما</h3>
+                <h3 className="mb-8 font-semibold text-hard-blue">ارتباط با ما</h3>
                 <ul className="flex flex-col space-y-3 relative">
                     <li className="footer-li">تلفن : 7786423</li>
                     <li className="footer-li">ایمیل :berlanshop@gmail.com</li>
@@ -40,7 +40,7 @@ const Footer = () => {
                 </ul>
             </div>
             <div>
-                <h3 className="mb-8 font-medium">نمادهای اطمینان</h3>
+                <h3 className="mb-8 font-semibold text-hard-blue">نمادهای اطمینان</h3>
                 <ul className="flex flex-col space-y-3 relative">
                     <Image src={"/zarinpal.png"} alt="zarinpal" width={100} height={50} />
                 </ul>
