@@ -1,10 +1,11 @@
 type NavbarList = { id: number; title: string; link: string };
 
-import { MdDashboard, MdSupervisedUserCircle, MdShoppingBag, MdOutlineMessage } from "react-icons/md";
+import { MdDashboard, MdShoppingBag, MdOutlineMessage } from "react-icons/md";
 import { FaUsers } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 import { IoExitOutline } from "react-icons/io5";
 import { BiSolidCategory } from "react-icons/bi";
+import { CgNotes } from "react-icons/cg";
 
 export const navBarList: NavbarList[] = [
     {
@@ -71,7 +72,7 @@ export const menuItems = [
     {
         title: "سفارشات",
         path: "/admin/orders",
-        icon: MdSupervisedUserCircle,
+        icon: CgNotes,
     },
     {
         title: "محصولات",

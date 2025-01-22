@@ -14,14 +14,15 @@ import {
     SidebarGroupContent,
     SidebarGroupLabel,
     SidebarMenu,
+    SidebarMenuButton,
     SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
-const AdminSidebar = () => {
+const AdminSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
     const pathname = usePathname();
 
     return (
-        <Sidebar variant="floating" side="right">
+        <Sidebar variant="floating" side="right" collapsible="icon" {...props}>
             <SidebarContent className="bg-primary-content rounded-lg">
                 <SidebarGroup>
                     <SidebarGroupLabel className="flex justify-between items-center my-5 ">
@@ -35,24 +36,29 @@ const AdminSidebar = () => {
                             className="mix-blend-multiply"
                         />
                         <div>
-                            <p className="text-[14px] font-semibold">ایمان</p>
-                            <span className="text-[10px]">ادمین</span>
+                            <p className="text-medium font-semibold">ایمان</p>
+                            <span className="text-small">ادمین</span>
                         </div>
                     </SidebarGroupLabel>
                     <SidebarGroupContent>
-                        <SidebarMenu>
-                            {menuItems.map(item => (
-                                <SidebarMenuItem key={item.title}>
-                                    <Link
-                                        href={item.path}
-                                        className={`flex items-center gap-2 p-2 ${pathname === item.path ? "bg-slate-200" : "text-black"} hover:bg-slate-200 rounded-lg outline-none duration-75 text-[12px]`}
-                                    >
-                                        <item.icon />
-                                        <p>{item.title}</p>
-                                    </Link>
-                                </SidebarMenuItem>
-                            ))}
-                        </SidebarMenu>
+                        <SidebarGroup className="p-0">
+                            <SidebarGroupLabel className="mb-2">منوی ادمین</SidebarGroupLabel>
+                            <SidebarMenu>
+                                {menuItems.map(item => (
+                                    <SidebarMenuItem key={item.title}>
+                                        <Link
+                                            href={item.path}
+                                            className={`flex items-center gap-2 ${pathname === item.path ? "bg-slate-200" : "text-black"} rounded-lg`}
+                                        >
+                                            <SidebarMenuButton tooltip={item.title}>
+                                                {<item.icon />}
+                                                <p>{item.title}</p>
+                                            </SidebarMenuButton>
+                                        </Link>
+                                    </SidebarMenuItem>
+                                ))}
+                            </SidebarMenu>
+                        </SidebarGroup>
                     </SidebarGroupContent>
                 </SidebarGroup>
             </SidebarContent>
