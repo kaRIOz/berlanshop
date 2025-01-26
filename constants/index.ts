@@ -4,7 +4,6 @@ import { MdDashboard, MdShoppingBag, MdOutlineMessage } from "react-icons/md";
 import { FaUsers } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 import { IoExitOutline } from "react-icons/io5";
-import { BiSolidCategory } from "react-icons/bi";
 import { CgNotes } from "react-icons/cg";
 
 export const navBarList: NavbarList[] = [
@@ -35,35 +34,7 @@ export const navBarList: NavbarList[] = [
     },
 ];
 
-type Product = {
-    id: string;
-    name: string;
-    price: number;
-    image: string;
-};
-
-export const product: Product[] = [
-    {
-        id: "1",
-        name: "شال مجلسی",
-        price: 248000,
-        image: "#",
-    },
-    {
-        id: "2",
-        name: "روسری",
-        price: 198000,
-        image: "#",
-    },
-    {
-        id: "3",
-        name: "مقنعه",
-        price: 158000,
-        image: "#",
-    },
-];
-
-export const menuItems = [
+export const topMenu = [
     {
         title: "پنل ادمین",
         path: "/admin",
@@ -75,20 +46,12 @@ export const menuItems = [
         icon: CgNotes,
     },
     {
-        title: "محصولات",
-        path: "/admin/products",
-        icon: MdShoppingBag,
-    },
-    {
-        title: "دسته بندی",
-        path: "/admin/categories",
-        icon: BiSolidCategory,
-    },
-    {
         title: "مشتریان",
         path: "/admin/customers",
         icon: FaUsers,
     },
+];
+export const downMenu = [
     {
         title: "پیام ها",
         path: "/admin/messages",
@@ -105,6 +68,9 @@ export const menuItems = [
         icon: IoExitOutline,
     },
 ];
+
+const data = {};
+
 export const provinces = [
     {
         id: 1,

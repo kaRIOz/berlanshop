@@ -9,7 +9,7 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/effect-cards";
 
-import { product } from "$/constants";
+// import { product } from "$/constants";
 const Newest = () => {
     return (
         <>
@@ -48,7 +48,7 @@ const Newest = () => {
                 }}
                 className="my-6 md:mb-20 md:mt-10"
             >
-                {product.concat([...product, ...product]).map((item, index) => (
+                {/* {product.concat([...product, ...product]).map((item, index) => (
                     <SwiperSlide key={index}>
                         <div className="w-40 md:w-48 lg:w-56 hover:border-b-[1px] hover:border-b-slate-300 transition ease-in-out">
                             <Image
@@ -72,7 +72,7 @@ const Newest = () => {
                             </div>
                         </div>
                     </SwiperSlide>
-                ))}
+                ))} */}
             </Swiper>
         </>
     );

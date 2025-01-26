@@ -5,8 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 
-import { menuItems } from "$/constants";
-
 import {
     Sidebar,
     SidebarContent,
@@ -17,6 +15,9 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import SidebarCategories from "./SidebarCategories/SidebarCategories";
+import TopMenu from "./TopMenu";
+import DownMenu from "./SidebarCategories/DownMenu";
 
 const AdminSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
     const pathname = usePathname();
@@ -43,21 +44,9 @@ const AdminSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
                     <SidebarGroupContent>
                         <SidebarGroup className="p-0">
                             <SidebarGroupLabel className="mb-2">منوی ادمین</SidebarGroupLabel>
-                            <SidebarMenu>
-                                {menuItems.map(item => (
-                                    <SidebarMenuItem key={item.title}>
-                                        <Link
-                                            href={item.path}
-                                            className={`flex items-center gap-2 ${pathname === item.path ? "bg-slate-200" : "text-black"} rounded-lg`}
-                                        >
-                                            <SidebarMenuButton tooltip={item.title}>
-                                                {<item.icon />}
-                                                <p>{item.title}</p>
-                                            </SidebarMenuButton>
-                                        </Link>
-                                    </SidebarMenuItem>
-                                ))}
-                            </SidebarMenu>
+                            <TopMenu />
+                            <SidebarCategories />
+                            <DownMenu />
                         </SidebarGroup>
                     </SidebarGroupContent>
                 </SidebarGroup>
