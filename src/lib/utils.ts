@@ -52,3 +52,17 @@ export function toast(response: unknown) {
 export async function wait(duration: number = 1000) {
     return new Promise(resolve => setTimeout(resolve, duration));
 }
+
+export function getDropDownValues<T>(data: T[]) {
+    const nameFaValues = data.map(item => item?.category?.nameFa ?? "");
+
+    const uniqueArray = [...new Set(nameFaValues)];
+    const noEmptyValues = uniqueArray.filter(element => element !== "");
+    const optionsArray = noEmptyValues.map(listItem => {
+        return {
+            value: listItem,
+            label: listItem,
+        };
+    });
+    return optionsArray;
+}

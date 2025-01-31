@@ -13,7 +13,6 @@ export const addAddress = async (formState: OperationResult | undefined, formDat
             const validatedData = Object.fromEntries(formData);
             const { success, data } = addressSchema.safeParse(validatedData);
             if (success) {
-                debugger;
                 await db.insert(address).values({
                     city: data.city,
                     fullAddress: data.fullAddress,
