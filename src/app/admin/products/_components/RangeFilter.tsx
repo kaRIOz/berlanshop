@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 
-interface RangeFilterProps {
-    value: number | string;
-    onChange: (value: number | string) => void;
-}
-
 const RangeFilter = ({
     value: initialValue,
     onChange,
+    debounce = 500,
     ...props
-}: RangeFilterProps & Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange">) => {
+}: {
+    value: string | number;
+    onChange: (value: string | number) => void;
+    debounce?: number;
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange">) => {
     // agar badan khastim filter variatn haye dige ezafe konim toye type filter varient union type ezafe mikonim
     // const { filterVariant } = column?.columnDef.meta ?? {};
     const [value, setValue] = useState(initialValue);
@@ -19,10 +19,10 @@ const RangeFilter = ({
     //     setValue(initialValue);
     // }, [initialValue]);
 
-    // React.useEffect(() => {
+    // useEffect(() => {
     //     const timeout = setTimeout(() => {
     //         onChange(value);
-    //     }, 500);
+    //     }, debounce);
 
     //     return () => clearTimeout(timeout);
     // }, [value]);

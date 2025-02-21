@@ -1,6 +1,7 @@
 "use client";
 
 import {
+    Column,
     ColumnDef,
     ColumnFiltersState,
     ColumnOrderState, //HERE
@@ -38,15 +39,16 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
     const table = useReactTable({
         data,
         columns,
-        getCoreRowModel: getCoreRowModel(),
-        //sorting:
-        onSortingChange: setSorting,
-        getSortedRowModel: getSortedRowModel(),
         state: {
             sorting,
             columnFilters,
             columnOrder,
         },
+        getCoreRowModel: getCoreRowModel(),
+        //sorting:
+        onSortingChange: setSorting,
+        getSortedRowModel: getSortedRowModel(),
+
         //pagination:
         getPaginationRowModel: getPaginationRowModel(),
         //Order of columns
@@ -59,6 +61,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
         //Faceted filters:
         getFacetedUniqueValues: getFacetedUniqueValues(),
         getFacetedRowModel: getFacetedRowModel(),
+        getFacetedMinMaxValues: getFacetedMinMaxValues(),
 
         debugTable: true,
         debugHeaders: true,
@@ -74,9 +77,8 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
             },
         },
     });
-
-    const price = table.getColumn("price");
-    console.log(price);
+    // const x = (table.getColumn("price")?.getFilterValue() as [number, number])?.[0];
+    // console.log(x);
 
     return (
         <div>
