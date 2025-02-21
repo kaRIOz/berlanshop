@@ -14,14 +14,15 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
     return (
         <SidebarProvider>
-            <div className="grid grid-cols-[auto,1fr] w-full scrollbar">
-                <AdminSidebar />
+            <AdminSidebar />
 
-                <main className="flex flex-col overflow-auto m-2 bg-primary-content border  p-3 rounded-lg">
+            <main className="w-full m-2 bg-primary-content border  p-3 rounded-lg">
+                <div className="flex items-center gap-2">
                     <SidebarTrigger />
-                    {children}
-                </main>
-            </div>
+                    <h2>داشبورد ادمین</h2>
+                </div>
+                {children}
+            </main>
         </SidebarProvider>
     );
 }

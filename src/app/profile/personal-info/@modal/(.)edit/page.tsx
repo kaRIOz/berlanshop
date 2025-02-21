@@ -6,7 +6,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
-import Modal from "@/components/modal/Modal";
+import UserModal from "@/components/user-modal/UserModal";
 
 const userInfoSchema = z.object({
     name: z.string().min(1),
@@ -30,7 +30,7 @@ const InterceptedEdit = () => {
         console.log("hi");
     };
     return (
-        <Modal>
+        <UserModal>
             <form className="grid grid-cols-2 items-stretch gap-3 p-3" onSubmit={handleSubmit(onsubmit)}>
                 <div>
                     <label htmlFor="name" className="text-[14px] font-medium opacity-70">
@@ -78,7 +78,7 @@ const InterceptedEdit = () => {
                     />
                 </div> */}
             </form>
-        </Modal>
+        </UserModal>
     );
 };
 

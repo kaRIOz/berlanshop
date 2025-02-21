@@ -9,11 +9,11 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/effect-cards";
 
-import { product } from "$/constants";
+// import { product } from "$/constants";
 const Newest = () => {
     return (
         <>
-            <h1 className="text-center mt-20 text-[2vw]">جدید ترین ها </h1>
+            <h1 className="text-center mt-20 text-[2vw] text-hard-blue">جدید ترین ها </h1>
             <Swiper
                 slidesPerView={"auto"}
                 centeredSlides={true}
@@ -48,7 +48,7 @@ const Newest = () => {
                 }}
                 className="my-6 md:mb-20 md:mt-10"
             >
-                {product.concat([...product, ...product]).map((item, index) => (
+                {/* {product.concat([...product, ...product]).map((item, index) => (
                     <SwiperSlide key={index}>
                         <div className="w-40 md:w-48 lg:w-56 hover:border-b-[1px] hover:border-b-slate-300 transition ease-in-out">
                             <Image
@@ -59,20 +59,20 @@ const Newest = () => {
                                 className="object-cove w-full"
                             />
                             <div className="flex flex-col p-2">
-                                <h2 className="font-medium">{item.name}</h2>
-                                <p className="text-[10px] font-light text-gray-400">
+                                <h2 className="font-semibold text-hard-blue">{item.name}</h2>
+                                <p className="text-small font-light text-gray-400">
                                     ورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ
                                 </p>
                                 <div className="flex justify-between items-center mt-2">
-                                    <button className="text-[8px] md:text-[10px] bg-blue-500 p-2 rounded text-white">
+                                    <button className="text-[8px] md:text-small bg-blue-500 p-2 rounded text-white">
                                         اضافه کردن به سبد خرید
                                     </button>
-                                    <p className="text-[12px] md:text-[14px] lg:text-[16px]">{item.price}</p>
+                                    <p className="text-regular md:text-medium lg:text-[16px]">{item.price}</p>
                                 </div>
                             </div>
                         </div>
                     </SwiperSlide>
-                ))}
+                ))} */}
             </Swiper>
         </>
     );

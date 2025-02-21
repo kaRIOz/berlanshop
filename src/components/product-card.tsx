@@ -4,12 +4,12 @@ import React from "react";
 import Image from "next/image";
 import { useCartStore } from "@/stores/cart.store";
 import { addToFavorite, removeFromFavorite } from "@/app/shop/actions";
-import { FaPlus, FaMinus } from "react-icons/fa6";
-import { RiDeleteBin5Line } from "react-icons/ri";
+
 import { FcLike } from "react-icons/fc";
 import { PiHeartFill } from "react-icons/pi";
 
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import UpdateCardButton from "./update-card-button/UpdateCardButton";
 
 type Props = {
     product: {
@@ -25,7 +25,7 @@ type Props = {
 const ProductCard = ({ product }: Props) => {
     const { id, name, description, price, thumbnail, isFavorite } = product;
     const addToCart = useCartStore(state => state.addToCart);
-    const updateQty = useCartStore(state => state.updateQty);
+
     const cart = useCartStore(state => state.cart);
     const isInBasket = cart.some(item => item.id === id);
 
@@ -41,9 +41,9 @@ const ProductCard = ({ product }: Props) => {
                 </div>
 
                 <div className="p-2">
-                    <h2 className="text-[14px]">{name}</h2>
-                    <p className="text-[10px] opacity-30">{description}</p>
-                    <p className="font-medium text-left mt-4 text-[14px] md:text-[16px]">
+                    <h2 className="text-medium text-hard-blue font-semibold">{name}</h2>
+                    <p className="text-small opacity-30">{description}</p>
+                    <p className="font-semibold text-left mt-4 text-medium md:text-[16px]">
                         {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                     </p>
                     <CardFooter className="flex justify-between items-center p-0 md:pb-0 pt-3 mt-1 md:mt-3">
@@ -65,28 +65,7 @@ const ProductCard = ({ product }: Props) => {
                         ) : (
                             cart
                                 .filter(item => item.id === id)
-                                ?.map(item => (
-                                    <div className="w-full flex justify-center items-center gap-x-2 " key={item.id}>
-                                        <button
-                                            onClick={() => updateQty("increment", item.id)}
-                                            className="rounded-lg  p-2 bg-primary-content shadow"
-                                        >
-                                            <FaPlus className="text-emerald-500 text-[13px] " />
-                                        </button>
-                                        <span className="mx-2">{item.quantity}</span>
-
-                                        <button
-                                            onClick={() => updateQty("decrement", item.id)}
-                                            className=" rounded-lg p-2 bg-primary-content shadow"
-                                        >
-                                            {(item.quantity as number) > 1 ? (
-                                                <FaMinus className="text-red-500 text-[13px]" />
-                                            ) : (
-                                                <RiDeleteBin5Line className="text-red-500" />
-                                            )}
-                                        </button>
-                                    </div>
-                                ))
+                                ?.map(item => <UpdateCardButton key={item.id} id={item.id} quantity={item.quantity} />)
                         )}
                     </CardFooter>
                 </div>
