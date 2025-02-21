@@ -9,6 +9,7 @@ import Footer from "@/components/homepage/footer/footer";
 export default async function Home() {
     // const categoriesData = getCategories();
     // const [categories] = await Promise.all([categoriesData]);
+    console.log("hi");
 
     return (
         <section className="w-full  mx-auto ">
