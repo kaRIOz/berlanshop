@@ -1,10 +1,11 @@
 import React from "react";
 import Link from "next/link";
 import { getAdminProducts } from "./queries";
-import { FaSearch } from "react-icons/fa";
-import Search from "@/components/admin-dashboard/search/Search";
-import ProductList from "./_components/product-list";
 import { notFound } from "next/navigation";
+import { DataTable } from "./_components/data-table";
+import { columns } from "./_components/columns";
+import { FaPlus } from "react-icons/fa6";
+import { Button } from "@/components/ui/button";
 
 const AdminProducts = async () => {
     const products = await getAdminProducts();
@@ -12,15 +13,14 @@ const AdminProducts = async () => {
     return (
         <div className="mt-3">
             <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 p-2 rounded-lg bg-slate-200 w-max">
-                    <FaSearch />
-                    <Search placeholder={"جستجو در سری محصولات شما"} />
-                </div>
-                <Link href={"/admin/products/new"} className="text-[12px] bg-blue-500 text-white px-3 py-2 rounded-lg">
-                    + کالای جدید{" "}
+                <Link href={"/admin/products/new"} className="mr-auto">
+                    <Button size="sm" variant="secondary" className="font-semibold bg-[#9ec1fb] hover:bg-[#9ec2fba8]">
+                        <FaPlus />
+                        <p>کالای جدید</p>
+                    </Button>
                 </Link>
             </div>
-            <ProductList products={products} />
+            <DataTable columns={columns} data={products} />
         </div>
     );
 };

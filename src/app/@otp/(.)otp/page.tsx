@@ -2,16 +2,16 @@
 import React from "react";
 import { usePathname } from "next/navigation";
 
-import Modal from "@/components/modal/Modal";
 import OTPSign from "@/app/otp/_components/otp-sign";
+import OTPModal from "@/components/otp-modal/OTPModal";
 
 const InterceptedOtp = () => {
     const pathname = usePathname();
     return (
         pathname === "/otp" && (
-            <Modal>
+            <OTPModal>
                 <OTPSign />
-            </Modal>
+            </OTPModal>
         )
     );
 };

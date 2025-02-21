@@ -58,11 +58,11 @@ const OTPSign = () => {
     };
 
     return (
-        <div className="flex justify-center items-center mx-auto">
+        <div className="h-full flex justify-center items-center">
             <div className="w-full flex flex-col items-center max-w-[350px] rounded-md">
                 <Image src={"/Logo.png"} alt="Logo" width={150} height={100} />
                 <h2 className="ml-auto mt-4">ورود | ثبت نام</h2>
-                <p className="ml-auto mt-10 text-[13px] text-gray-600 font-light">
+                <p className="ml-auto mt-5 md:mt-10 text-[13px] text-gray-600 font-light">
                     لطفا شماره موبایل خود را وارد کنید. کد تایید به این شماره پیامک خواهد شد
                 </p>
 

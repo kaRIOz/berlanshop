@@ -16,7 +16,8 @@ export const tailwindColors: ColorObject = {
     secondary: "#6c5ce7",
     "secondary-100": "#757685",
     "secondary-50": "#75768580",
-    "secondary-content": "#FFFFFF",
+    "hard-blue": "#23254e",
+    "light-red": "#ef4056",
     // "secondary-focus": generateDarkenColorFrom("#6c5ce7"),
     accent: "#1FB2A5",
     "accent-content": "#FFFFFF",
@@ -59,6 +60,11 @@ const config: Config = {
             },
             fontFamily: {
                 vazir: "var(--font-vazir)",
+            },
+            fontSize: {
+                small: "10px",
+                regular: "12px",
+                medium: "14px",
             },
 
             colors: {

@@ -6,7 +6,7 @@ const AboutUs = () => {
         <>
             <Header />
             <section className="w-5/6 max-w-container mx-auto">
-                <h1 className="my-10"> برلن شاپ : جایی که زیبایی به روایت شماست</h1>
+                <h1 className="my-10 text-hard-blue font-semibold"> برلن شاپ : جایی که زیبایی به روایت شماست</h1>
 
                 <p className="opacity-55 leading-10">
                     ما در برلن شاپ بر این باوریم که هر روسری و شالی، داستانی برای گفتن دارد. داستانی از مد، زیبایی و
