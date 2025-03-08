@@ -66,7 +66,9 @@ const config: Config = {
                 regular: "12px",
                 medium: "14px",
             },
-
+            aspectRatio: {
+                dynamic: "clamp(0.75, 1, 1.77)", // 3/4 تا 16/9
+            },
             colors: {
                 ...tailwindColors,
                 background: "hsl(var(--background))",

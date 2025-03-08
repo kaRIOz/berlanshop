@@ -24,7 +24,7 @@ const Header = () => {
         <header
             className={`w-full md:h-full bg-primary-content sticky top-0 ${pathname === "otp" && "otp-verify" ? " z-[1001] " : "z-30"} shadow-sm `}
         >
-            <nav className="px-4 py-2 max-w-container mx-auto relative">
+            <nav className="px-4 py-1 max-w-container mx-auto relative">
                 <div className="h-full flex justify-between items-center">
                     <div className="flex flex-row-reverse gap-x-2  md:flex-row items-center ">
                         <Link href="/" className="hidden md:inline-block">

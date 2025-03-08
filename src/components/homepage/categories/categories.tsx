@@ -2,11 +2,11 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 
-import "./sales.css";
+import "./categories.css";
 import { getCategories } from "@/app/queries";
 import Image from "next/image";
 
-const Sales = async () => {
+const HomeCategories = async () => {
     const categoriesData = getCategories();
     const [categories] = await Promise.all([categoriesData]);
     return (
@@ -29,4 +29,4 @@ const Sales = async () => {
     );
 };
 
-export default Sales;
+export default HomeCategories;
