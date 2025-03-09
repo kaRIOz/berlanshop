@@ -14,7 +14,7 @@ export default async function Home() {
             <Header />
             <Banner />
 
-            <div className="w-full max-w-container mx-auto mt-12 px-10">
+            <div className="w-full max-w-container mx-auto mt-12">
                 <HomeCategories />
                 <Newest />
             </div>

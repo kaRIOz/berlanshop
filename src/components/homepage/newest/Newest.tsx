@@ -13,7 +13,7 @@ import "swiper/css/effect-cards";
 const Newest = () => {
     return (
         <>
-            <h1 className="text-center mt-20 text-[2vw] text-hard-blue">جدید ترین ها </h1>
+            <h1 className="text-center mt-20 text-[calc(12px_+_1.1vw)] text-hard-blue">جدید ترین ها </h1>
             <Swiper
                 slidesPerView={"auto"}
                 centeredSlides={true}
