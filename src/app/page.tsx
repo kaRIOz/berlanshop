@@ -5,12 +5,8 @@ import Footer from "@/components/homepage/footer/footer";
 import HomeCategories from "@/components/homepage/categories/categories";
 
 export default async function Home() {
-    // const categoriesData = getCategories();
-    // const [categories] = await Promise.all([categoriesData]);
-    console.log("hi");
-
     return (
-        <section className="w-full  mx-auto ">
+        <section className="w-full mx-auto ">
             <Header />
             <Banner />
 

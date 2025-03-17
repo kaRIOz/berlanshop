@@ -17,7 +17,7 @@ const CategoryList = ({ category }) => {
             scrollTrigger: {
                 trigger: container.current,
                 scrub: true,
-                start: "top+=30%",
+                start: "top+=60%",
                 end: "+=300px",
             },
             y: -150,

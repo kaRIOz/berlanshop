@@ -67,7 +67,7 @@ const config: Config = {
                 medium: "14px",
             },
             aspectRatio: {
-                dynamic: "clamp(0.75, 1, 1.77)", // 3/4 تا 16/9
+                dynamic: "clamp(0.35, 1, 1.3)", // 3/4 تا 16/9
             },
             colors: {
                 ...tailwindColors,
