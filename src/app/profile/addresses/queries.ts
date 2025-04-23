@@ -1,8 +1,8 @@
-import db from "@/drizzle";
-import { address } from "@/drizzle/schema";
-import { executeQuery } from "@/drizzle/utils/executeQuery";
 import { and, eq } from "drizzle-orm";
-import { unstable_cache } from "next/cache";
+
+import { address } from "@/drizzle/schema";
+import db from "@/drizzle";
+import { executeQuery } from "@/drizzle/utils/executeQuery";
 
 export const getUserAddressList = async () => {
     return executeQuery({

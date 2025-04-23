@@ -14,8 +14,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         signIn: "/otp",
     },
     session: {
-        maxAge: 172800,
-        updateAge: 86400,
+        maxAge: 172800, //48 hours
+        updateAge: 86400,// 24 hours
     },
     providers: [
         Credentials({

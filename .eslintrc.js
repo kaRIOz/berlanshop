@@ -74,6 +74,7 @@ module.exports = {
         "no-debugger": "warn",
         "no-console": ["warn", { allow: ["log", "warn", "error", "info"] }],
         "no-var": "error",
+        "@typescript-eslint/no-require-imports": "off",
 
         // "boundaries/no-unknown": ["error"],
         // "boundaries/no-unknown-files": ["error"],

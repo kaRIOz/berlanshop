@@ -10,6 +10,7 @@ import { addressSchema } from "@/drizzle/schema/user/address";
 export const addAddress = async (formState: OperationResult | undefined, formData: FormData) => {
     return executeAction({
         actionFn: async (id?: number) => {
+            debugger;
             const validatedData = Object.fromEntries(formData);
             const { success, data } = addressSchema.safeParse(validatedData);
             if (success) {
@@ -24,7 +25,7 @@ export const addAddress = async (formState: OperationResult | undefined, formDat
                 revalidatePath("/profile/addresses");
             }
         },
-        isProtected: false,
+        isProtected: true,
         clientSuccessMessage: `آدرس با موفقیت اضافه شد`,
         serverErrorMessage: "error in create address",
     });

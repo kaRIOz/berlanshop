@@ -50,14 +50,13 @@ const NewAddressForm = ({ city, formatted_address: addressDetails, state, setMap
     } = useForm<AddressFormType>({ resolver: zodResolver(userAddressFormSchema) });
 
     const onSubmit: SubmitHandler<AddressFormType> = data => {
+        debugger;
         const formData = new FormData();
         formData.append("fullAddress", data.fullAddress);
         formData.append("province", data.province);
         formData.append("city", data.city);
         formData.append("postalCode", data.postalCode);
         startTransition(async () => action(formData));
-
-        console.log(data);
     };
 
     return (
