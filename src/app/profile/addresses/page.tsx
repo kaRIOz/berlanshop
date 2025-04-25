@@ -45,7 +45,7 @@ export default async function Addresses() {
                     />
                     <p className="font-medium text-meduim">هنوز آدرس ثبت نکرده اید.</p>
 
-                    <Link href="addresses/new-address">
+                    <Link href="addresses/new">
                         <button className="flex items-center gap-2 border border-red-500 text-red-500 mt-2 font-normal hover:bg-none rounded-lg px-3 py-2">
                             <MdOutlineAddLocation />
                             <p className="text-regular">ثبت آدرس</p>

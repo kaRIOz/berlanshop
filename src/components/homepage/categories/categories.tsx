@@ -9,7 +9,7 @@ const HomeCategories = async () => {
     const categoriesData = getCategories();
     const [categories] = await Promise.all([categoriesData]);
     return (
-        <section className="columns-[150px] md:columns-[300px]  lg:columns-[350px] px-3">
+        <section className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 px-5 lg:px-10 gap-2">
             {categories?.map(category => {
                 return <CategoryList key={category.nameEn} category={category} />;
             })}

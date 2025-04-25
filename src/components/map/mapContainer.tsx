@@ -43,7 +43,6 @@ const Map = () => {
     const mapRef = useRef<L.Map | null>(null);
 
     const tehranFilter = searchResults.filter(item => item.region === "تهران، استان تهران");
-
     useEffect(() => {
         const getAddressSearchTerm = async () => {
             const url = `https://api.neshan.org/v1/search?term=${searchValue}&lat=${coordinate.lat}&lng=${coordinate.lng}`;
@@ -153,6 +152,7 @@ const Map = () => {
                                             lat: item.location.y,
                                             lng: item.location.x,
                                         });
+                                        setSearchResults([]);
                                         setSearchValue("");
                                     }}
                                 >

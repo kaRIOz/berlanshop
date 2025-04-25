@@ -17,7 +17,7 @@ const CategoryList = ({ category }) => {
             scrollTrigger: {
                 trigger: container.current,
                 scrub: true,
-                start: "top+=60%",
+                start: "top+=70%",
                 end: "+=300px",
             },
             y: -150,
@@ -26,13 +26,13 @@ const CategoryList = ({ category }) => {
     });
 
     return (
-        <article ref={container} key={category.nameEn} className="relative">
+        <article ref={container} key={category.nameEn} className="break-inside-avoid">
             <Image
                 src={category.thumbnail}
                 alt="category"
                 width={100}
                 height={100}
-                className="w-full h-auto object-cover rounded block mb-4"
+                className="w-full object-cover rounded-sm mb-4"
             />
             <h2 className="absolute bottom-3 left-3 text-white text-[12px] md:text-[20px]">{category.nameFa}</h2>
         </article>

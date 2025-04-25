@@ -24,7 +24,7 @@ export const addAddress = async (formState: OperationResult | undefined, formDat
                 revalidatePath("/profile/addresses");
             }
         },
-        isProtected: false,
+        isProtected: true,
         clientSuccessMessage: `آدرس با موفقیت اضافه شد`,
         serverErrorMessage: "error in create address",
     });

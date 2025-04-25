@@ -30,9 +30,15 @@ const ProductCard = ({ product }: Props) => {
     const isInBasket = cart.some(item => item.id === id);
 
     return (
-        <Card className="rounded-none broder  p-2">
+        <Card className="border border-white p-2 hover:border-slate-300">
             <CardContent className="w-full relative p-0 group">
-                <Image width={200} height={200} src={thumbnail} alt={name} className="w-full object-cover relative " />
+                <Image
+                    width={100}
+                    height={100}
+                    src={thumbnail}
+                    alt={name}
+                    className="w-44 mx-auto h-56 object-cover relative "
+                />
                 <div
                     onClick={() => (isFavorite ? removeFromFavorite(id) : addToFavorite(id))}
                     className="absolute cursor-pointer top-4 left-4"
