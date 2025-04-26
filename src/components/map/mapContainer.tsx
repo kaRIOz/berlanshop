@@ -1,12 +1,23 @@
-import React, { createRef, useEffect, useRef, useState, useTransition, type MutableRefObject } from "react";
+import React, {
+    createRef,
+    useCallback,
+    useEffect,
+    useRef,
+    useState,
+    useTransition,
+    type MutableRefObject,
+} from "react";
 import { MapContainer, Marker, TileLayer, useMapEvent, ZoomControl } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { debounce } from "lodash";
 
 import NewAddressForm from "@/app/profile/addresses/_components/address-form";
+import api from "@/services/mapApi";
 
 import { Input } from "../ui/input";
 import { Loading } from "../loading";
+import { useDebounce } from "@/hooks/use-debounce";
 
 type Coordinate = {
     lat: number;
@@ -41,34 +52,33 @@ const Map = () => {
     const [userAddress, setUserAddress] = useState<InitialAddress>();
     const [isPending, startTransition] = useTransition();
     const mapRef = useRef<L.Map | null>(null);
+    const debounceSearch = useDebounce(searchValue);
 
     const tehranFilter = searchResults.filter(item => item.region === "تهران، استان تهران");
 
     useEffect(() => {
+        const controller = new AbortController();
         const getAddressSearchTerm = async () => {
-            const url = `https://api.neshan.org/v1/search?term=${searchValue}&lat=${coordinate.lat}&lng=${coordinate.lng}`;
+            setSearchResults([]);
             try {
-                const response = await fetch(url, {
-                    headers: {
-                        "Api-Key": `${process.env.NEXT_PUBLIC_MAP_API_KEY}`,
-                    },
+                const response = await api.get(`${debounceSearch}&lat=${coordinate.lat}&lng=${coordinate.lng}`, {
+                    signal: controller.signal,
+                    headers: { "api-key": process.env.NEXT_PUBLIC_MAP_API_KEY },
                 });
-                if (!response.ok) {
-                    throw new Error(`Response status: ${response.status}`);
-                }
 
-                const { items } = await response.json();
+                if (searchValue) setSearchResults(response.data.items);
 
-                setSearchResults(items);
                 mapRef.current?.flyTo(coordinate, 16);
             } catch (error) {
-                console.error(error);
+                console.log(error);
             }
         };
-
         getAddressSearchTerm();
-    }, [searchValue, coordinate, mapStep]);
 
+        return () => controller.abort();
+    }, [searchValue, coordinate, mapStep, debounceSearch]);
+
+    console.log(searchResults);
     const getAddressByLatlng = async () => {
         const url = `https://api.neshan.org/v5/reverse?lat=${coordinate.lat}&lng=${coordinate.lng}`;
 
@@ -86,7 +96,6 @@ const Map = () => {
             const { state, city, formatted_address } = data;
             setUserAddress({ city: city, state: state, formatted_address: formatted_address });
             setMapStep(true);
-            // console.log(userAddress);
         } catch (error) {
             console.error(error);
         }
@@ -143,7 +152,9 @@ const Map = () => {
                             value={searchValue}
                             onChange={e => setSearchValue(e.target.value)}
                         />
-                        <div className={`${searchResults.length ? "h-52" : "h-0"} overflow-y-auto bg-primary-content`}>
+                        <div
+                            className={`${searchResults.length ? "h-auto" : "h-0"} max-h-52 overflow-y-auto bg-primary-content`}
+                        >
                             {tehranFilter.map((item, index) => (
                                 <div
                                     key={index}
@@ -154,6 +165,7 @@ const Map = () => {
                                             lng: item.location.x,
                                         });
                                         setSearchValue("");
+                                        setSearchResults([]);
                                     }}
                                 >
                                     <p className="text-medium">{item.title}</p>

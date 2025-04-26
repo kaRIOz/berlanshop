@@ -21,26 +21,13 @@ const Header = () => {
     const pathname = usePathname();
 
     return (
-        <header
-            className={`w-full md:h-full bg-primary-content sticky top-0 ${pathname === "otp" && "otp-verify" ? " z-[1001] " : "z-30"} shadow-sm `}
-        >
-            <nav className="px-4 py-2 max-w-container mx-auto relative">
-                <div className="h-full flex justify-between items-center">
+        <header className={`sticky top-0 ${pathname === "otp" && "otp-verify" ? " z-[1001] " : "z-30"} shadow-sm `}>
+            <nav className="w-full md:h-full relative bg-primary-content px-[4.6%] py-2">
+                <div className="max-w-container mx-auto h-full flex justify-between items-center">
                     <div className="flex flex-row-reverse gap-x-2  md:flex-row items-center ">
                         <Link href="/" className="hidden md:inline-block">
                             <Image src={"/Logo.png"} alt="Logo" width={100} height={50} />
                         </Link>
-                        <ul className="flex items-center  z-50 p-0 gap-2">
-                            {navBarList.map(({ id, title, link }) => (
-                                <Link
-                                    key={id}
-                                    className={`hidden md:flex text-sm hover:font-Regular w-22 h-6 justify-center items-center px-4 ${pathname === link ? "text-hard-blue " : "text-[#767676] "}  hover:text-hard-blue`}
-                                    href={link}
-                                >
-                                    <li>{title}</li>
-                                </Link>
-                            ))}
-                        </ul>
                     </div>
 
                     <div className="flex justify-between items-center space-x-5 space-x-reverse">
@@ -63,8 +50,23 @@ const Header = () => {
                         )}
                     </div>
                 </div>
+
                 <MobileSidebar />
             </nav>
+
+            <div className="px-[4.6%] py-2 flex items-center justify-start bg-[#262626]">
+                <ul className="flex items-center  z-50 p-0 gap-2">
+                    {navBarList.map(({ id, title, link }) => (
+                        <Link
+                            key={id}
+                            className={`hidden md:flex text-sm hover:font-Regular w-22 h-6 justify-center items-center px-4 text-primary-content hover:text-[#DB2777]`}
+                            href={link}
+                        >
+                            <li>{title}</li>
+                        </Link>
+                    ))}
+                </ul>
+            </div>
         </header>
     );
 };
