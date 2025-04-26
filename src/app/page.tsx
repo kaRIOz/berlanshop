@@ -1,9 +1,8 @@
 import Banner from "@/components/homepage/banner/Banner";
 import Header from "@/components/homepage/header/Header";
-import Sales from "@/components/homepage/sales/Sales";
 import Newest from "@/components/homepage/newest/Newest";
-import SearchVsCategory from "@/components/homepage/search-category/SearchVsCategory";
 import Footer from "@/components/homepage/footer/footer";
+import HomeCategories from "@/components/homepage/categories/categories";
 
 export default async function Home() {
     // const categoriesData = getCategories();
@@ -11,12 +10,12 @@ export default async function Home() {
     console.log("hi");
 
     return (
-        <section className="w-full  mx-auto ">
+        <section className="w-full mx-auto ">
             <Header />
             <Banner />
 
-            <div className="w-full max-w-container mx-auto mt-12 px-10">
-                <Sales />
+            <div className="w-full max-w-container mx-auto mt-12">
+                <HomeCategories />
                 <Newest />
             </div>
 

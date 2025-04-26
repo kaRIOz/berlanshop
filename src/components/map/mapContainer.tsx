@@ -55,7 +55,6 @@ const Map = () => {
     const debounceSearch = useDebounce(searchValue);
 
     const tehranFilter = searchResults.filter(item => item.region === "تهران، استان تهران");
-
     useEffect(() => {
         const controller = new AbortController();
         const getAddressSearchTerm = async () => {
@@ -164,6 +163,7 @@ const Map = () => {
                                             lat: item.location.y,
                                             lng: item.location.x,
                                         });
+                                        setSearchResults([]);
                                         setSearchValue("");
                                         setSearchResults([]);
                                     }}
