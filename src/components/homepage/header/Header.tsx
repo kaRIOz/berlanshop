@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -9,19 +9,40 @@ import { useSession } from "next-auth/react";
 import MobileSidebar from "@/components/mobile-sidebar/MobileSidebar";
 import UserDropdown from "@/components/user-dropdown/UserDropdown";
 import { Loading } from "@/components/loading";
-
-import { navBarList } from "$/constants";
+import UserBasketHover from "@/components/user-basket-hover/UserBasketHover";
 
 import { Button } from "@/components/ui/button";
 
-import UserBasketHover from "@/components/user-basket-hover/UserBasketHover";
+import { navBarList } from "$/constants";
 
 const Header = () => {
+    const [showNavbar, setShowNavbar] = useState(true);
     const { data, status } = useSession();
     const pathname = usePathname();
 
+    useEffect(() => {
+        let lastScrollY = window.scrollY;
+
+        const controllNavbar = () => {
+            const currentScrollY = window.scrollY;
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                setShowNavbar(false);
+            } else {
+                setShowNavbar(true);
+            }
+
+            lastScrollY = currentScrollY;
+        };
+
+        window.addEventListener("scroll", controllNavbar);
+
+        return () => window.removeEventListener("scroll", controllNavbar);
+    });
+
     return (
-        <header className={`sticky top-0 ${pathname === "otp" && "otp-verify" ? " z-[1001] " : "z-30"} shadow-sm `}>
+        <header
+            className={`sticky top-0 w-full transition-transform duration-300 ${showNavbar ? "translate-y-0" : "-translate-y-full"} ${pathname === "otp" && "otp-verify" ? " z-[1001] " : "z-30"}`}
+        >
             <nav className="w-full md:h-full relative bg-primary-content px-[4.6%] py-2">
                 <div className="max-w-container mx-auto h-full flex justify-between items-center">
                     <div className="flex flex-row-reverse gap-x-2  md:flex-row items-center ">
@@ -54,7 +75,7 @@ const Header = () => {
                 <MobileSidebar />
             </nav>
 
-            <div className="px-[4.6%] py-2 flex items-center justify-start bg-[#262626]">
+            <div className="px-[4.6%] py-2 hidden lg:flex lg:items-center lg:justify-start bg-[#262626]">
                 <ul className="flex items-center  z-50 p-0 gap-2">
                     {navBarList.map(({ id, title, link }) => (
                         <Link

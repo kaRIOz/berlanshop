@@ -18,7 +18,7 @@ import { GiBackup } from "react-icons/gi";
 
 const Banner = () => {
     return (
-        <>
+        <div className="max-w-[1550px]">
             <Swiper
                 pagination={true}
                 modules={[Autoplay, Pagination, Navigation]}
@@ -26,16 +26,16 @@ const Banner = () => {
                     delay: 2500,
                     disableOnInteraction: false,
                 }}
-                className="aspect-dynamic lg:aspect-auto max-w-[1550px]"
+                className="aspect-dynamic lg:aspect-auto"
             >
                 <SwiperSlide>
-                    <Image className="w-full" src={"/imgBanner1.webp"} alt="imageBanner1" width={1550} height={100} />
+                    <Image className="w-full" src={"/imgBanner1.webp"} alt="imageBanner1" width={1550} height={150} />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <Image className="w-full" src={"/imgBanner3.webp"} alt="imageBanner2" width={1550} height={100} />
+                    <Image className="w-full" src={"/imgBanner3.webp"} alt="imageBanner2" width={1550} height={150} />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <Image className="w-full" src={"/imgBanner2.webp"} alt="imageBanner3" width={1550} height={100} />
+                    <Image className="w-full" src={"/imgBanner2.webp"} alt="imageBanner3" width={1550} height={150} />
                 </SwiperSlide>
             </Swiper>
             <div className="w-full border-b">
@@ -58,7 +58,7 @@ const Banner = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 
