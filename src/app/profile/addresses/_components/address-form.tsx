@@ -21,6 +21,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { provinces, cities } from "$/constants";
 import { addAddress } from "../new/action";
 import { Loading } from "@/components/loading";
+import { toast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
 
 type UserAddress = {
     state?: string;
@@ -38,6 +40,7 @@ const NewAddressForm = ({ city, formatted_address: addressDetails, state, setMap
     //api call args: city ,fullAddress, postalCode ,postalCode
     // const [selectedProvince, setSelectedProvince] = useState<number>(8);
     // const [cities, setCities] = useState<City[]>([]);
+    const router = useRouter();
     const { data } = useSession();
     const [isPending, startTransition] = useTransition();
     const [formState, action] = useActionState(addAddress, undefined);
@@ -48,6 +51,21 @@ const NewAddressForm = ({ city, formatted_address: addressDetails, state, setMap
         handleSubmit,
         control,
     } = useForm<AddressFormType>({ resolver: zodResolver(userAddressFormSchema) });
+
+    useEffect(() => {
+        if (formState?.success) {
+            toast({
+                title: formState.message,
+                variant: "default",
+            });
+            router.back();
+        } else if (formState?.success === false) {
+            toast({
+                title: formState.message,
+                variant: "destructive",
+            });
+        }
+    }, [formState, router]);
 
     const onSubmit: SubmitHandler<AddressFormType> = data => {
         debugger;

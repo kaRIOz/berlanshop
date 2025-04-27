@@ -13,24 +13,11 @@ export type Addresse = {
     postalCode: string;
 };
 
-// const addresses: Addresse[] = [
-//     {
-//         id: 1,
-//         address: "خ جمهوری ، خ حافظ ، ب ب هور ",
-//         city: "تهران",
-//         No: "64",
-//         Unit: "1",
-//         zipCode: "1388964782",
-//         phoneNumber: "09191234567",
-//         name: "ایمان",
-//     },
-// ];
-
 export default async function Addresses() {
     const addresses = await getUserAddressList();
     return (
         <div className="overflow-hidden">
-            <h1 className="border-b mb-2">آدرس ها</h1>
+            <h1 className="border-b pb-2">آدرس ها</h1>
             {addresses && addresses.length === 0 ? (
                 <div className="w-4/5 mx-auto flex flex-col items-center">
                     <Image
