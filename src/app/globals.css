@@ -107,7 +107,7 @@
     }
 }
 @layer components {
-    .footer-li {
+    /* .footer-li {
         @apply text-sm font-light tracking-wider cursor-pointer hover:text-red-600 hover:font-normal w-fit;
     }
 
@@ -116,6 +116,19 @@
     }
     .tbody td {
         @apply text-gray-500 text-[12px] border-b rounded-lg;
+    } */
+    .homepage-container {
+        @apply w-full mx-auto;
+    }
+    @media (min-width: 1536px) {
+        .homepage-container {
+            @apply max-w-screen-xl;
+        }
+    }
+    @media (min-width: 1280px) {
+        .homepage-container {
+            @apply px-16;
+        }
     }
 }
 .leaflet-bottom.leaflet-right {

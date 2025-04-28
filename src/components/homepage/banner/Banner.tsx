@@ -105,7 +105,7 @@ const Banner = () => {
     const images = ["/imgBanner1.webp", "/imgBanner2.webp", "/imgBanner3.webp"];
 
     return (
-        <div className="w-full overflow-hidden pb-10 pt-4 lg:gap-8 lg:pb-12 lg:pt-10">
+        <div className="w-full overflow-hidden">
             <div className="h-[calc(100vw/1.2-2.5px)] min-h-[300px] md:h-[calc((80vw/71)*24-2.5px)] lg:min-h-[460px]">
                 <div ref={sliderRef} className="keen-slider">
                     {images.map((src, idx) => (
@@ -125,8 +125,8 @@ const Banner = () => {
                     ))}
                 </div>
             </div>
-            <div className="w-full border-b">
-                <div className="max-w-container mx-auto mt-4 py-3  md:py-6 grid grid-cols-2 gap-y-3 md:gap-y-0 md:grid-cols-4">
+            <div className="homepage-container">
+                <div className="mt-4 py-3  md:py-6 grid grid-cols-2 gap-y-3 md:gap-y-0 md:grid-cols-4">
                     <div className="flex justify-center items-center space-x-3 space-x-reverse  text-hard-blue">
                         <TbTruckDelivery className="text-medium md:text-2xl" />
                         <p className="font-semibold text-regular md:text-sm">ارسال سریع</p>

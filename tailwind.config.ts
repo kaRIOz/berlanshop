@@ -10,6 +10,7 @@ export const tailwindColors: ColorObject = {
     transparent: "transparent",
     white: "#F9F9F9",
     primary: "#0D3261",
+    "primary-main": "#C327DB",
     "primary-content": "#FFFFFF",
     "main-bg": "var(--Main-BG-Pattern, linear-gradient(0deg, #98C1E5 0%, #AA8FBF 100%))",
     // "primary-focus": generateDarkenColorFrom("#0D3261"),
