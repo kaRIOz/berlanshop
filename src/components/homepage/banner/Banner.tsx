@@ -14,14 +14,21 @@ import { GiBackup } from "react-icons/gi";
 import Link from "next/link";
 
 const Banner = () => {
+    const [loaded, setLoaded] = useState(false);
+    const [currentSlide, setCurrentSlide] = useState(0);
     const [details, setDetails] = React.useState<TrackDetails | null>(null);
     const [sliderRef, slider] = useKeenSlider<HTMLDivElement>(
         {
             loop: true,
-            initial: 2,
+            slides: { origin: "center", perView: 1.1, spacing: 23 },
+            slideChanged(slider) {
+                setCurrentSlide(slider.track.details.rel);
+            },
             created(s) {
                 setDetails(s.track.details);
+                setLoaded(true);
             },
+
             updated(s) {
                 setDetails(s.track.details);
             },
@@ -32,19 +39,6 @@ const Banner = () => {
             defaultAnimation: {
                 duration: 2000,
                 easing: t => 1 - Math.pow(1 - t, 3),
-            },
-            slides: { origin: "center" },
-            breakpoints: {
-                "(min-width: 348px)": {
-                    slides: {
-                        spacing: -70, // برای دسکتاپ
-                    },
-                },
-                "(min-width: 1200px)": {
-                    slides: {
-                        spacing: -110, // برای دسکتاپ
-                    },
-                },
             },
         },
 
@@ -102,11 +96,11 @@ const Banner = () => {
         };
     }
 
-    const images = ["/imgBanner1.webp", "/imgBanner2.webp", "/imgBanner3.webp"];
+    const images = ["/imgBanner1.webp", "/imgBanner2.webp", "/imgBanner3.webp", "/imgBanner1.webp", "/imgBanner2.webp"];
 
     return (
         <div className="w-full overflow-hidden">
-            <div className="h-[calc(100vw/1.2-2.5px)] min-h-[300px] md:h-[calc((80vw/71)*24-2.5px)] lg:min-h-[460px]">
+            <div className="relative w-full h-[calc(100vw/1.2-2.5px)] min-h-[300px] md:h-[calc((80vw/71)*24-2.5px)] lg:min-h-[460px]">
                 <div ref={sliderRef} className="keen-slider">
                     {images.map((src, idx) => (
                         <div key={idx} className="keen-slider__slide">
@@ -117,12 +111,29 @@ const Banner = () => {
                                     height={356}
                                     src={src}
                                     alt={`Slide ${idx}`}
-                                    className="w-[80%] md:w-[90%] h-full block mx-auto object-cover rounded"
+                                    className="w-full h-full object-cover rounded"
                                 />
                                 {/* </Link> */}
                             </div>
                         </div>
                     ))}
+                    <div className="absolute bottom-0 left-1/2 flex -translate-x-1/2 items-center justify-center pb-2 lg:pb-4">
+                        {loaded && slider.current && (
+                            <>
+                                {[...Array(slider.current.track.details.slides.length).keys()].map(idx => {
+                                    return (
+                                        <button
+                                            key={idx}
+                                            onClick={() => {
+                                                slider.current?.moveToIdx(idx);
+                                            }}
+                                            className={`ml-1 cursor-pointer border-0 h-1 ${currentSlide === idx ? "h-1.5 w-4 rounded-sm bg-[#e5e5e572]" : " w-1 rounded-full bg-gray-500 "}`}
+                                        ></button>
+                                    );
+                                })}
+                            </>
+                        )}
+                    </div>
                 </div>
             </div>
             <div className="homepage-container">

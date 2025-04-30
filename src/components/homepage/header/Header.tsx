@@ -55,7 +55,7 @@ const Header = () => {
                         {status === "unauthenticated" && (
                             <Link href={"/otp"} className="text-small md:text-[13px] md:w-full md:h-full ">
                                 <Button
-                                    className="text-hard-blue px-2 py-1 md:py-2 rounded-lg bg-transparent"
+                                    className="text-primary-main px-2 py-1 md:py-2 rounded bg-transparent shadow-none border-primary-main hover:bg-transparent hover:text-primary-main font-medium lg:font-semibold"
                                     variant="outline"
                                 >
                                     ورود | ثبت نام

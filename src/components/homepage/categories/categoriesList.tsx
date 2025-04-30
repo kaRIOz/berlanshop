@@ -32,7 +32,7 @@ const CategoryList = ({ category }) => {
                 alt="category"
                 width={100}
                 height={100}
-                className="w-full object-cover rounded-sm mb-4"
+                className="w-full object-cover rounded mb-4"
             />
             <h2 className="absolute bottom-3 left-3 text-white text-[12px] md:text-[20px]">{category.nameFa}</h2>
         </article>

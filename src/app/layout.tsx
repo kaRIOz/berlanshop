@@ -31,7 +31,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" dir="rtl" suppressHydrationWarning>
-            <body className={`${vazir.className} antialiased bg-gray-50`}>
+            <body className={`${vazir.className} antialiased bg-[#f8f9fa]`}>
                 <AuthProvider>
                     <Toaster />
                     <main>{children}</main>

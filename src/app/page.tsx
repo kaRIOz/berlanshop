@@ -1,17 +1,14 @@
 import Banner from "@/components/homepage/banner/Banner";
 import Header from "@/components/homepage/header/Header";
-import Newest from "@/components/homepage/newest/Newest";
 import Footer from "@/components/homepage/footer/footer";
 import HomeCategories from "@/components/homepage/categories/categories";
 import Festival from "./../components/homepage/festival/festival";
+import HomeProductList from "@/components/homepage/home-product-list/HomeProductList";
+import FourCards from "@/components/homepage/four-cards/FourCards";
 
 export default async function Home() {
-    // const categoriesData = getCategories();
-    // const [categories] = await Promise.all([categoriesData]);
-    console.log("hi");
-
     return (
-        <section className="relative z-10 flex w-full flex-col gap-6 pb-10 lg:gap-8 lg:pb-12">
+        <section className="relative z-10 flex w-full flex-col gap-6 lg:gap-8">
             <Header />
             <Banner />
 
@@ -22,7 +19,13 @@ export default async function Home() {
                 <HomeCategories />
             </div>
             <div className="homepage-container">
-                <Newest />
+                <HomeProductList title={"پرفروش ترین ها"} filterType="best-sell" />
+            </div>
+            <div className="homepage-container">
+                <FourCards />
+            </div>
+            <div className="homepage-container">
+                <HomeProductList title={"جدیدترین ها"} filterType="newest" />
             </div>
 
             <Footer />
