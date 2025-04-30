@@ -79,7 +79,7 @@
         @apply border-border;
     }
     body {
-        @apply bg-background text-foreground;
+        @apply bg-[#f8f9fa] text-foreground;
     }
 }
 
@@ -107,28 +107,8 @@
     }
 }
 @layer components {
-    /* .footer-li {
-        @apply text-sm font-light tracking-wider cursor-pointer hover:text-red-600 hover:font-normal w-fit;
-    }
-
-    .table td {
-        @apply text-[14px] p-4 text-center;
-    }
-    .tbody td {
-        @apply text-gray-500 text-[12px] border-b rounded-lg;
-    } */
     .homepage-container {
-        @apply w-full mx-auto;
-    }
-    @media (min-width: 1536px) {
-        .homepage-container {
-            @apply max-w-screen-xl;
-        }
-    }
-    @media (min-width: 1280px) {
-        .homepage-container {
-            @apply px-16;
-        }
+        @apply w-full mx-auto px-2 lg:px-16 2xl:max-w-screen-xl;
     }
 }
 .leaflet-bottom.leaflet-right {

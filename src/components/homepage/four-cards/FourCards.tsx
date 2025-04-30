@@ -15,7 +15,7 @@ const FourCards = () => {
 
     return (
         <>
-            <div className="px-0 relative min-h-[110px] md:hidden">
+            <div className="px-0 relative min-h-[110px] lg:hidden">
                 <div className="navigation-wrapper group relative w-full">
                     <div ref={sliderRef} className="keen-slider">
                         <Link href={"#"} className="keen-slider__slide overflow-hidden rounded">
@@ -65,7 +65,7 @@ const FourCards = () => {
                     </div>
                 </div>
             </div>
-            <div className="hidden md:block">
+            <div className="hidden lg:block">
                 <div className="grid grid-cols-2 gap-6">
                     <Link href={"#"} className="relative overflow-hidden rounded">
                         <Image
