@@ -52,7 +52,7 @@ const HomeProductList: FC<ProductListProps> = ({ title, filterType }) => {
             </div>
             <div className="relative overflow-hidden">
                 <div className="navigation-wrapper group relative w-full">
-                    <div ref={sliderRef} className="keen-slider [&>*:last-child]:pl-3 lg:[&>*:last-child]:pl-0">
+                    <div ref={sliderRef} className="keen-slider [&>*:last-child]:pl-0 lg:[&>*:last-child]:pl-0">
                         {filteredProducts.map(product => (
                             <div
                                 className="keen-slider__slide min-w-fit max-w-fit px-0 bg-primary-content"

@@ -19,13 +19,13 @@ export default async function Home() {
                 <HomeCategories />
             </div>
             <div className="homepage-container">
-                <HomeProductList title={"پرفروش ترین ها"} filterType="best-sell" />
+                <HomeProductList title={"پرفروش‌ترین‌ها"} filterType="best-sell" />
             </div>
             <div className="homepage-container">
                 <FourCards />
             </div>
             <div className="homepage-container">
-                <HomeProductList title={"جدیدترین ها"} filterType="newest" />
+                <HomeProductList title={"جدیدترین‌ها"} filterType="newest" />
             </div>
 
             <Footer />

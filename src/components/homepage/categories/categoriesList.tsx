@@ -10,23 +10,23 @@ import { useGSAP } from "@gsap/react";
 const CategoryList = ({ category }) => {
     const container = useRef<HTMLDivElement>(null);
 
-    useGSAP(() => {
-        gsap.registerPlugin(ScrollTrigger);
+    // useGSAP(() => {
+    //     gsap.registerPlugin(ScrollTrigger);
 
-        gsap.to(container.current, {
-            scrollTrigger: {
-                trigger: container.current,
-                scrub: true,
-                start: "top+=70%",
-                end: "+=300px",
-            },
-            y: -150,
-            opacity: 0,
-        });
-    });
+    //     gsap.to(container.current, {
+    //         scrollTrigger: {
+    //             trigger: container.current,
+    //             scrub: true,
+    //             start: "top+=70%",
+    //             end: "+=300px",
+    //         },
+    //         y: -150,
+    //         opacity: 0,
+    //     });
+    // });
 
     return (
-        <article ref={container} key={category.nameEn} className="break-inside-avoid">
+        <article key={category.nameEn} className="break-inside-avoid">
             <Image
                 src={category.thumbnail}
                 alt="category"

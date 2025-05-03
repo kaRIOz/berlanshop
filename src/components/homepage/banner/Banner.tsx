@@ -21,6 +21,11 @@ const Banner = () => {
         {
             loop: true,
             slides: { origin: "center", perView: 1.1, spacing: 23 },
+            breakpoints: {
+                "(max-width: 480px)": {
+                    slides: { perView: 1.2, origin: "center", spacing: 15 },
+                },
+            },
             slideChanged(slider) {
                 setCurrentSlide(slider.track.details.rel);
             },

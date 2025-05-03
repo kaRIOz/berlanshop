@@ -47,7 +47,7 @@ const Header = () => {
                 <div className="max-w-container mx-auto h-full flex justify-between items-center">
                     <div className="flex flex-row-reverse gap-x-2  md:flex-row items-center ">
                         <Link href="/" className="hidden md:inline-block">
-                            <Image src={"/Logo.png"} alt="Logo" width={100} height={50} />
+                            <Image src={"/Logo.png"} alt="Logo" width={90} height={50} />
                         </Link>
                     </div>
 

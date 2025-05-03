@@ -24,19 +24,19 @@ const Footer = () => {
                         <div className="flex flex-col gap-4.5 lg:gap-3 lg:pr-2">
                             <Link
                                 href="#"
-                                className="w-fit border-transparent text-xs font-medium text-white hover:border-brand-secondary hover:text-brand-secondary lg:border-b lg:pb-1 lg:text-sm"
+                                className="w-fit border-transparent text-xs font-medium text-white hover:border-primary-main hover:text-primary-main transition-colors lg:border-b lg:pb-1 lg:text-sm"
                             >
                                 تماس با ما
                             </Link>
                             <Link
                                 href="#"
-                                className="w-fit border-transparent text-xs font-medium text-white hover:border-brand-secondary hover:text-brand-secondary lg:border-b lg:pb-1 lg:text-sm"
+                                className="w-fit border-transparent text-xs font-medium text-white hover:border-primary-main hover:text-primary-main transition-colors lg:border-b lg:pb-1 lg:text-sm"
                             >
                                 درباره ما
                             </Link>
                             <Link
                                 href="#"
-                                className="w-fit border-transparent text-xs font-medium text-white hover:border-brand-secondary hover:text-brand-secondary lg:border-b lg:pb-1 lg:text-sm"
+                                className="w-fit border-transparent text-xs font-medium text-white hover:border-primary-main hover:text-primary-main transition-colors lg:border-b lg:pb-1 lg:text-sm"
                             >
                                 حریم خصوصی
                             </Link>
@@ -47,31 +47,31 @@ const Footer = () => {
                         <div className="flex flex-col gap-4.5 lg:gap-3 lg:pr-2">
                             <Link
                                 href="#"
-                                className="w-fit border-transparent text-xs font-medium text-white hover:border-brand-secondary hover:text-brand-secondary lg:border-b lg:pb-1 lg:text-sm"
+                                className="w-fit border-transparent text-xs font-medium text-white hover:border-primary-main hover:text-primary-main transition-colors lg:border-b lg:pb-1 lg:text-sm"
                             >
                                 پرسش های متداول
                             </Link>
                             <Link
                                 href="#"
-                                className="w-fit border-transparent text-xs font-medium text-white hover:border-brand-secondary hover:text-brand-secondary lg:border-b lg:pb-1 lg:text-sm"
+                                className="w-fit border-transparent text-xs font-medium text-white hover:border-primary-main hover:text-primary-main transition-colors lg:border-b lg:pb-1 lg:text-sm"
                             >
                                 راهنمای خرید و ارسال
                             </Link>
                             <Link
                                 href="#"
-                                className="w-fit border-transparent text-xs font-medium text-white hover:border-brand-secondary hover:text-brand-secondary lg:border-b lg:pb-1 lg:text-sm"
+                                className="w-fit border-transparent text-xs font-medium text-white hover:border-primary-main hover:text-primary-main transition-colors lg:border-b lg:pb-1 lg:text-sm"
                             >
                                 حریم خصوصی
                             </Link>
                             <Link
                                 href="#"
-                                className="w-fit border-transparent text-xs font-medium text-white hover:border-brand-secondary hover:text-brand-secondary lg:border-b lg:pb-1 lg:text-sm"
+                                className="w-fit border-transparent text-xs font-medium text-white hover:border-primary-main hover:text-primary-main transition-colors lg:border-b lg:pb-1 lg:text-sm"
                             >
                                 شرایط مرجوعی
                             </Link>
                             <Link
                                 href="#"
-                                className="w-fit border-transparent text-xs font-medium text-white hover:border-brand-secondary hover:text-brand-secondary lg:border-b lg:pb-1 lg:text-sm"
+                                className="w-fit border-transparent text-xs font-medium text-white hover:border-primary-main hover:text-primary-main transition-colors lg:border-b lg:pb-1 lg:text-sm"
                             >
                                 ارتباط با پشتیبانی
                             </Link>
