@@ -47,7 +47,7 @@ const Header = () => {
                 <div className="max-w-container mx-auto h-full flex justify-between items-center">
                     <div className="flex flex-row-reverse gap-x-2  md:flex-row items-center ">
                         <Link href="/" className="hidden md:inline-block">
-                            <Image src={"/Logo.png"} alt="Logo" width={90} height={50} />
+                            <Image src={"/Logo.png"} alt="Logo" width={80} height={50} />
                         </Link>
                     </div>
 
@@ -55,7 +55,7 @@ const Header = () => {
                         {status === "unauthenticated" && (
                             <Link href={"/otp"} className="text-small md:text-[13px] md:w-full md:h-full ">
                                 <Button
-                                    className="text-primary-main px-2 py-1 md:py-2 rounded bg-transparent shadow-none border-primary-main hover:bg-transparent hover:text-primary-main font-medium lg:font-semibold"
+                                    className="text-primary-main px-2 py-1 md:py-2 rounded bg-transparent shadow-none border-primary-main hover:bg-transparent hover:text-primary-main hover:scale-95 font-medium lg:font-semibold"
                                     variant="outline"
                                 >
                                     ورود | ثبت نام

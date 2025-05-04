@@ -27,7 +27,7 @@ export default function RootLayout({
     otp,
 }: Readonly<{
     children: React.ReactNode;
-    otp: never;
+    otp: React.ReactNode;
 }>) {
     return (
         <html lang="en" dir="rtl" suppressHydrationWarning>

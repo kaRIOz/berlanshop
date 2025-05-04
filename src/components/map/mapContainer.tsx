@@ -10,9 +10,8 @@ import React, {
 import { MapContainer, Marker, TileLayer, useMapEvent, ZoomControl } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { debounce } from "lodash";
 
-import NewAddressForm from "@/app/profile/addresses/_components/address-form";
+import AddressForm from "@/app/profile/addresses/_components/address-form";
 import api from "@/services/mapApi";
 
 import { Input } from "../ui/input";
@@ -163,7 +162,6 @@ const Map = () => {
                                             lat: item.location.y,
                                             lng: item.location.x,
                                         });
-                                        setSearchResults([]);
                                         setSearchValue("");
                                         setSearchResults([]);
                                     }}
@@ -183,7 +181,7 @@ const Map = () => {
                     </button>
                 </section>
             ) : (
-                <NewAddressForm {...userAddress} setMapStep={setMapStep} />
+                <AddressForm {...userAddress} setMapStep={setMapStep} />
             )}
         </>
     );

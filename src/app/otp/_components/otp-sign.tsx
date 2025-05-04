@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useTransition } from "react";
+import React, { useEffect, useTransition } from "react";
 import Image from "next/image";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -38,6 +38,8 @@ const OTPSign = () => {
         register,
         handleSubmit,
         formState: { errors },
+        watch,
+        getValues,
     } = useForm<OTPForm>({ resolver: zodResolver(otpSignUpSchema) });
 
     const onSubmit: SubmitHandler<OTPForm> = async data => {
@@ -53,8 +55,9 @@ const OTPSign = () => {
                     </ToastAction>
                 ),
             });
-            router.push("/otp-verify?phoneNumber=" + data.phoneNumber);
+            router.push("/otp-verify?phone=" + data.phoneNumber);
         });
+        return router.push("/otp-verify?phone=" + data.phoneNumber);
     };
 
     return (
@@ -83,9 +86,7 @@ const OTPSign = () => {
                         type="submit"
                         className="w-full mt-6 mb-10 bg-red-500 text-white py-2 rounded-lg active:scale-95"
                     >
-                        <Link href={"/otp-verify"} replace>
-                            {!isPending ? "ورود" : <Loading />}
-                        </Link>
+                        {!isPending ? "ورود" : <Loading />}
                     </button>
                 </form>
             </div>

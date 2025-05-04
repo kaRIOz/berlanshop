@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useActionState, useEffect, useTransition } from "react";
+import React, { useActionState, useEffect, useTransition, useRef, ButtonHTMLAttributes } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect, useSearchParams } from "next/navigation";
@@ -16,12 +16,14 @@ import { OTPVerifySchema, type OTPVerifyType } from "../types";
 import { signInAction } from "../actions";
 
 const OTPClient = () => {
-    const phoneNumber = useSearchParams().get("phoneNumber");
+    const phoneNumber = useSearchParams().get("phone");
 
     const {
         register,
         handleSubmit,
         control,
+        setValue,
+        watch,
         formState: { errors },
     } = useForm<OTPVerifyType>({
         resolver: zodResolver(OTPVerifySchema),
@@ -50,6 +52,7 @@ const OTPClient = () => {
         startTransition(async () => await action(formData));
     };
 
+    const otpValue = watch("verificationCode");
     return (
         <div className="h-full flex justify-center items-center">
             <div className=" w-full flex flex-col items-center max-w-[350px] rounded-md">
@@ -66,7 +69,20 @@ const OTPClient = () => {
                         name="verificationCode"
                         control={control}
                         render={({ field }) => (
-                            <InputOTP maxLength={6} {...field}>
+                            <InputOTP
+                                maxLength={6}
+                                {...field}
+                                value={otpValue}
+                                onChange={value => {
+                                    setValue("verificationCode", value, {
+                                        shouldValidate: true,
+                                    });
+
+                                    if (value.length === 6) {
+                                        document.getElementById("submitBtn")?.click();
+                                    }
+                                }}
+                            >
                                 <InputOTPGroup className="gap-2">
                                     <InputOTPSlot index={5} />
                                     <InputOTPSlot index={4} />
@@ -78,13 +94,14 @@ const OTPClient = () => {
                             </InputOTP>
                         )}
                     />
-                    {errors.verificationCode && (
-                        <span className="text-[11px] text-red-500">{errors.verificationCode.message}</span>
-                    )}
+                    {/* {errors.verificationCode && (
+                        <span className="text-[11px] text-red-500 mr-5">{errors.verificationCode.message}</span>
+                    )} */}
                     <button
                         disabled={isPending}
                         type="submit"
                         className="w-full mt-6 mb-2 bg-red-500 text-white py-2 rounded-lg active:scale-95"
+                        id="submitBtn"
                     >
                         {!isPending ? "تایید" : <Loading />}
                     </button>

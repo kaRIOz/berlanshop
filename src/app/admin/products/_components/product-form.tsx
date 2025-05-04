@@ -16,7 +16,6 @@ import { Loading } from "@/components/loading";
 import { updateProduct } from "../[id]/edit/actions";
 
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import env from "@/configs/env";
 
 type Props = {
     product?: {

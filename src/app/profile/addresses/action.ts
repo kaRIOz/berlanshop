@@ -15,7 +15,8 @@ export const updateAddress = async (formState: OperationResult | undefined, form
             const addressId = Number(formData.get("id"));
 
             if (success && addressId) {
-                await db.update(address)
+                await db
+                    .update(address)
                     .set({
                         city: data.city,
                         fullAddress: data.fullAddress,
@@ -35,17 +36,16 @@ export const updateAddress = async (formState: OperationResult | undefined, form
         serverErrorMessage: "error in update address",
     });
 };
-    export const deleteAddress = async (formState: OperationResult | undefined, formData: FormData) => {
+export const deleteAddress = async (formState: OperationResult | undefined, formData: FormData) => {
     return executeAction({
         actionFn: async (id?: number) => {
             const addressId = Number(formData.get("id"));
 
             if (addressId) {
-                await db.delete(address)
-                    .where(
-                        eq(address.id, addressId),
-                        // eq(address.userId, Number(id))
-                    );
+                await db.delete(address).where(
+                    eq(address.id, addressId),
+                    // eq(address.userId, Number(id))
+                );
 
                 revalidatePath("/profile/addresses");
             }

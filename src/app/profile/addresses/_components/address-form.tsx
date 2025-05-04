@@ -36,7 +36,7 @@ type City = {
     slug: string;
     province_id: number;
 };
-const NewAddressForm = ({ city, formatted_address: addressDetails, state, setMapStep }: UserAddress) => {
+const AddressForm = ({ formatted_address: addressDetails, setMapStep }: UserAddress) => {
     //api call args: city ,fullAddress, postalCode ,postalCode
     // const [selectedProvince, setSelectedProvince] = useState<number>(8);
     // const [cities, setCities] = useState<City[]>([]);
@@ -50,7 +50,7 @@ const NewAddressForm = ({ city, formatted_address: addressDetails, state, setMap
         formState: { errors },
         handleSubmit,
         control,
-    } = useForm<AddressFormType>({ resolver: zodResolver(userAddressFormSchema) });
+    } = useForm<AddressFormType>({ resolver: zodResolver(userAddressFormSchema), defaultValues: {} });
 
     useEffect(() => {
         if (formState?.success) {
@@ -199,4 +199,4 @@ const NewAddressForm = ({ city, formatted_address: addressDetails, state, setMap
     );
 };
 
-export default NewAddressForm;
+export default AddressForm;

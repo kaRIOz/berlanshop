@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import OTPClient from "./_components/otp-client";
 
-export default async function OTPServerPage() {
+export default async function OTPVerify() {
     return (
         <Suspense fallback={"loading..."}>
             <section className="h-screen">

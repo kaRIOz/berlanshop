@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useActionState } from "react";
 import Link from "next/link";
 
 import { HiOutlineDotsVertical } from "react-icons/hi";
@@ -12,12 +14,14 @@ import { FiEdit3 } from "react-icons/fi";
 import type { Addresse } from "../page";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { PopoverClose } from "@radix-ui/react-popover";
+import { deleteAddress } from "../action";
 
 type Props = {
     addresses: Addresse[];
 };
 
 const AddressList = ({ addresses }: Props) => {
+    // const [state, action] = useActionState(deleteAddress);
     return (
         <div>
             {addresses.map(address => (
