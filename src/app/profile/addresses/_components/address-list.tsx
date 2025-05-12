@@ -1,17 +1,16 @@
-import React from "react";
-import Link from "next/link";
-
-import { HiOutlineDotsVertical } from "react-icons/hi";
 import { FaCity, FaRegEnvelope } from "react-icons/fa";
-import { FaPhone } from "react-icons/fa6";
-import { MdOutlineAddLocation } from "react-icons/md";
-import { IoMdPerson } from "react-icons/io";
-import { RiDeleteBin5Line } from "react-icons/ri";
-import { FiEdit3 } from "react-icons/fi";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 import type { Addresse } from "../page";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { FaPhone } from "react-icons/fa6";
+import { FiEdit3 } from "react-icons/fi";
+import { HiOutlineDotsVertical } from "react-icons/hi";
+import { IoMdPerson } from "react-icons/io";
+import Link from "next/link";
+import { MdOutlineAddLocation } from "react-icons/md";
 import { PopoverClose } from "@radix-ui/react-popover";
+import React from "react";
+import { RiDeleteBin5Line } from "react-icons/ri";
 
 type Props = {
     addresses: Addresse[];
@@ -30,11 +29,17 @@ const AddressList = ({ addresses }: Props) => {
                                     <HiOutlineDotsVertical className="cursor-pointer" />
                                 </PopoverTrigger>
                                 <PopoverContent align="end" className="p-1">
-                                    <div className="flex items-center gap-2 p-2 hover:bg-slate-100 cursor-pointer">
+                                    <div
+                                        className="flex items-center gap-2 p-2 hover:bg-slate-100 cursor-pointer"
+                                        onClick={() => console.log("first")}
+                                    >
                                         <FiEdit3 className="text-sky-500" />
                                         <span className="text-medium font-medium">ویرایش آدرس</span>
                                     </div>
-                                    <div className="flex items-center gap-2 p-2 hover:bg-slate-100 cursor-pointer">
+                                    <div
+                                        className="flex items-center gap-2 p-2 hover:bg-slate-100 cursor-pointer"
+                                        onClick={() => console.log("second")}
+                                    >
                                         <RiDeleteBin5Line className="text-red-500" />
                                         <span className="text-medium font-medium">حذف آدرس</span>
                                     </div>

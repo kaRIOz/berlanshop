@@ -81,7 +81,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             // if(trigger === 'update'){
             //     const updatedUser = await
             // }
-            console.log(token);
             return token;
         },
         session({ session, token }) {
