@@ -1,5 +1,8 @@
+"use client";
+
 import { FaCity, FaRegEnvelope } from "react-icons/fa";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { startTransition, useActionState, useEffect } from "react";
 
 import type { Addresse } from "../page";
 import { FaPhone } from "react-icons/fa6";
@@ -8,15 +11,31 @@ import { HiOutlineDotsVertical } from "react-icons/hi";
 import { IoMdPerson } from "react-icons/io";
 import Link from "next/link";
 import { MdOutlineAddLocation } from "react-icons/md";
-import { PopoverClose } from "@radix-ui/react-popover";
-import React from "react";
 import { RiDeleteBin5Line } from "react-icons/ri";
+import { deleteAddress } from "../action";
+import { toast } from "@/components/ui/use-toast";
 
 type Props = {
     addresses: Addresse[];
 };
 
 const AddressList = ({ addresses }: Props) => {
+    const [state, deleteAction] = useActionState(deleteAddress, undefined);
+
+    useEffect(() => {
+        if (state?.success) {
+            toast({
+                title: state.message,
+                variant: "default",
+            });
+        } else if (state?.success === false) {
+            toast({
+                title: state.message,
+                variant: "destructive",
+            });
+        }
+    }, [state?.message, state?.success]);
+
     return (
         <div>
             {addresses.map(address => (
@@ -31,14 +50,18 @@ const AddressList = ({ addresses }: Props) => {
                                 <PopoverContent align="end" className="p-1">
                                     <div
                                         className="flex items-center gap-2 p-2 hover:bg-slate-100 cursor-pointer"
-                                        onClick={() => console.log("first")}
+                                        onClick={() => console.log("second")}
                                     >
                                         <FiEdit3 className="text-sky-500" />
                                         <span className="text-medium font-medium">ویرایش آدرس</span>
                                     </div>
                                     <div
                                         className="flex items-center gap-2 p-2 hover:bg-slate-100 cursor-pointer"
-                                        onClick={() => console.log("second")}
+                                        onClick={() =>
+                                            startTransition(() => {
+                                                deleteAction(address.id);
+                                            })
+                                        }
                                     >
                                         <RiDeleteBin5Line className="text-red-500" />
                                         <span className="text-medium font-medium">حذف آدرس</span>

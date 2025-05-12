@@ -1,12 +1,10 @@
-"user server";
-import { executeAction, type OperationResult } from "@/drizzle/utils/executeAction";
-import fs from "fs/promises";
+"use server";
 import db from "@/drizzle";
 import { address } from "@/drizzle/schema";
-import { revalidatePath } from "next/cache";
 import { addressSchema } from "@/drizzle/schema/user/address";
+import { executeAction, type OperationResult } from "@/drizzle/utils/executeAction";
 import { eq } from "drizzle-orm";
-//TODO: add action for update and delete address
+import { revalidatePath } from "next/cache";
 export const updateAddress = async (formState: OperationResult | undefined, formData: FormData) => {
     return executeAction({
         actionFn: async (id?: number) => {
@@ -15,7 +13,8 @@ export const updateAddress = async (formState: OperationResult | undefined, form
             const addressId = Number(formData.get("id"));
 
             if (success && addressId) {
-                await db.update(address)
+                await db
+                    .update(address)
                     .set({
                         city: data.city,
                         fullAddress: data.fullAddress,
@@ -35,17 +34,11 @@ export const updateAddress = async (formState: OperationResult | undefined, form
         serverErrorMessage: "error in update address",
     });
 };
-    export const deleteAddress = async (formState: OperationResult | undefined, formData: FormData) => {
+export const deleteAddress = async (formState: OperationResult | undefined, addressId: number) => {
     return executeAction({
         actionFn: async (id?: number) => {
-            const addressId = Number(formData.get("id"));
-
             if (addressId) {
-                await db.delete(address)
-                    .where(
-                        eq(address.id, addressId),
-                        // eq(address.userId, Number(id))
-                    );
+                await db.delete(address).where(eq(address.id, addressId));
 
                 revalidatePath("/profile/addresses");
             }
