@@ -13,10 +13,15 @@ import { getSession } from "next-auth/react";
 import { toast } from "@/components/ui/use-toast";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { OTPVerifySchema, type OTPVerifyType } from "../types";
-import { signInAction } from "../actions";
+import { signInAction } from "@/app/otp-verify/actions";
+import { usePhoneStore } from "@/stores/phone.store";
+type Props = {
+    setShow: (show: boolean) => void;
+};
+const OTPClient = ({ setShow }: Props) => {
+    // const phoneNumber = useSearchParams().get("phone");
 
-const OTPClient = () => {
-    const phoneNumber = useSearchParams().get("phone");
+    const { phoneNumber } = usePhoneStore();
 
     const {
         register,
@@ -54,8 +59,8 @@ const OTPClient = () => {
 
     const otpValue = watch("verificationCode");
     return (
-        <div className="h-full flex justify-center items-center">
-            <div className=" w-full flex flex-col items-center max-w-[350px] rounded-md">
+        <div className="md:border md:border-gray-100 md:rounded-lg px-3">
+            <div className="w-[350px] flex flex-col items-center max-w-[350px] rounded-md">
                 <Image src={"/Logo.png"} alt="Logo" width={150} height={100} />
                 <h2 className="ml-auto mt-4">کد تایید را وارد کنید</h2>
                 <p className="ml-auto mt-6 text-[13px] text-gray-600 font-light">
@@ -105,12 +110,15 @@ const OTPClient = () => {
                     >
                         {!isPending ? "تایید" : <Loading />}
                     </button>
-                    <Link href={"/otp"}>
-                        <button className="w-full text-sm border border-red-500 py-1 mb-4 rounded-lg active:scale-95">
-                            {" "}
-                            تغییر شماره موبایل
-                        </button>
-                    </Link>
+                    {/* <Link href={"/otp"}> */}
+                    <button
+                        className="w-full text-sm border border-red-500 py-1 mb-4 rounded-lg active:scale-95"
+                        onClick={() => setShow(true)}
+                    >
+                        {" "}
+                        تغییر شماره موبایل
+                    </button>
+                    {/* </Link> */}
                 </form>
             </div>
         </div>

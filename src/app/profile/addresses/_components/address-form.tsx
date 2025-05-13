@@ -68,7 +68,6 @@ const AddressForm = ({ formatted_address: addressDetails, setMapStep }: UserAddr
     }, [formState, router]);
 
     const onSubmit: SubmitHandler<AddressFormType> = data => {
-        debugger;
         const formData = new FormData();
         formData.append("fullAddress", data.fullAddress);
         formData.append("province", data.province);

@@ -54,10 +54,7 @@ const HomeProductList: FC<ProductListProps> = ({ title, filterType }) => {
                 <div className="navigation-wrapper group relative w-full">
                     <div ref={sliderRef} className="keen-slider [&>*:last-child]:pl-0 lg:[&>*:last-child]:pl-0">
                         {filteredProducts.map(product => (
-                            <div
-                                className="keen-slider__slide min-w-fit max-w-fit px-0 bg-primary-content"
-                                key={product.id}
-                            >
+                            <div className="keen-slider__slide min-w-fit max-w-fit px-0" key={product.id}>
                                 <Link
                                     href={"#"}
                                     className="flex h-full  flex-col gap-2 rounded border border-border-gray-light bg-surface-solid-0 p-2 shadow-sm min-h-[248px] !w-[164px] lg:min-h-[280px] lg:!w-[224px]"

@@ -53,7 +53,7 @@ const Header = () => {
 
                     <div className="flex justify-between items-center space-x-5 space-x-reverse">
                         {status === "unauthenticated" && (
-                            <Link href={"/otp"} className="text-small md:text-[13px] md:w-full md:h-full ">
+                            <Link href={"/login"} className="text-small md:text-[13px] md:w-full md:h-full ">
                                 <Button
                                     className="text-primary-main px-2 py-1 md:py-2 rounded bg-transparent shadow-none border-primary-main hover:bg-transparent hover:text-primary-main hover:scale-95 font-medium lg:font-semibold"
                                     variant="outline"

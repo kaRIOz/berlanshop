@@ -4,9 +4,9 @@ import db from "@/drizzle";
 import { user } from "@/drizzle/schema/user/user";
 import { executeQuery } from "@/drizzle/utils/executeQuery";
 import { and, eq } from "drizzle-orm";
-import { OTPVerifySchema } from "./types";
 import { signIn } from "@/auth";
 import { executeAction } from "@/drizzle/utils/executeAction";
+import { OTPVerifySchema } from "./types";
 
 export async function signInAction(formState: { success: boolean; message: string } | undefined, formData: FormData) {
     const validatedData = OTPVerifySchema.safeParse(Object.fromEntries(formData));

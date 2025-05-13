@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useTransition } from "react";
+import React, { useTransition } from "react";
 import Image from "next/image";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,9 +11,13 @@ import { useRouter } from "next/navigation";
 import { toast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
 import { useCopyToClipboard } from "usehooks-ts";
-import Link from "next/link";
+import { usePhoneStore } from "@/stores/phone.store";
 
-const OTPSign = () => {
+type Props = {
+    setShow: (show: boolean) => void;
+};
+const OTPSign = ({ setShow }: Props) => {
+    const { setPhoneNumber } = usePhoneStore();
     const router = useRouter();
     const [copiedText, copy] = useCopyToClipboard();
     console.log(copiedText);
@@ -38,13 +42,12 @@ const OTPSign = () => {
         register,
         handleSubmit,
         formState: { errors },
-        watch,
-        getValues,
     } = useForm<OTPForm>({ resolver: zodResolver(otpSignUpSchema) });
 
     const onSubmit: SubmitHandler<OTPForm> = async data => {
         startTransition(async () => {
             const response = await checkPhoneNumber(data);
+            if (response.success === true) setPhoneNumber(data.phoneNumber);
             toast({
                 title: "Verification code sent successfully",
                 variant: response.success === true ? "default" : "destructive",
@@ -55,13 +58,13 @@ const OTPSign = () => {
                     </ToastAction>
                 ),
             });
-            router.push("/otp-verify?phone=" + data.phoneNumber);
+            setShow(false);
         });
-        return router.push("/otp-verify?phone=" + data.phoneNumber);
+        // return router.push("/otp-verify?phone=" + data.phoneNumber);
     };
 
     return (
-        <div className="h-full flex justify-center items-center">
+        <div className="md:border md:border-gray-100 md:rounded-lg px-3">
             <div className="w-full flex flex-col items-center max-w-[350px] rounded-md">
                 <Image src={"/Logo.png"} alt="Logo" width={150} height={100} />
                 <h2 className="ml-auto mt-4">ورود | ثبت نام</h2>
@@ -84,7 +87,7 @@ const OTPSign = () => {
                     <button
                         disabled={isPending}
                         type="submit"
-                        className="w-full mt-6 mb-10 bg-red-500 text-white py-2 rounded-lg active:scale-95"
+                        className="w-full mt-6 mb-4 bg-red-500 text-white py-2 rounded-lg active:scale-95"
                     >
                         {!isPending ? "ورود" : <Loading />}
                     </button>
