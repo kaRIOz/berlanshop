@@ -77,7 +77,6 @@ const Map = () => {
         return () => controller.abort();
     }, [searchValue, coordinate, mapStep, debounceSearch]);
 
-    console.log(searchResults);
     const getAddressByLatlng = async () => {
         const url = `https://api.neshan.org/v5/reverse?lat=${coordinate.lat}&lng=${coordinate.lng}`;
 
